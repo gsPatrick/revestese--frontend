@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback, useRef } from 'react';
+import { trackCarrinho } from '@/services/analytics';
 
 // 1. Criar o Contexto
 const CartContext = createContext();
@@ -17,9 +18,25 @@ export const CartProvider = ({ children }) => {
     return [];
   });
 
-  // Salvar no localStorage sempre que o carrinho mudar
+  // Salvar no localStorage e registrar carrinho abandonado sempre que mudar
+  const abandonTimer = useRef(null);
   useEffect(() => {
     localStorage.setItem('revesteCart', JSON.stringify(cartItems));
+
+    // Debounce: envia como carrinho abandonado após 30s de inatividade com itens
+    if (abandonTimer.current) clearTimeout(abandonTimer.current);
+    if (cartItems.length > 0) {
+      const total = cartItems.reduce((s, i) => s + i.preco * i.quantidade, 0);
+      abandonTimer.current = setTimeout(() => {
+        trackCarrinho(cartItems.map(i => ({
+          produtoId: i.id,
+          nome: i.nome,
+          quantidade: i.quantidade,
+          preco: i.preco,
+        })), total);
+      }, 30000);
+    }
+    return () => { if (abandonTimer.current) clearTimeout(abandonTimer.current); };
   }, [cartItems]);
 
   // Função para adicionar um item ao carrinho

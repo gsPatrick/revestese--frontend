@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { trackPageview } from '@/services/analytics';
 import { useFilter } from '@/context/FilterContext';
 import FilterSidebar from '@/components/CatalogPage/FilterSidebar';
 import ProductGrid from '@/components/CatalogPage/ProductGrid';
@@ -20,6 +21,7 @@ export default function CatalogPage() {
 
   useEffect(() => {
     document.body.classList.add('catalog-background');
+    trackPageview('catalogo');
     return () => document.body.classList.remove('catalog-background');
   }, []);
 

@@ -1,70 +1,144 @@
-.loading { padding: 4rem; text-align: center; color: #9ca3af; font-size: 0.9rem; }
+/* ── Layout ───────────────────────────────────────── */
+.page { display: flex; flex-direction: column; gap: 2rem; }
 
-.page { display: flex; flex-direction: column; gap: 1.5rem; }
+.loadingState {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; min-height: 60vh; gap: 1rem; color: #9ca3af;
+}
+.spinner {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid #f3f4f6; border-top-color: #780e1a;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
+/* ── Section titles ───────────────────────────────── */
+.sectionTitle {
+  font-size: 0.7rem; font-weight: 800; color: #9ca3af;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin: 0 0 1rem;
+}
+.sectionHeaderRow {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 1rem; margin-bottom: 1rem;
+}
+.sectionHeaderRow .sectionTitle { margin: 0; }
+
+/* ── KPI cards ────────────────────────────────────── */
 .kpiGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 
 .kpiCard {
-  background: white;
-  border-radius: 6px;
-  padding: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  border: 1px solid #f3f4f6;
+  background: #fff; border-radius: 10px; padding: 1.25rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06); border: 1px solid #f3f4f6;
+  transition: box-shadow 0.2s;
 }
+.kpiCard:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
 
 .kpiIcon {
-  width: 44px; height: 44px;
-  border-radius: 50%;
+  width: 46px; height: 46px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem;
-  flex-shrink: 0;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.kpiLabel { font-size: 0.69rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 0.2rem; }
+.kpiValue { font-size: 1.45rem; font-weight: 800; color: #111827; margin: 0 0 0.1rem; }
+.kpiSub   { font-size: 0.68rem; color: #9ca3af; margin: 0; }
+
+/* ── Analytics KPIs ───────────────────────────────── */
+.analyticsKpis { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.smallKpi {
+  background: #fff; border-radius: 10px; padding: 1rem 1.25rem;
+  display: flex; align-items: center; gap: 0.85rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05); border: 1px solid #f3f4f6;
+  flex: 1; min-width: 180px;
 }
 
-.kpiLabel { font-size: 0.72rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 0.25rem; }
-.kpiValue { font-size: 1.35rem; font-weight: 700; color: #111827; margin: 0; }
+/* ── Period tabs ──────────────────────────────────── */
+.periodTabs { display: flex; gap: 0.35rem; }
+.periodTab {
+  padding: 0.3rem 0.75rem; border-radius: 6px;
+  font-size: 0.72rem; font-weight: 600; cursor: pointer;
+  border: 1px solid #e5e7eb; background: #fff; color: #6b7280;
+  transition: all 0.15s;
+}
+.periodTab:hover { border-color: #780e1a; color: #780e1a; }
+.periodTabActive { background: #780e1a !important; color: #fff !important; border-color: #780e1a !important; }
 
-.row { display: flex; gap: 1.25rem; }
+/* ── Row / Card ───────────────────────────────────── */
+.row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
 
 .card {
-  flex: 1;
-  background: white;
-  border-radius: 6px;
-  padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  border: 1px solid #f3f4f6;
-  min-width: 0;
+  background: #fff; border-radius: 10px; padding: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06); border: 1px solid #f3f4f6;
+  min-width: 0; flex: 1;
 }
 
-.cardTitle { font-size: 0.85rem; font-weight: 700; color: #374151; margin: 0 0 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.cardHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+.cardTitle { font-size: 0.72rem; font-weight: 800; color: #374151; text-transform: uppercase; letter-spacing: 0.06em; margin: 0; }
+.cardMeta  { font-size: 0.7rem; color: #9ca3af; }
 
-.topList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem; }
+.viewAll {
+  font-size: 0.72rem; font-weight: 600; color: #780e1a;
+  text-decoration: none; display: flex; align-items: center; gap: 3px;
+}
+.viewAll:hover { text-decoration: underline; }
 
-.topItem { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; }
-.topRank { width: 18px; height: 18px; border-radius: 50%; background: #f3f4f6; color: #6b7280; font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.topName { flex: 1; color: #374151; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.topQty { font-weight: 700; color: #780e1a; flex-shrink: 0; }
+/* ── Empty states ─────────────────────────────────── */
+.emptyChart {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 120px; color: #9ca3af; font-size: 0.8rem; text-align: center;
+}
 
-.empty { text-align: center; color: #9ca3af; font-size: 0.8rem; padding: 1rem 0; }
+/* ── Rank list ────────────────────────────────────── */
+.rankList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+.rankItem { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; }
+.rankBadge {
+  width: 20px; height: 20px; border-radius: 50%;
+  font-size: 0.63rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.rankName { flex: 1; color: #374151; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rankVal  { font-weight: 700; color: #780e1a; flex-shrink: 0; }
+.emptyList { color: #9ca3af; font-size: 0.8rem; text-align: center; padding: 1rem 0; }
 
+/* ── Donut legend ─────────────────────────────────── */
+.legendList { list-style: none; padding: 0; margin: 0.75rem 0 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.legendItem { display: flex; align-items: center; gap: 0.5rem; font-size: 0.77rem; }
+.legendDot  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.legendName { flex: 1; color: #6b7280; }
+.legendVal  { font-weight: 700; color: #374151; }
+
+/* ── Table ────────────────────────────────────────── */
 .tableWrap { overflow-x: auto; }
 
 .table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-.table th { text-align: left; padding: 0.5rem 0.75rem; color: #6b7280; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #f3f4f6; }
-.table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid #f9fafb; vertical-align: middle; }
-.table tr:last-child td { border-bottom: none; }
-
-.tdMono { font-family: monospace; font-size: 0.78rem; color: #780e1a; font-weight: 600; }
-.tdMuted { color: #9ca3af; }
-
-.badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; }
-
-@media (max-width: 900px) {
-  .kpiGrid { grid-template-columns: repeat(2, 1fr); }
-  .row { flex-direction: column; }
+.table th {
+  text-align: left; padding: 0.5rem 0.75rem; color: #6b7280;
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; border-bottom: 2px solid #f3f4f6;
 }
-@media (max-width: 500px) {
+.table td { padding: 0.7rem 0.75rem; border-bottom: 1px solid #f9fafb; vertical-align: middle; }
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: #fafafa; }
+
+.tdMono  { font-family: 'Courier New', monospace; font-size: 0.77rem; color: #780e1a; font-weight: 700; }
+.tdMuted { color: #9ca3af; font-size: 0.77rem; }
+
+.badge { display: inline-block; padding: 0.2rem 0.65rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; }
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 1024px) {
+  .kpiGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
   .kpiGrid { grid-template-columns: 1fr 1fr; }
+  .row     { flex-direction: column; }
+  .sectionHeaderRow { flex-direction: column; align-items: flex-start; }
+  .analyticsKpis { flex-direction: column; }
+}
+@media (max-width: 460px) {
+  .kpiGrid { grid-template-columns: 1fr; }
 }

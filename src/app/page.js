@@ -1,4 +1,5 @@
 import HeroSection from '@/components/Hero/HeroSection';
+import TrackView from '@/components/Analytics/TrackView';
 import ScrollVideo from '@/components/ScrollVideo/ScrollVideo';
 import TrustBar from '@/components/TrustBar/TrustBar';
 import EditorialSection from '@/components/Editorial/EditorialSection';
@@ -11,6 +12,7 @@ import ConsigneSection from '@/components/Consigne/ConsigneSection';
 export default function Home() {
   return (
     <main>
+      <TrackView tipo="home" />
       <HeroSection />
       <ScrollVideo />
       <TrustBar />

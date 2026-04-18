@@ -9,6 +9,7 @@ import ProductDescription from '@/components/ProductPage/ProductDescription';
 import RelatedProducts from '@/components/ProductPage/RelatedProducts';
 import api from '@/services/api';
 import { notFound } from 'next/navigation';
+import TrackView from '@/components/Analytics/TrackView';
 
 async function getProductData(slug) {
   try {
@@ -108,6 +109,7 @@ export default async function ProductPage({ params }) {
 
   return (
     <main style={{ padding: '0 1.5rem 4rem 1.5rem', maxWidth: '1280px', margin: '0 auto' }}>
+      <TrackView tipo="produto" produtoId={product.id} />
       <Breadcrumb items={breadcrumbItems} />
       
       <div className={styles.productPageGrid}>
