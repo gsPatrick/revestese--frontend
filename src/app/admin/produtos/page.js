@@ -11,7 +11,7 @@ const EMPTY_PRODUTO = {
   peso: '0.300', largura: '10', altura: '10', comprimento: '10',
 };
 
-const EMPTY_VARIACAO = { nome: 'Único', preco: '', estoque: '1', ativo: true };
+const EMPTY_VARIACAO = { nome: 'Único', preco: '', estoque: '1', ativo: true, digital: false };
 
 export default function ProdutosPage() {
   const [produtos,   setProdutos]   = useState([]);
@@ -112,8 +112,9 @@ export default function ProdutosPage() {
         await api.post(`/produtos/${produtoId}/variacoes`, {
           nome: v.nome || 'Único',
           preco: parseFloat(v.preco),
-          estoque: parseInt(v.estoque) || 0,
+          estoque: v.digital ? 0 : (parseInt(v.estoque) || 0),
           ativo: v.ativo,
+          digital: v.digital,
         });
       }
 
@@ -269,8 +270,11 @@ export default function ProdutosPage() {
                       <div key={v.id} className={styles.varRow}>
                         <span className={styles.varName}>{v.nome}</span>
                         <span className={styles.varPrice}>R$ {Number(v.preco).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
-                        <span className={styles.varStock}>Estoque: {v.estoque}</span>
-                        <span className={`${styles.badge} ${v.ativo ? '' : styles.badgeOff}`} style={v.ativo ? { background: '#d1fae5', color: '#059669' } : { background: '#f3f4f6', color: '#9ca3af' }}>
+                        {v.digital
+                          ? <span className={styles.badge} style={{ background: '#eff6ff', color: '#3b82f6' }}>💾 Digital</span>
+                          : <span className={styles.varStock}>Estoque: {v.estoque}</span>
+                        }
+                        <span className={styles.badge} style={v.ativo ? { background: '#d1fae5', color: '#059669' } : { background: '#f3f4f6', color: '#9ca3af' }}>
                           {v.ativo ? 'Ativa' : 'Inativa'}
                         </span>
                         <button type="button" className={`${styles.btnIcon} ${styles.btnDanger}`} onClick={() => handleDeleteVar(editing, v.id)} title="Remover"><BsTrash/></button>
@@ -302,7 +306,15 @@ export default function ProdutosPage() {
                   </div>
                   <div className={styles.field} style={{ flex: 1 }}>
                     {i === 0 && <label>Estoque</label>}
-                    <input type="number" min="0" value={v.estoque} onChange={e => updateVar(i, 'estoque', e.target.value)} placeholder="1"/>
+                    <input type="number" min="0" value={v.estoque} onChange={e => updateVar(i, 'estoque', e.target.value)} placeholder="1" disabled={v.digital}/>
+                  </div>
+                  <div className={styles.field} style={{ flex: 'none' }}>
+                    {i === 0 && <label>Tipo</label>}
+                    <select value={v.digital ? 'digital' : 'fisico'} onChange={e => updateVar(i, 'digital', e.target.value === 'digital')}
+                      style={{ padding: '0.6rem 0.5rem', border: '1.5px solid #e5e7eb', borderRadius: '4px', fontSize: '0.82rem', background: 'white' }}>
+                      <option value="fisico">🏷 Físico</option>
+                      <option value="digital">💾 Digital</option>
+                    </select>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'flex-end', paddingBottom: '0.1rem' }}>
                     {variacoes.length > 1 && (
@@ -312,7 +324,7 @@ export default function ProdutosPage() {
                 </div>
               ))}
               <p style={{ fontSize: '0.72rem', color: '#9ca3af', margin: '0.25rem 0 0' }}>
-                Preço e estoque ficam nas variações. Deixe o nome como "Único" se não houver tamanhos.
+                Preço e estoque ficam nas variações. Use "Único" se não houver tamanhos. Digital = sem frete.
               </p>
 
               <div className={styles.modalFooter}>
