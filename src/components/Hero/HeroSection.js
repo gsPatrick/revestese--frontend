@@ -170,8 +170,8 @@ const HeroSection = () => {
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               >
-                <Link href="/subscription" className={styles.secondaryButton}>
-                  Clube de Assinatura
+                <Link href="/about" className={styles.secondaryButton}>
+                  Nossa História
                 </Link>
               </motion.div>
             </div>
