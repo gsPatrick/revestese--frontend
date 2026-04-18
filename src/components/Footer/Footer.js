@@ -1,13 +1,23 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useFilter } from '@/context/FilterContext';
+import api from '@/services/api';
 import styles from './Footer.module.css';
 import { FaInstagram, FaFacebookF, FaTiktok, FaEnvelope, FaLeaf, FaPhoneAlt } from 'react-icons/fa';
 import { BsShieldLockFill, BsArrowRepeat, BsHandbag } from 'react-icons/bs';
 
 const Footer = () => {
+  const { setCategoryAndNavigate } = useFilter();
+  const [categorias, setCategorias] = useState([]);
+  useEffect(() => {
+    api.get('/categorias')
+      .then(r => setCategorias((r.data || []).filter(c => c.ativo !== false).slice(0, 6)))
+      .catch(() => setCategorias([]));
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
@@ -61,11 +71,23 @@ const Footer = () => {
         <motion.div className={styles.footerColumn} variants={itemVariants}>
           <h3 className={styles.footerTitle}>Categorias</h3>
           <ul className={styles.footerList}>
-            <li><Link href="/catalog?categoria=feminino" className={styles.footerLink}>Feminino</Link></li>
-            <li><Link href="/catalog?categoria=masculino" className={styles.footerLink}>Masculino</Link></li>
-            <li><Link href="/catalog?categoria=acessorios" className={styles.footerLink}>Acessórios</Link></li>
-            <li><Link href="/catalog?sort=mais-vendidos" className={styles.footerLink}>Mais Vendidos</Link></li>
-            <li><Link href="/catalog?sort=lancamentos" className={styles.footerLink}>Recém Chegados</Link></li>
+            {categorias.length > 0 ? (
+              categorias.map(c => (
+                <li key={c.id}>
+                  <Link
+                    href="/catalog"
+                    className={styles.footerLink}
+                    onClick={() => setCategoryAndNavigate(String(c.id))}
+                  >
+                    {c.nome}
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <li>
+                <Link href="/catalog" className={styles.footerLink}>Ver acervo completo</Link>
+              </li>
+            )}
           </ul>
         </motion.div>
 
