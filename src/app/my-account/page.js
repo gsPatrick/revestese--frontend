@@ -12,7 +12,6 @@ import AccountDashboard from '@/components/AccountPage/AccountDashboard';
 import OrderHistory from '@/components/AccountPage/OrderHistory';
 import FavoriteProducts from '@/components/AccountPage/FavoriteProducts';
 import AccountDetails from '@/components/AccountPage/AccountDetails';
-import DigitalDownloads from '@/components/AccountPage/DigitalDownloads';
 import AddressManager from '@/components/AccountPage/AddressManager';
 
 export default function MyAccountPage() {
@@ -23,7 +22,6 @@ export default function MyAccountPage() {
   const [profileData, setProfileData] = useState(null);
   const [orders, setOrders] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [downloads, setDownloads] = useState([]);
   const [addresses, setAddresses] = useState([]);
   
   const [isLoading, setIsLoading] = useState(true);
@@ -41,20 +39,17 @@ export default function MyAccountPage() {
             profileRes,
             ordersRes,
             favoritesRes,
-            downloadsRes,
             addressesRes
           ] = await Promise.all([
             api.get('/usuarios/perfil'),
             api.get('/pedidos/meus-pedidos'),
             api.get('/favoritos'),
-            api.get('/pedidos/meus/downloads'),
             api.get('/enderecos'),
           ]);
 
           setProfileData(profileRes.data);
           setOrders(ordersRes.data.pedidos);
           setFavorites(favoritesRes.data);
-          setDownloads(downloadsRes.data);
           setAddresses(addressesRes.data);
 
         } catch (err) {
@@ -91,8 +86,6 @@ export default function MyAccountPage() {
         return <AccountDashboard user={profileData} orders={orders} />;
       case 'orders':
         return <OrderHistory orders={orders} />;
-      case 'downloads':
-        return <DigitalDownloads downloads={downloads} />;
       case 'addresses':
         return <AddressManager addresses={addresses} />;
       case 'favorites':

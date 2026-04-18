@@ -3,15 +3,14 @@
 import React from 'react';
 import styles from './AccountPage.module.css';
 import { useAuth } from '@/context/AuthContext';
-import { BsGrid1X2, BsBoxSeam, BsHeart, BsPerson, BsBoxArrowRight, BsDownload, BsPinMapFill } from 'react-icons/bs';
+import { BsGrid1X2, BsBoxSeam, BsHeart, BsPerson, BsBoxArrowRight, BsPinMapFill } from 'react-icons/bs';
 
 const AccountSidebar = ({ activeView, setActiveView }) => {
   const { logout } = useAuth();
   const navItems = [
     { id: 'dashboard', label: 'Painel', icon: <BsGrid1X2 /> },
     { id: 'orders', label: 'Minhas Compras', icon: <BsBoxSeam /> },
-    { id: 'downloads', label: 'Meus Downloads', icon: <BsDownload /> }, // <-- NOVO
-    { id: 'addresses', label: 'Meus Endereços', icon: <BsPinMapFill /> }, // <-- NOVO
+    { id: 'addresses', label: 'Meus Endereços', icon: <BsPinMapFill /> },
     { id: 'favorites', label: 'Meus Favoritos', icon: <BsHeart /> },
     { id: 'details', label: 'Meus Dados', icon: <BsPerson /> },
   ];
