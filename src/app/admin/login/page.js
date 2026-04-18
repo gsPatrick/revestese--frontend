@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/services/api';
 import styles from './login.module.css';
-import { GiHanger } from 'react-icons/gi';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
 export default function AdminLogin() {
@@ -45,11 +44,8 @@ export default function AdminLogin() {
     <div className={styles.page}>
       <div className={styles.card}>
         <div className={styles.logo}>
-          <GiHanger className={styles.logoIcon} />
-          <div>
-            <span className={styles.logoName}>Reveste-se</span>
-            <span className={styles.logoBadge}>admin</span>
-          </div>
+          <img src="/logo.png" alt="Reveste-se" style={{ height: '80px', width: 'auto', objectFit: 'contain', marginBottom: '4px' }} />
+          <span className={styles.logoBadge}>admin</span>
         </div>
 
         <h1 className={styles.title}>Entrar no painel</h1>

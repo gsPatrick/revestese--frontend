@@ -136,7 +136,7 @@ const HeroSection = () => {
           <div className={styles.heroImageContainer}>
             <Image
               ref={logoRef}
-              src="/imagens/logo.svg"
+              src="/logo.png"
               alt="Reveste-se — Moda Circular"
               width={520}
               height={520}

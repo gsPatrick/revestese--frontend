@@ -23,7 +23,7 @@ export default function AuthPage() {
         <div className={styles.illustrationColumn}>
           {/* IMAGEM ATUALIZADA PARA A LOGO */}
           <Image 
-            src="/imagens/logo.svg" 
+            src="/logo.png"
             alt="Logo Reveste-se" 
             width={300} 
             height={300}

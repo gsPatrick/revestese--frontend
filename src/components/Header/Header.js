@@ -185,7 +185,9 @@ const Header = () => {
         <div className={styles.mainBar}>
             {/* ...código da mainBar... */}
             <div className={styles.mainBarContent}>
-            <Link href="/" className={styles.mainLogo}><span>Reveste-se</span></Link>
+            <Link href="/" className={styles.mainLogo}>
+              <img src="/logo.png" alt="Reveste-se" style={{ height: '52px', width: 'auto', objectFit: 'contain' }} />
+            </Link>
             
             <div className={styles.searchContainerWrapper} ref={searchContainerRef}>
                 <div className={styles.searchContainer}>
