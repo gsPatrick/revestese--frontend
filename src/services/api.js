@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://n8n-doodledreamsbackend.r954jc.easypanel.host/api';
+const API_URL = 'https://geral-revestese-api.r954jc.easypanel.host/api';
 
 const api = axios.create({
   baseURL: API_URL,
