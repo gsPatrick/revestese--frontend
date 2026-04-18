@@ -8,7 +8,7 @@ import api from '@/services/api';
 import styles from './CollectionsSection.module.css';
 import {
   GiHanger, GiTrousers, GiRunningShoe, GiSunflower, GiDiamondRing,
-  GiDress, GiClothes, GiHanger, GiNecklace, GiSewingNeedle,
+  GiDress, GiClothes, GiNecklace, GiSewingNeedle,
 } from 'react-icons/gi';
 
 // Paleta de cores por índice
