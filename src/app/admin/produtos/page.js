@@ -295,37 +295,50 @@ export default function ProdutosPage() {
               </div>
 
               {variacoes.map((v, i) => (
-                <div key={i} className={styles.varInputRow}>
-                  <div className={styles.field} style={{ flex: 2 }}>
-                    {i === 0 && <label>Nome</label>}
-                    <input value={v.nome} onChange={e => updateVar(i, 'nome', e.target.value)} placeholder="Ex: Único, P, M, G"/>
-                  </div>
-                  <div className={styles.field} style={{ flex: 1.5 }}>
-                    {i === 0 && <label>Preço (R$) *</label>}
-                    <input type="number" step="0.01" min="0" value={v.preco} onChange={e => updateVar(i, 'preco', e.target.value)} placeholder="89.90"/>
-                  </div>
-                  <div className={styles.field} style={{ flex: 1 }}>
-                    {i === 0 && <label>Estoque</label>}
-                    <input type="number" min="0" value={v.estoque} onChange={e => updateVar(i, 'estoque', e.target.value)} placeholder="1" disabled={v.digital}/>
-                  </div>
-                  <div className={styles.field} style={{ flex: 'none' }}>
-                    {i === 0 && <label>Tipo</label>}
-                    <select value={v.digital ? 'digital' : 'fisico'} onChange={e => updateVar(i, 'digital', e.target.value === 'digital')}
-                      style={{ padding: '0.6rem 0.5rem', border: '1.5px solid #e5e7eb', borderRadius: '4px', fontSize: '0.82rem', background: 'white' }}>
-                      <option value="fisico">🏷 Físico</option>
-                      <option value="digital">💾 Digital</option>
-                    </select>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'flex-end', paddingBottom: '0.1rem' }}>
+                <div key={i} className={styles.varCard}>
+                  {/* Linha 1: Nome + botão remover */}
+                  <div className={styles.varCardTop}>
+                    <span className={styles.varCardIndex}>{i + 1}</span>
+                    <div className={styles.field} style={{ flex: 1 }}>
+                      <label>Nome da variação</label>
+                      <input value={v.nome} onChange={e => updateVar(i, 'nome', e.target.value)} placeholder="Ex: Único, P, M, G, 38..."/>
+                    </div>
                     {variacoes.length > 1 && (
-                      <button type="button" className={`${styles.btnIcon} ${styles.btnDanger}`} onClick={() => removeVar(i)}><BsDash/></button>
+                      <button type="button" className={`${styles.btnIcon} ${styles.btnDanger}`} onClick={() => removeVar(i)} title="Remover variação"><BsDash/></button>
                     )}
                   </div>
+
+                  {/* Linha 2: Tipo toggle */}
+                  <div className={styles.varTypeToggle}>
+                    <button
+                      type="button"
+                      className={`${styles.varTypeBtn} ${!v.digital ? styles.varTypeBtnActive : ''}`}
+                      onClick={() => updateVar(i, 'digital', false)}
+                    >
+                      🏷 Físico
+                    </button>
+                    <button
+                      type="button"
+                      className={`${styles.varTypeBtn} ${v.digital ? styles.varTypeBtnActiveDigital : ''}`}
+                      onClick={() => updateVar(i, 'digital', true)}
+                    >
+                      💾 Digital
+                    </button>
+                  </div>
+
+                  {/* Linha 3: Preço + Estoque */}
+                  <div className={styles.varCardFields}>
+                    <div className={styles.field}>
+                      <label>Preço (R$) *</label>
+                      <input type="number" step="0.01" min="0" value={v.preco} onChange={e => updateVar(i, 'preco', e.target.value)} placeholder="89.90"/>
+                    </div>
+                    <div className={styles.field}>
+                      <label>Estoque {v.digital && <span style={{ color: '#9ca3af', fontWeight: 400 }}>(N/A)</span>}</label>
+                      <input type="number" min="0" value={v.estoque} onChange={e => updateVar(i, 'estoque', e.target.value)} placeholder="1" disabled={v.digital}/>
+                    </div>
+                  </div>
                 </div>
-              ))}
-              <p style={{ fontSize: '0.72rem', color: '#9ca3af', margin: '0.25rem 0 0' }}>
-                Preço e estoque ficam nas variações. Use "Único" se não houver tamanhos. Digital = sem frete.
-              </p>
+              )})}
 
               <div className={styles.modalFooter}>
                 <button type="button" className={styles.btnSecondary} onClick={() => setModal(false)}>Cancelar</button>

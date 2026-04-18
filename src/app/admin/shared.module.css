@@ -401,6 +401,78 @@
   border-radius: 8px;
 }
 
+/* ── Variation Card (new input style) ── */
+.varCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 1rem 1rem;
+  background: white;
+  border: 1.5px solid #e9eaec;
+  border-radius: 10px;
+  margin-top: 0.6rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.varCard:hover { border-color: #c9a84c44; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+
+.varCardTop {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.varCardIndex {
+  width: 22px; height: 22px;
+  background: #1a0408;
+  color: #C9A84C;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 0.1rem;
+}
+
+.varTypeToggle {
+  display: flex;
+  gap: 0;
+  border: 1.5px solid #e9eaec;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.varTypeBtn {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  background: #f9fafb;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.varTypeBtn:first-child { border-right: 1.5px solid #e9eaec; }
+.varTypeBtn:hover { background: #f3f4f6; color: #374151; }
+
+.varTypeBtnActive {
+  background: #fdf2f4 !important;
+  color: #780e1a !important;
+  border-color: transparent !important;
+}
+
+.varTypeBtnActiveDigital {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+  border-color: transparent !important;
+}
+
+.varCardFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
 /* ── Inline form (for small CRUDs) ── */
 .inlineForm {
   display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap;
