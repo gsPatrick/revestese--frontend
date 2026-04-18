@@ -98,7 +98,18 @@ export default function ProdutosPage() {
     setModal(true);
   };
 
-  const closeModal = () => { setModal(false); resetModal(); };
+  const closeModal = (force = false) => {
+    // If product was already created (savedId set) and not forced, warn user
+    if (savedId && !force) {
+      const ok = window.confirm(
+        `O produto foi salvo parcialmente (ID ${savedId}).\n\nSe fechar agora, ele ficará na lista como rascunho e você pode continuar editando depois.\n\nFechar mesmo assim?`
+      );
+      if (!ok) return;
+    }
+    setModal(false);
+    resetModal();
+    if (savedId && !force) load(); // refresh list so draft product appears
+  };
 
   // ── Step 0: Save product data ──
   const handleSaveDados = async (e) => {
@@ -271,13 +282,20 @@ export default function ProdutosPage() {
 
       {/* ══ MODAL ══ */}
       {modal && (
-        <div className={styles.modalOverlay} onClick={closeModal}>
-          <div className={pStyles.modal} onClick={e => e.stopPropagation()}>
+        <div className={styles.modalOverlay}>
+          <div className={pStyles.modal}>
 
             {/* Header */}
             <div className={styles.modalHeader}>
-              <h2>{editing ? 'Editar produto' : 'Novo produto'}</h2>
-              <button className={styles.modalClose} onClick={closeModal}><BsX size={18}/></button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                <h2>{editing ? 'Editar produto' : 'Novo produto'}</h2>
+                {savedId && !editing && (
+                  <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 600 }}>
+                    ✓ Produto criado (ID {savedId}) — conclua os passos abaixo
+                  </span>
+                )}
+              </div>
+              <button className={styles.modalClose} onClick={() => closeModal(false)}><BsX size={18}/></button>
             </div>
 
             {/* Steps indicator */}
