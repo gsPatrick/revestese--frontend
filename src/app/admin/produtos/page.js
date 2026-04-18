@@ -154,7 +154,7 @@ export default function ProdutosPage() {
     setSaving(true);
     try {
       const formData = new FormData();
-      imageFiles.forEach(f => formData.append('imagens', f));
+      imageFiles.forEach(f => formData.append('files', f));
       await api.post(`/uploads/produtos/${savedId}/imagens`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
