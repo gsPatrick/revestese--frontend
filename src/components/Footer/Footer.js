@@ -94,11 +94,11 @@ const Footer = () => {
         <motion.div className={styles.footerColumn} variants={itemVariants}>
           <h3 className={styles.footerTitle}>Ajuda</h3>
           <ul className={styles.footerList}>
-            <li><Link href="/how-to-buy" className={styles.footerLink}>Como Comprar</Link></li>
-            <li><Link href="/payment" className={styles.footerLink}>Pagamento</Link></li>
-            <li><Link href="/shipping" className={styles.footerLink}>Envio</Link></li>
-            <li><Link href="/returns" className={styles.footerLink}>Trocas e Devoluções</Link></li>
-            <li><Link href="/faq" className={styles.footerLink}>FAQ</Link></li>
+            <li><Link href="/ajuda#como-comprar" className={styles.footerLink}>Como Comprar</Link></li>
+            <li><Link href="/ajuda#pagamento" className={styles.footerLink}>Pagamento</Link></li>
+            <li><Link href="/ajuda#envio" className={styles.footerLink}>Envio</Link></li>
+            <li><Link href="/ajuda#trocas" className={styles.footerLink}>Trocas e Devoluções</Link></li>
+            <li><Link href="/ajuda#faq" className={styles.footerLink}>FAQ</Link></li>
           </ul>
           <h3 className={`${styles.footerTitle} ${styles.marginTop}`}>Contato</h3>
           <ul className={styles.footerList}>
