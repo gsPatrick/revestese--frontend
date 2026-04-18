@@ -1,62 +1,76 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useFilter } from '@/context/FilterContext';
+import api from '@/services/api';
 import styles from './CollectionsSection.module.css';
-import { GiHanger, GiTrousers, GiRunningShoe, GiSunflower, GiDiamondRing } from 'react-icons/gi';
+import {
+  GiHanger, GiTrousers, GiRunningShoe, GiSunflower, GiDiamondRing,
+  GiDress, GiClothes, GiBagHandbag, GiNecklace, GiSewingNeedle,
+} from 'react-icons/gi';
 
-const collectionData = [
-  {
-    id: '1',
-    name: 'Feminino',
-    description: 'Roupas e looks femininos',
-    icon: <GiHanger />,
-    accent: 'var(--reveste-crimson)',
-  },
-  {
-    id: '2',
-    name: 'Masculino',
-    description: 'Peças para o guarda-roupa masculino',
-    icon: <GiTrousers />,
-    accent: 'var(--reveste-crimson-dark)',
-  },
-  {
-    id: '3',
-    name: 'Calçados',
-    description: 'Tênis, botas e sandálias únicos',
-    icon: <GiRunningShoe />,
-    accent: 'var(--reveste-gold-dark)',
-  },
-  {
-    id: '5',
-    name: 'Vintage',
-    description: 'Peças com história e personalidade',
-    icon: <GiSunflower />,
-    accent: 'var(--reveste-crimson-light)',
-  },
-  {
-    id: '4',
-    name: 'Acessórios',
-    description: 'Bolsas, cintos e joias especiais',
-    icon: <GiDiamondRing />,
-    accent: 'var(--reveste-gold)',
-  },
+// Paleta de cores por índice
+const ACCENTS = [
+  'var(--reveste-crimson)',
+  'var(--reveste-crimson-dark)',
+  'var(--reveste-gold-dark)',
+  'var(--reveste-crimson-light)',
+  'var(--reveste-gold)',
+  '#6b7280',
+  'var(--reveste-crimson)',
+  'var(--reveste-gold-dark)',
 ];
+
+// Ícone por nome da categoria (fallback = GiHanger)
+const ICONS = [
+  GiHanger, GiDress, GiTrousers, GiRunningShoe,
+  GiSunflower, GiDiamondRing, GiBagHandbag, GiNecklace,
+  GiClothes, GiSewingNeedle,
+];
+
+const getIcon = (nome, idx) => {
+  const n = nome?.toLowerCase() || '';
+  if (n.includes('feminin') || n.includes('vestido') || n.includes('dress')) return <GiDress />;
+  if (n.includes('masculin') || n.includes('calça') || n.includes('trouse')) return <GiTrousers />;
+  if (n.includes('calçado') || n.includes('sapato') || n.includes('tênis') || n.includes('shoe')) return <GiRunningShoe />;
+  if (n.includes('vintage') || n.includes('retrô')) return <GiSunflower />;
+  if (n.includes('acessório') || n.includes('joia') || n.includes('colar') || n.includes('anel')) return <GiDiamondRing />;
+  if (n.includes('bolsa') || n.includes('bag')) return <GiBagHandbag />;
+  const Icon = ICONS[idx % ICONS.length];
+  return <Icon />;
+};
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
-
 const itemVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 90 } },
 };
 
+// Skeleton card
+const SkeletonCard = () => (
+  <div className={styles.skeletonCard}>
+    <div className={styles.skeletonIcon} />
+    <div className={styles.skeletonTitle} />
+    <div className={styles.skeletonText} />
+  </div>
+);
+
 const CollectionsSection = () => {
   const { setCategoryAndNavigate } = useFilter();
+  const [categorias, setCategorias] = useState([]);
+  const [loading,    setLoading]    = useState(true);
+
+  useEffect(() => {
+    api.get('/categorias')
+      .then(r => setCategorias((r.data || []).filter(c => c.ativo !== false)))
+      .catch(() => setCategorias([]))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <motion.section
@@ -73,33 +87,59 @@ const CollectionsSection = () => {
         Encontre a peça perfeita para cada estilo
       </motion.p>
 
-      <motion.div variants={itemVariants} className={styles.collectionsGrid}>
-        {collectionData.map((collection) => (
-          <motion.div
-            key={collection.id}
-            className={styles.collectionCard}
-            style={{ '--card-accent': collection.accent }}
-            whileHover={{ scale: 1.04, y: -6 }}
-            transition={{ type: 'spring', stiffness: 280, damping: 18 }}
-          >
-            <div className={styles.collectionIconContainer}>
-              <span className={styles.collectionIcon} style={{ color: collection.accent }}>
-                {collection.icon}
-              </span>
-            </div>
-            <h3 className={styles.collectionName}>{collection.name}</h3>
-            <p className={styles.collectionDescription}>{collection.description}</p>
-            <Link
-              href="/catalog"
-              onClick={() => setCategoryAndNavigate(collection.id)}
-              className={styles.viewCollectionLink}
+      {/* ── Loading ── */}
+      {loading && (
+        <div className={styles.collectionsGrid}>
+          {[...Array(5)].map((_, i) => <SkeletonCard key={i} />)}
+        </div>
+      )}
+
+      {/* ── Categorias da API ── */}
+      {!loading && categorias.length > 0 && (
+        <motion.div variants={itemVariants} className={styles.collectionsGrid}>
+          {categorias.map((cat, i) => (
+            <motion.div
+              key={cat.id}
+              className={styles.collectionCard}
+              style={{ '--card-accent': ACCENTS[i % ACCENTS.length] }}
+              whileHover={{ scale: 1.04, y: -6 }}
+              transition={{ type: 'spring', stiffness: 280, damping: 18 }}
             >
-              Ver peças
-              <span className={styles.arrowIcon}>→</span>
-            </Link>
-          </motion.div>
-        ))}
-      </motion.div>
+              <div className={styles.collectionIconContainer}>
+                <span className={styles.collectionIcon} style={{ color: ACCENTS[i % ACCENTS.length] }}>
+                  {getIcon(cat.nome, i)}
+                </span>
+              </div>
+              <h3 className={styles.collectionName}>{cat.nome}</h3>
+              <p className={styles.collectionDescription}>
+                {cat.descricao || 'Explore as peças desta categoria'}
+              </p>
+              <Link
+                href="/catalog"
+                onClick={() => setCategoryAndNavigate(String(cat.id))}
+                className={styles.viewCollectionLink}
+              >
+                Ver peças
+                <span className={styles.arrowIcon}>→</span>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
+
+      {/* ── Estado vazio ── */}
+      {!loading && categorias.length === 0 && (
+        <motion.div variants={itemVariants} className={styles.emptyState}>
+          <span className={styles.emptyIcon}><GiHanger /></span>
+          <h3 className={styles.emptyTitle}>Em breve novas coleções</h3>
+          <p className={styles.emptyText}>
+            Estamos organizando o acervo. Enquanto isso, explore todas as peças disponíveis.
+          </p>
+          <Link href="/catalog" className={styles.emptyBtn}>
+            Ver acervo completo →
+          </Link>
+        </motion.div>
+      )}
     </motion.section>
   );
 };
