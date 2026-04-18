@@ -71,7 +71,7 @@ const LoginForm = () => {
         whileTap={{ scale: 0.98 }}
         disabled={isLoading}
       >
-        {isLoading ? 'Entrando...' : 'Entrar na Aventura'}
+        {isLoading ? 'Entrando...' : 'Entrar'}
       </motion.button>
     </motion.form>
   );

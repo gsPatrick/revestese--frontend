@@ -27,9 +27,7 @@ const AccountDashboard = ({ user, orders }) => {
     >
       <h2 className={styles.contentTitle}>Painel</h2>
       <p className={styles.welcomeMessage}>
-        {/* Usando optional chaining para segurança */}
-        Bem-vinda ao seu espaço, {user?.nome}! Aqui você pode gerenciar suas compras,
-        favoritos e dados pessoais.
+        Olá, {user?.nome}! Aqui você acompanha seus pedidos, favoritos e dados pessoais.
       </p>
       <div className={styles.dashboardSummary}>
         <div className={styles.summaryCard}>

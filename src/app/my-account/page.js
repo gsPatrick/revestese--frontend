@@ -80,7 +80,7 @@ export default function MyAccountPage() {
   // Função para renderizar o conteúdo com base na view ativa
   const renderContent = () => {
     if (isLoading) {
-      return <p>Carregando seus dados mágicos...</p>;
+      return <p>Carregando seus dados...</p>;
     }
     if (error) {
       return <p style={{ color: 'red' }}>{error}</p>;
@@ -111,7 +111,7 @@ export default function MyAccountPage() {
         <main className={styles.mainContainer}>
             <Breadcrumb items={breadcrumbItems} />
             <div className={styles.contentPanel}>
-                <p>{isAuthLoading ? 'Verificando sua magia...' : 'Você precisa estar logado para ver esta página.'}</p>
+                <p>{isAuthLoading ? 'Verificando...' : 'Você precisa estar logado para ver esta página.'}</p>
             </div>
         </main>
     );
@@ -122,7 +122,7 @@ export default function MyAccountPage() {
       <Breadcrumb items={breadcrumbItems} />
       <div className={styles.accountHeader}>
         <h1>Minha Conta</h1>
-        <p>Olá, {user?.nome}! Bem-vinda de volta ao seu cantinho mágico.</p>
+        <p>Olá, {user?.nome}! Bem-vindo(a) de volta ao seu espaço.</p>
       </div>
       <div className={styles.accountLayout}>
         <AccountSidebar activeView={activeView} setActiveView={setActiveView} />

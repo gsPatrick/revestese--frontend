@@ -85,7 +85,7 @@ const RegisterForm = () => {
         whileTap={{ scale: 0.98 }}
         disabled={isLoading}
       >
-        {isLoading ? 'Criando...' : 'Criar Conta Mágica'}
+        {isLoading ? 'Criando conta...' : 'Criar Conta'}
       </motion.button>
     </motion.form>
   );

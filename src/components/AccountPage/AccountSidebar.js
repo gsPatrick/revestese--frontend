@@ -2,10 +2,11 @@
 
 import React from 'react';
 import styles from './AccountPage.module.css';
-// Ícones novos: BsDownload, BsPinMapFill
+import { useAuth } from '@/context/AuthContext';
 import { BsGrid1X2, BsBoxSeam, BsHeart, BsPerson, BsBoxArrowRight, BsDownload, BsPinMapFill } from 'react-icons/bs';
 
 const AccountSidebar = ({ activeView, setActiveView }) => {
+  const { logout } = useAuth();
   const navItems = [
     { id: 'dashboard', label: 'Painel', icon: <BsGrid1X2 /> },
     { id: 'orders', label: 'Minhas Compras', icon: <BsBoxSeam /> },
@@ -15,9 +16,6 @@ const AccountSidebar = ({ activeView, setActiveView }) => {
     { id: 'details', label: 'Meus Dados', icon: <BsPerson /> },
   ];
 
-  const handleLogout = () => {
-    alert('Você foi desconectado! (Simulação)');
-  };
 
   return (
     <aside className={styles.sidebar}>
@@ -36,7 +34,7 @@ const AccountSidebar = ({ activeView, setActiveView }) => {
           ))}
         </ul>
       </nav>
-      <button className={styles.logoutButton} onClick={handleLogout}>
+      <button className={styles.logoutButton} onClick={logout}>
         <BsBoxArrowRight />
         <span>Sair</span>
       </button>
