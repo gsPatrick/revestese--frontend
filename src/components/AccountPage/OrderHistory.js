@@ -10,7 +10,7 @@ import { BsBoxSeam } from 'react-icons/bs';
 
 // Defina a URL base do seu backend onde as imagens estão hospedadas
 // É uma boa prática pegar isso de variáveis de ambiente, mas para simplificar, colocaremos direto por enquanto.
-const BACKEND_BASE_URL = 'https://n8n-doodledreamsbackend.r954jc.easypanel.host';
+const BACKEND_BASE_URL = 'https://geral-revestese-api.r954jc.easypanel.host';
 
 const OrderHistory = ({ orders }) => {
   const getStatusClass = (status) => {
@@ -81,8 +81,8 @@ const OrderHistory = ({ orders }) => {
         ) : (
           <div className={styles.emptyStateContainer}>
             <BsBoxSeam className={styles.emptyStateIcon} />
-            <h3 className={styles.emptyStateTitle}>Sua estante de aventuras está vazia</h3>
-            <p className={styles.emptyStateText}>Quando você fizer uma compra, seus pedidos mágicos aparecerão aqui.</p>
+            <h3 className={styles.emptyStateTitle}>Nenhuma compra realizada ainda</h3>
+            <p className={styles.emptyStateText}>Quando você fizer uma compra, seus pedidos aparecerão aqui.</p>
           </div>
         )}
       </div>

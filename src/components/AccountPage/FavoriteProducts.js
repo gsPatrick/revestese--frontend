@@ -76,8 +76,8 @@ const FavoriteProducts = ({ favorites }) => {
       ) : (
         <div className={styles.emptyStateContainer}>
             <BsHeartbreak className={styles.emptyStateIcon} />
-            <h3 className={styles.emptyStateTitle}>Nenhum rabisco favorito ainda?</h3>
-            <p className={styles.emptyStateText}>Explore nosso catálogo e clique no coração para guardar suas artes preferidas!</p>
+            <h3 className={styles.emptyStateTitle}>Nenhum favorito ainda</h3>
+            <p className={styles.emptyStateText}>Explore o acervo e salve as peças que mais te encantaram.</p>
         </div>
       )}
     </motion.div>

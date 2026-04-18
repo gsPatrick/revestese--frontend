@@ -47,7 +47,7 @@ const AddressManager = ({ addresses, onAddressChange }) => {
       >
         <h2 className={styles.contentTitle}>Meus Endereços</h2>
         <p className={styles.contentSubtitle}>
-          Gerencie seus endereços de entrega para uma finalização de compra mais rápida e mágica.
+          Gerencie seus endereços de entrega para uma finalização de compra mais rápida.
         </p>
         
         {addresses && addresses.length > 0 ? (
@@ -83,8 +83,8 @@ const AddressManager = ({ addresses, onAddressChange }) => {
         ) : (
           <div className={styles.emptyStateContainer}>
               <BsHouseHeart className={styles.emptyStateIcon} />
-              <h3 className={styles.emptyStateTitle}>Nenhum endereço mágico cadastrado</h3>
-              <p className={styles.emptyStateText}>Adicione um endereço para que possamos enviar suas aventuras coloridas!</p>
+              <h3 className={styles.emptyStateTitle}>Nenhum endereço cadastrado</h3>
+              <p className={styles.emptyStateText}>Adicione um endereço para agilizar suas próximas compras.</p>
               <motion.button 
                 className={styles.addAddressButton} 
                 style={{marginTop: '2rem'}}
