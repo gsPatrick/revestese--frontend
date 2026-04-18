@@ -74,11 +74,11 @@
   font-weight: 600;
   font-style: italic;
   letter-spacing: 0.04em;
-  color: var(--reveste-crimson);
+  color: var(--reveste-gold);
   transition: color 0.3s ease;
   white-space: nowrap;
 }
-.mainLogo:hover { color: var(--reveste-crimson-dark); }
+.mainLogo:hover { color: var(--reveste-gold-dark); }
 
 /* --- Search --- */
 .searchContainerWrapper {

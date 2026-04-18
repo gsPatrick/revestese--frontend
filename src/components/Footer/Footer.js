@@ -45,7 +45,7 @@ const Footer = () => {
 
         <motion.div className={styles.footerColumn} variants={itemVariants}>
           <Link href="/" className={styles.footerLogoLink}>
-            <img src="/logo.png" alt="Reveste-se" style={{ height: '64px', width: 'auto', objectFit: 'contain' }} />
+            <img src="/logo.png" alt="Reveste-se" style={{ height: '120px', width: 'auto', objectFit: 'contain' }} />
           </Link>
           <p className={styles.footerDescription}>
             Moda circular curada com amor. Damos nova vida a peças únicas e autênticas, unindo estilo, sustentabilidade e consciência. Vista o passado. Construa o futuro.
