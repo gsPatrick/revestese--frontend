@@ -3,33 +3,32 @@
 import React from 'react';
 import styles from './ContactPage.module.css';
 import { motion } from 'framer-motion';
-// CORREÇÃO: Importando cada ícone da sua biblioteca correta. BsPinterestP vem de 'fa'.
 import { BsEnvelope, BsPhone, BsPinMap, BsTiktok } from 'react-icons/bs';
-import { FaFacebookF, FaPinterestP } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 const contactMethods = [
-  { icon: <BsEnvelope />, title: "Email Mágico", content: "contato@doodledreams.com.br", href: "mailto:contato@doodledreams.com.br" },
-  { icon: <BsPhone />, title: "Telefone dos Sonhos", content: "(11) 95472-8628", href: "tel:+5511954728628" },
-  { icon: <BsPinMap />, title: "Nosso Ateliê", content: "Rua da Imaginação, 123 - São Paulo, SP", href: "#" }
+  { icon: <BsEnvelope />, title: 'E-mail', content: 'contato@reveste-se.com.br', href: 'mailto:contato@reveste-se.com.br' },
+  { icon: <BsPhone />, title: 'Telefone', content: '(11) 95472-8628', href: 'tel:+5511954728628' },
+  { icon: <BsPinMap />, title: 'Localização', content: 'Presidente Epitácio — SP', href: '#' },
 ];
 
 const socialLinks = [
-  { icon: <BsInstagram />, label: "Instagram", href: "https://www.instagram.com/doodle_dreams.colorir?igsh=eGNsbHFjeDV0azlq" },
-  { icon: <FaFacebookF />, label: "Facebook", href: "https://www.facebook.com/profile.php?id=61578009051256&mibextid=wwXIfr&mibextid=wwXIfr" }, // Corrigido para usar o ícone importado corretamente
-  { icon: <BsTiktok />, label: "TikTok", href: "https://www.tiktok.com/@doodle.dreams14?_t=ZM-8xq6di3BCFS&_r=1" } // Corrigido para usar o ícone importado corretamente
+  { icon: <FaInstagram />, label: 'Instagram', href: 'https://www.instagram.com/reveste.se' },
+  { icon: <FaFacebookF />, label: 'Facebook', href: 'https://www.facebook.com/revestese' },
+  { icon: <BsTiktok />, label: 'TikTok', href: 'https://www.tiktok.com/@reveste.se' },
 ];
 
 const ContactInfo = () => {
   return (
     <div className={styles.infoContainer}>
-      <h3>Outras Formas de Conectar</h3>
+      <h3>Onde nos encontrar</h3>
       <div className={styles.infoCardsWrapper}>
         {contactMethods.map((method, index) => (
           <motion.a
             key={index}
             href={method.href}
             className={styles.infoCard}
-            whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
+            whileHover={{ y: -4 }}
           >
             <div className={styles.infoIcon}>{method.icon}</div>
             <div className={styles.infoText}>
@@ -40,10 +39,17 @@ const ContactInfo = () => {
         ))}
       </div>
       <div className={styles.socialsWrapper}>
-        <h4>Siga nossa magia</h4>
+        <h4>Siga o movimento</h4>
         <div className={styles.socialIcons}>
           {socialLinks.map((social, index) => (
-            <motion.a key={index} href={social.href} aria-label={social.label} whileHover={{ scale: 1.2, rotate: 10 }}>
+            <motion.a
+              key={index}
+              href={social.href}
+              aria-label={social.label}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.2, y: -3 }}
+            >
               {social.icon}
             </motion.a>
           ))}

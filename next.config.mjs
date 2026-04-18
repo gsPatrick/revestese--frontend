@@ -17,6 +17,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
       // Configuração para o seu backend (corrigida)
       {
         protocol: 'https',

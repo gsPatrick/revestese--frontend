@@ -24,7 +24,7 @@ export default function AuthPage() {
           {/* IMAGEM ATUALIZADA PARA A LOGO */}
           <Image 
             src="/imagens/logo.svg" 
-            alt="Logo Doodle Dreams" 
+            alt="Logo Reveste-se" 
             width={300} 
             height={300}
             className={styles.illustrationImage}

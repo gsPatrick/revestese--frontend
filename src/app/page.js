@@ -1,24 +1,25 @@
-// src/app/page.js
-
 import HeroSection from '@/components/Hero/HeroSection';
-import TrustBar from '@/components/TrustBar/TrustBar'; 
-import MercadoPagoBanner from '@/components/MercadoPagoBanner/MercadoPagoBanner'; // <-- NOVO COMPONENTE
+import ScrollVideo from '@/components/ScrollVideo/ScrollVideo';
+import TrustBar from '@/components/TrustBar/TrustBar';
+import EditorialSection from '@/components/Editorial/EditorialSection';
+import MercadoPagoBanner from '@/components/MercadoPagoBanner/MercadoPagoBanner';
 import CollectionsSection from '@/components/Collections/CollectionsSection';
-import LatestProductsSection from '@/components/LatestProducts/LatestProductsSection';
-import TestimonialsSection from '@/components/Testimonials/TestimonialsSection';
-import SubscriptionClubSection from '@/components/SubscriptionClub/SubscriptionClubSection';
+import CuradoriaSection from '@/components/Curadoria/CuradoriaSection';
+import HowItWorksSection from '@/components/HowItWorks/HowItWorksSection';
+import ConsigneSection from '@/components/Consigne/ConsigneSection';
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
+      <ScrollVideo />
       <TrustBar />
-      {/* --- ADICIONADO AQUI --- */}
-      <MercadoPagoBanner />
-      {/* --- FIM DA ADIÇÃO --- */}
+      <EditorialSection />
       <CollectionsSection />
-      <LatestProductsSection />
-      <SubscriptionClubSection />
+      <CuradoriaSection />
+      <HowItWorksSection />
+      <MercadoPagoBanner />
+      <ConsigneSection />
     </main>
   );
 }

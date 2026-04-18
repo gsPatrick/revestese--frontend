@@ -44,7 +44,7 @@ const ContactForm = () => {
           >
             <BsCheckCircleFill />
             <h3>Mensagem Enviada!</h3>
-            <p>Seu rabisco mágico chegou até nós. Responderemos em breve!</p>
+            <p>Sua mensagem chegou até nós. Respondemos em até 24 horas!</p>
           </motion.div>
         ) : (
           <motion.form
@@ -77,7 +77,7 @@ const ContactForm = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {status === 'sending' ? 'Enviando...' : 'Enviar Rabisco'}
+              {status === 'sending' ? 'Enviando...' : 'Enviar mensagem'}
             </motion.button>
           </motion.form>
         )}

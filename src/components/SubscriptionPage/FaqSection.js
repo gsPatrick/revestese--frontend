@@ -30,7 +30,7 @@ const AccordionItem = ({ item, isOpen, onClick }) => {
       <motion.button
         className={styles.accordionHeader}
         onClick={onClick}
-        whileHover={{ backgroundColor: 'var(--doodle-beige-light)' }}
+        whileHover={{ backgroundColor: 'var(--reveste-bg-muted)' }}
       >
         <span className={styles.questionText}>{item.question}</span>
         <motion.div

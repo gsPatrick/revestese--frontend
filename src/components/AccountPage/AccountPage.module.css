@@ -12,13 +12,13 @@
 }
 
 .accountHeader h1 {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 2.8rem;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 .accountHeader p {
   font-size: 1.1rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
 }
 
 .accountLayout {
@@ -30,7 +30,7 @@
 
 /* Sidebar (com mais "vida") */
 .sidebar {
-  background-color: var(--doodle-white);
+  background-color: var(--reveste-white);
   border-radius: 20px;
   padding: 1.5rem;
   box-shadow: 0 8px 25px rgba(144, 122, 204, 0.1);
@@ -59,62 +59,62 @@
   background-color: transparent;
   border-radius: 12px;
   text-align: left;
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-weight: 600;
   font-size: 1.1rem;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .navButton svg, .logoutButton svg {
   font-size: 1.5rem;
-  color: var(--doodle-purple-light);
+  color: var(--reveste-crimson);
   transition: transform 0.3s ease;
 }
 .navButton:hover {
-  background-color: var(--doodle-beige-light);
-  color: var(--doodle-purple-soft);
+  background-color: var(--reveste-bg-alt);
+  color: var(--reveste-crimson);
   transform: translateX(5px);
 }
 .navButton:hover svg {
   transform: rotate(-10deg) scale(1.1);
 }
 .navButton.active {
-  background-color: var(--doodle-purple-soft);
-  color: var(--doodle-white);
+  background-color: var(--reveste-crimson);
+  color: var(--reveste-white);
   box-shadow: 0 4px 15px rgba(144, 122, 204, 0.4);
   transform: translateX(10px) scale(1.02);
 }
 .navButton.active svg {
-  color: var(--doodle-white);
+  color: var(--reveste-white);
   transform: scale(1.1);
 }
 .logoutButton {
   margin-top: 2rem;
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-crimson-light);
 }
-.logoutButton svg { color: var(--doodle-pink-pastel); }
+.logoutButton svg { color: var(--reveste-crimson-light); }
 .logoutButton:hover { background-color: #fce8f0; }
 
 /* Painel de Conteúdo */
 .contentPanel {
-  background-color: var(--doodle-white);
+  background-color: var(--reveste-white);
   border-radius: 20px;
   padding: 2.5rem;
   box-shadow: 0 8px 25px rgba(0,0,0,0.07);
   min-height: 450px;
 }
 .contentTitle {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 2rem;
   font-weight: 700;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin-bottom: 0.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px dashed var(--doodle-purple-light);
+  border-bottom: 2px dashed var(--reveste-crimson);
 }
 .contentSubtitle {
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   margin-bottom: 2.5rem;
   font-size: 1rem;
 }
@@ -125,18 +125,18 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  background-color: var(--doodle-beige-light);
+  background-color: var(--reveste-bg-alt);
   padding: 1rem;
   border-radius: 12px;
   transition: all 0.3s ease;
 }
 .downloadImage { border-radius: 8px; }
 .downloadInfo { flex-grow: 1; }
-.downloadInfo h4 { margin: 0 0 0.25rem 0; font-family: var(--font-mali-next); font-weight: 600; color: var(--doodle-dark-grey); }
-.downloadInfo p { margin: 0; font-size: 0.9rem; color: var(--doodle-placeholder-text); }
+.downloadInfo h4 { margin: 0 0 0.25rem 0; font-family: var(--font-cormorant-next); font-weight: 600; color: var(--reveste-text); }
+.downloadInfo p { margin: 0; font-size: 0.9rem; color: var(--reveste-text-muted); }
 .downloadButton {
   flex-shrink: 0;
-  background-color: var(--doodle-purple-soft);
+  background-color: var(--reveste-crimson);
   color: white;
   border: none;
   border-radius: 50%;
@@ -154,18 +154,18 @@
 /* --- ESTILOS PARA GERENCIADOR DE ENDEREÇOS --- */
 .addressList { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .addressCard {
-  background-color: var(--doodle-white);
-  border: 2px dashed var(--doodle-input-border);
+  background-color: var(--reveste-white);
+  border: 2px dashed var(--reveste-input-border);
   border-radius: 12px;
   padding: 1.5rem;
   display: flex;
   justify-content: space-between;
 }
-.addressContent p { line-height: 1.5; color: var(--doodle-placeholder-text); margin: 0; }
-.addressAlias { font-family: var(--font-mali-next); font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-.primaryBadge { font-size: 0.7rem; background-color: var(--doodle-yellow-mustard); color: white; padding: 0.2rem 0.6rem; border-radius: 99px; }
+.addressContent p { line-height: 1.5; color: var(--reveste-text-muted); margin: 0; }
+.addressAlias { font-family: var(--font-cormorant-next); font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+.primaryBadge { font-size: 0.7rem; background-color: var(--reveste-gold); color: white; padding: 0.2rem 0.6rem; border-radius: 99px; }
 .addressActions { display: flex; flex-direction: column; gap: 0.5rem; }
-.addressActions button { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--doodle-placeholder-text); }
+.addressActions button { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--reveste-text-muted); }
 .addAddressButton {
   grid-column: 1 / -1; /* Ocupa a largura total no grid */
   display: flex;
@@ -173,11 +173,11 @@
   justify-content: center;
   gap: 1rem;
   padding: 1.5rem;
-  border: 2px dashed var(--doodle-purple-light);
+  border: 2px dashed var(--reveste-crimson);
   border-radius: 12px;
   background-color: transparent;
-  color: var(--doodle-purple-soft);
-  font-family: var(--font-mali-next);
+  color: var(--reveste-crimson);
+  font-family: var(--font-cormorant-next);
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -190,37 +190,37 @@
 .addAddressButton svg { font-size: 1.5rem; }
 
 /* Outros estilos (sem alterações drásticas) */
-.welcomeMessage { font-size: 1.1rem; line-height: 1.6; color: var(--doodle-placeholder-text); margin-bottom: 2rem; }
+.welcomeMessage { font-size: 1.1rem; line-height: 1.6; color: var(--reveste-text-muted); margin-bottom: 2rem; }
 .dashboardSummary { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.summaryCard { background-color: var(--doodle-beige-light); padding: 1.5rem; border-radius: 12px; }
-.summaryCard h4 { font-family: var(--font-mali-next); font-weight: 600; margin: 0 0 0.5rem 0; }
+.summaryCard { background-color: var(--reveste-bg-alt); padding: 1.5rem; border-radius: 12px; }
+.summaryCard h4 { font-family: var(--font-cormorant-next); font-weight: 600; margin: 0 0 0.5rem 0; }
 .orderList { display: flex; flex-direction: column; gap: 1.5rem; }
-.orderCard { border: 1px solid var(--doodle-input-border); border-radius: 12px; overflow: hidden; }
-.orderHeader { display: flex; justify-content: space-between; align-items: center; background-color: var(--doodle-beige-light); padding: 1rem 1.5rem; }
+.orderCard { border: 1px solid var(--reveste-input-border); border-radius: 12px; overflow: hidden; }
+.orderHeader { display: flex; justify-content: space-between; align-items: center; background-color: var(--reveste-bg-alt); padding: 1rem 1.5rem; }
 .orderHeader h3 { margin: 0; font-size: 1.1rem; }
-.orderHeader p { margin: 0; font-size: 0.9rem; color: var(--doodle-placeholder-text); }
+.orderHeader p { margin: 0; font-size: 0.9rem; color: var(--reveste-text-muted); }
 .orderStatus { padding: 0.4rem 0.8rem; border-radius: 99px; font-size: 0.8rem; font-weight: 700; }
-.statusDelivered { background-color: var(--doodle-green-pastel); color: #1e6a25; }
-.statusProcessing { background-color: var(--doodle-yellow-light); color: #856404; }
+.statusDelivered { background-color: var(--reveste-bg-muted); color: #1e6a25; }
+.statusProcessing { background-color: var(--reveste-bg-muted); color: #856404; }
 .orderItems { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
 .orderItem { display: flex; align-items: center; gap: 1rem; }
 .orderItem img { border-radius: 4px; }
-.orderTotal { padding: 1rem 1.5rem; text-align: right; border-top: 1px solid var(--doodle-input-border); }
+.orderTotal { padding: 1rem 1.5rem; text-align: right; border-top: 1px solid var(--reveste-input-border); }
 .favoritesGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
-.favoriteCard { border: 1px solid var(--doodle-input-border); border-radius: 12px; padding: 1rem; text-align: center; }
+.favoriteCard { border: 1px solid var(--reveste-input-border); border-radius: 12px; padding: 1rem; text-align: center; }
 .favoriteCard img { border-radius: 8px; margin-bottom: 1rem; }
-.favoriteName { font-family: var(--font-mali-next); font-weight: 600; margin-bottom: 0.5rem; }
-.favoritePrice { color: var(--doodle-purple-soft); font-weight: 700; margin-bottom: 1rem; }
+.favoriteName { font-family: var(--font-cormorant-next); font-weight: 600; margin-bottom: 0.5rem; }
+.favoritePrice { color: var(--reveste-crimson); font-weight: 700; margin-bottom: 1rem; }
 .favoriteActions { display: flex; gap: 0.5rem; }
 .viewProductBtn, .removeFavoriteBtn { flex-grow: 1; padding: 0.5rem; border-radius: 8px; border: 1px solid; cursor: pointer; transition: all 0.2s; }
-.viewProductBtn { background-color: var(--doodle-blue-soft); color: white; border-color: var(--doodle-blue-soft); }
-.removeFavoriteBtn { background-color: transparent; border-color: var(--doodle-pink-pastel); color: var(--doodle-pink-pastel); }
+.viewProductBtn { background-color: var(--reveste-gold-dark); color: white; border-color: var(--reveste-gold-dark); }
+.removeFavoriteBtn { background-color: transparent; border-color: var(--reveste-crimson-light); color: var(--reveste-crimson-light); }
 .detailsForm { display: flex; flex-direction: column; gap: 1.5rem; max-width: 500px; }
 .formGroup { display: flex; flex-direction: column; }
 .formGroup label { margin-bottom: 0.5rem; font-weight: 600; }
-.formGroup input { padding: 0.8rem; border-radius: 8px; border: 1px solid var(--doodle-input-border); font-size: 1rem; }
+.formGroup input { padding: 0.8rem; border-radius: 8px; border: 1px solid var(--reveste-input-border); font-size: 1rem; }
 .formActions { margin-top: 1rem; }
-.saveButton { background-color: var(--doodle-purple-soft); color: white; padding: 0.8rem 2rem; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; }
+.saveButton { background-color: var(--reveste-crimson); color: white; padding: 0.8rem 2rem; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; }
 
 /* Responsividade */
 @media (max-width: 991px) {
@@ -244,27 +244,27 @@
   justify-content: center;
   text-align: center;
   padding: 3rem 1rem;
-  border: 2px dashed var(--doodle-input-border);
+  border: 2px dashed var(--reveste-input-border);
   border-radius: 16px;
   min-height: 300px;
 }
 
 .emptyStateIcon {
   font-size: 3.5rem;
-  color: var(--doodle-purple-light);
+  color: var(--reveste-crimson);
   margin-bottom: 1.5rem;
 }
 
 .emptyStateTitle {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin: 0 0 0.5rem 0;
 }
 
 .emptyStateText {
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   max-width: 400px;
   line-height: 1.6;
 }
@@ -272,7 +272,7 @@
 /* NOVO: Estilos para o formulário de detalhes */
 .formDivider {
   border: none;
-  border-top: 1px dashed var(--doodle-input-border);
+  border-top: 1px dashed var(--reveste-input-border);
   margin: 1.5rem 0;
 }
 .errorMessage, .successMessage {
@@ -290,7 +290,7 @@
   color: #1e6a25;
 }
 .saveButton:disabled {
-  background-color: var(--doodle-placeholder-text);
+  background-color: var(--reveste-text-muted);
   cursor: not-allowed;
 }
 
@@ -319,7 +319,7 @@
 
 .downloadButton { /* Reutiliza o estilo existente, apenas garante que esteja dentro do downloadActions */
   flex-shrink: 0;
-  background-color: var(--doodle-purple-soft);
+  background-color: var(--reveste-crimson);
   color: white;
   border: none;
   border-radius: 50%;
@@ -345,7 +345,7 @@
 /* NOVO: Estilo para a mensagem de "sem arquivos" */
 .infoTextSmall {
     font-size: 0.85rem;
-    color: var(--doodle-placeholder-text);
+    color: var(--reveste-text-muted);
     font-style: italic;
 }
 

@@ -57,7 +57,7 @@ const FeaturedProductCard = ({ product, index }) => {
           <motion.button
             className={styles.addToCartBtn}
             onClick={handleAddToCart}
-            whileHover={{ scale: 1.1, backgroundColor: 'var(--doodle-purple-light)' }}
+            whileHover={{ scale: 1.1, backgroundColor: 'var(--reveste-crimson-muted)' }}
             whileTap={{ scale: 0.9 }}
             aria-label={`Adicionar ${product.name} ao carrinho`}
           >

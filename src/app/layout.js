@@ -1,5 +1,5 @@
 import Script from 'next/script';
-import { Mali, Sacramento } from 'next/font/google';
+import { Cormorant_Garamond, Raleway } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
@@ -7,25 +7,26 @@ import { CartProvider } from '@/context/CartContext';
 import { AuthProvider } from '@/context/AuthContext';
 import { FilterProvider } from '@/context/FilterContext';
 import CouponPopup from '@/components/CouponPopup/CouponPopup';
+import WhatsAppCta from '@/components/WhatsAppCta/WhatsAppCta';
 
-const mali = Mali({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700'],
-  variable: '--font-mali-next',
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant-next',
   display: 'swap',
 });
 
-const magnolia = Sacramento({
+const raleway = Raleway({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-magnolia-next',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-raleway-next',
   display: 'swap',
-  // display: swap ajuda com desempenho e estabilidade de fontes no carregamento
 });
 
 export const metadata = {
-  title: 'DoodleDreams - Livros de Colorir Mágicos',
-  description: 'Descubra a magia dos livros de colorir com DoodleDreams. Lúdico, Cinematográfico e Inspirador.',
+  title: 'Reveste-se — Moda Circular | Brechó Premium',
+  description: 'Dê nova vida ao seu guarda-roupa com peças únicas e sustentáveis. Reveste-se é moda circular de verdade — curada, autêntica e consciente.',
 };
 
 export default function RootLayout({ children }) {
@@ -33,13 +34,12 @@ export default function RootLayout({ children }) {
     <html
       lang="pt-BR"
       style={{
-        '--font-mali-next': mali.style.fontFamily,
-        '--font-magnolia-next': magnolia.style.fontFamily,
+        '--font-cormorant-next': cormorant.style.fontFamily,
+        '--font-raleway-next': raleway.style.fontFamily,
       }}
     >
       <head>
-        {/* Meta Pixel Script */}
-        <Script id="meta-pixel-dd" strategy="afterInteractive">
+        <Script id="meta-pixel-reveste" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -54,8 +54,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body>
-        {/* Meta Pixel noscript fallback */}
+      <body className={`${cormorant.variable} ${raleway.variable}`}>
         <noscript>
           <img
             height="1"
@@ -72,6 +71,7 @@ export default function RootLayout({ children }) {
               <main>{children}</main>
               <Footer />
               <CouponPopup />
+              <WhatsAppCta />
             </FilterProvider>
           </CartProvider>
         </AuthProvider>

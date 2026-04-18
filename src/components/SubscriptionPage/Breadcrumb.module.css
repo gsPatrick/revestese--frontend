@@ -25,22 +25,22 @@
 
 .separator {
   margin: 0 0.5rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
 }
 
 .breadcrumbLink {
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-crimson-light);
   font-weight: 600;
   transition: color 0.2s ease;
 }
 
 .breadcrumbLink:hover {
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
   text-decoration: underline;
 }
 
 .breadcrumbCurrent {
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 
 /* --- Responsividade para Mobile --- */

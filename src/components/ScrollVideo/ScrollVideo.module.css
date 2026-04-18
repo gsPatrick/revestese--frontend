@@ -1,0 +1,218 @@
+/* ── Tall scroll container ── */
+.container {
+  position: relative;
+  width: 100%;
+  background-color: var(--reveste-crimson-deeper, #2e0509);
+}
+
+/* ── Sticky panel that locks in viewport ── */
+.stickyWrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: stretch;
+  background-color: var(--reveste-crimson-deeper, #2e0509);
+  overflow: hidden;
+}
+
+/* ════════════════════════
+   Left column — copy
+════════════════════════ */
+.leftCol {
+  flex: 0 0 38%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 3.5rem 0 2.5rem;
+  border-right: 1px solid rgba(201,168,76,0.2);
+  position: relative;
+  background-color: var(--reveste-crimson-deeper, #2e0509);
+}
+
+/* Dot-grid texture */
+.leftCol::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(201,168,76,0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+/* Gold vertical accent bar */
+.leftCol::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, var(--reveste-gold) 40%, var(--reveste-crimson-light) 70%, transparent);
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.copyInner {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-family: var(--font-raleway-next);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--reveste-gold);
+}
+
+.headline {
+  font-family: var(--font-cormorant-next);
+  font-size: clamp(2.4rem, 3.5vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--reveste-cream, #F5F0E8);
+  margin: 0;
+}
+
+.headline em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--reveste-gold-light, #E8C97A);
+}
+
+.body {
+  font-family: var(--font-raleway-next);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.65);
+  font-weight: 300;
+  margin: 0;
+}
+
+/* Animated scroll hint */
+.scrollHint {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.scrollLine {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--reveste-crimson);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--reveste-gold);
+  animation: slide-line 1.8s ease-in-out infinite;
+}
+
+@keyframes slide-line {
+  0%   { left: -100%; }
+  50%  { left: 0; }
+  100% { left: 100%; }
+}
+
+.scrollLabel {
+  font-family: var(--font-raleway-next);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+}
+
+/* ════════════════════════
+   Right column — video
+════════════════════════ */
+.rightCol {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2.5rem 2.5rem 3rem;
+  background-color: #1a0408;
+}
+
+/* Video frame with subtle border */
+.videoFrame {
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 6rem);
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--reveste-border);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Top wedge transition ── */
+.topWedge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 10;
+  pointer-events: none;
+  line-height: 0;
+}
+
+.topWedge svg {
+  width: 100%;
+  height: 64px;
+  display: block;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .stickyWrapper {
+    flex-direction: column;
+  }
+
+  .leftCol {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    padding: 2rem 1.5rem 1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .leftCol::before { display: none; }
+
+  .copyInner { max-width: 100%; gap: 0.8rem; }
+  .headline { font-size: 2rem; }
+  .scrollHint { display: none; }
+
+  .rightCol {
+    flex: 1;
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  .videoFrame { max-height: 55vh; }
+}

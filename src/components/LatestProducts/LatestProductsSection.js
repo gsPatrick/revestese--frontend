@@ -70,10 +70,10 @@ const LatestProductsSection = () => {
       return (
         <div className={styles.emptyContainer}>
           <h3 className={styles.emptyMessage}>
-            Todo <span className={styles.highlight}>sonho</span> começa com um simples <span className={styles.highlight}>rabisco</span>.
+            Novas <span className={styles.highlight}>peças únicas</span> chegam toda semana.
           </h3>
           <p className={styles.emptySubMessage}>
-            Novas criações mágicas chegarão em breve!
+            Em breve o acervo será atualizado com novas chegadas!
           </p>
         </div>
       );
@@ -97,8 +97,8 @@ const LatestProductsSection = () => {
       <div className={styles.decorativeElementsContainer}>
         {/* ...elementos... */}
       </div>
-      <h2 ref={titleRef} className={styles.sectionTitle}>Últimos Lançamentos</h2>
-      <p ref={subtitleRef} className={styles.sectionSubtitle}>Descubra as novidades mais recentes do universo DoodleDreams!</p>
+      <h2 ref={titleRef} className={styles.sectionTitle}>Recém Chegadas</h2>
+      <p ref={subtitleRef} className={styles.sectionSubtitle}>Peças únicas que acabaram de entrar no acervo</p>
       {renderContent()}
     </section>
   );

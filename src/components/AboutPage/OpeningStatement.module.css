@@ -1,57 +1,48 @@
 .statementSection {
   display: flex;
-  flex-direction: column; /* Para empilhar a frase e o nome da marca */
+  flex-direction: column;
   align-items: center;
-  padding: 0rem 1.5rem;
-  background-color: var(--doodle-page-bg);
+  padding: 5rem 1.5rem;
+  background-color: var(--reveste-bg);
   overflow: hidden;
   text-align: center;
 }
 
 .statementText {
-  font-family: var(--font-mali-next);
-  font-size: clamp(3rem, 10vw, 6.5rem); /* Fonte ainda maior */
-  font-weight: 800;
-  color: var(--doodle-dark-grey);
+  font-family: var(--font-cormorant-next);
+  font-size: clamp(2.4rem, 8vw, 5.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--reveste-text);
   line-height: 1.2;
   max-width: 1200px;
-  margin-bottom: 2rem; /* Espaço entre a frase e o nome da marca */
+  margin-bottom: 2rem;
 }
 
-/* Esconde o overflow das palavras enquanto elas animam */
-.statementText span.word {
-  display: inline-block;
-  position: relative;
-}
+.statementText span.word { display: inline-block; position: relative; }
 
-/* Estilo para as palavras "sonho" e "rabisco" */
 .highlight {
   position: relative;
   display: inline-block;
-  color: var(--doodle-purple-soft); /* Cor de destaque */
-  z-index: 1;
+  color: var(--reveste-crimson);
+  font-weight: 600;
 }
 
-/* Efeito de "pincelada" estático atrás das palavras */
 .highlight::before {
   content: '';
   position: absolute;
-  bottom: 10%;
-  left: -5%;
-  width: 110%;
-  height: 40%;
-  background-color: var(--doodle-yellow-light); /* Fundo amarelo suave */
+  bottom: 8%; left: -3%; width: 106%; height: 30%;
+  background-color: var(--reveste-crimson-wash);
   z-index: -1;
-  transform: rotate(-2deg); /* Leve inclinação */
-  border-radius: 4px;
+  transform: rotate(-1.5deg);
+  border-radius: 2px;
 }
 
-/* Nome da marca que aparece depois */
 .brandName {
-  font-family: var(--font-mali-next);
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  font-weight: 700;
-  color: var(--doodle-purple-light);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-family: var(--font-cormorant-next);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--reveste-crimson);
+  letter-spacing: 0.06em;
 }

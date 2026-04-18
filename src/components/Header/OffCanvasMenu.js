@@ -27,7 +27,6 @@ const OffCanvasMenu = ({ isOpen, onClose }) => {
         { name: 'Mais Vendidos', href: '/featured/mais-vendidos' },
         { name: 'Lançamentos', href: '/featured/lancamentos' },
     ]},
-    { name: 'Assinatura', href: '/subscription' },
     { name: 'Sobre Nós', href: '/about' },
     { name: 'Contato', href: '/contact' },
     { name: 'Blog', href: '/blog' },
@@ -99,11 +98,11 @@ const OffCanvasMenu = ({ isOpen, onClose }) => {
             <a href="tel:+5511954728628" className={styles.menuContactLink}>
               <BsPhone className={styles.menuContactIcon} /> (11) 95472-8628
             </a>
-            <a href="mailto:contato@doodledreams.com.br" className={styles.menuContactLink}>
-              <BsEnvelope className={styles.menuContactIcon} /> contato@doodledreams.com.br
+            <a href="mailto:contato@reveste-se.com.br" className={styles.menuContactLink}>
+              <BsEnvelope className={styles.menuContactIcon} /> contato@reveste-se.com.br
             </a>
             <div className={styles.menuSocialLinks}>
-              <a href="https://www.tiktok.com/@doodle.dreams14?_t=ZM-8xq6di3BCFS&_r=1" className={styles.menuSocialLink} aria-label="TikTok"><BsTiktok /></a>
+              <a href="https://www.tiktok.com/@reveste.se" className={styles.menuSocialLink} aria-label="TikTok"><BsTiktok /></a>
               <a href="https://www.facebook.com/profile.php?id=61578009051256&mibextid=wwXIfr&mibextid=wwXIfr" className={styles.menuSocialLink} aria-label="Facebook"><FaFacebookF /></a>
               <a href="https://www.facebook.com/profile.php?id=61578009051256&mibextid=wwXIfr&mibextid=wwXIfr" className={styles.menuSocialLink} aria-label="Instagram"><FaInstagram /></a>
             </div>

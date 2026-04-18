@@ -39,7 +39,6 @@ const HeaderNavBar = ({ isMobile }) => {
         </div>
       ),
     },
-    { name: 'Assinatura', href: '/subscription' },
     { name: 'Sobre Nós', href: '/about' },
   ];
 

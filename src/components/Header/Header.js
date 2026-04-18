@@ -22,11 +22,18 @@ import { HiOutlineBars3, HiXMark, HiChevronDown } from 'react-icons/hi2';
 
 const Header = () => {
   const headerRef = useRef(null);
-  const searchContainerRef = useRef(null); 
+  const searchContainerRef = useRef(null);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCatalogDropdownOpen, setIsCatalogDropdownOpen] = useState(false);
   const [apiCategories, setApiCategories] = useState([]);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -134,26 +141,25 @@ const Header = () => {
         </div>
       )
     },
-    { name: 'Assinatura', href: '/subscription' },
     { name: 'Sobre Nós', href: '/about' },
-    {name: 'Contato', href: '/contact'}
+    { name: 'Contato', href: '/contact' }
   ];
   
   const mobileNavLinks = [
-    { name: 'Home', href: '/' }, { name: 'Catálogo', href: '/catalog' }, { name: 'Assinatura', href: '/subscription' }, { name: 'Sobre Nós', href: '/about' }, {name: 'Contato', href: '/contact'}
+    { name: 'Home', href: '/' }, { name: 'Catálogo', href: '/catalog' }, { name: 'Sobre Nós', href: '/about' }, { name: 'Contato', href: '/contact' }
   ];
 
 
   // --- ALTERAÇÃO PRINCIPAL AQUI ---
   const topBarTrustBadges = [
-    { text: 'Frete fixo R$ 9,90 para todo o Brasil' },
-    { text: 'Pague com Pix, boleto ou cartão' },
+    { text: 'Moda circular & sustentável' },
+    { text: 'Peças autênticas verificadas' },
     { text: 'Compra segura com MercadoPago' },
   ];
 
   return (
     <>
-      <header ref={headerRef} className={styles.header}>
+      <header ref={headerRef} className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
         <div className={styles.topBarWrapper}>
             <div className={styles.topBar}>
                 <div className={styles.topBarContent}>
@@ -167,9 +173,9 @@ const Header = () => {
                       ))}
                     </div>
                     <div className={styles.topBarSocial}>
-                        <a href="https://www.tiktok.com/@doodle.dreams14?_t=ZM-8xq6di3BCFS&_r=1" className={styles.topBarSocialLink} aria-label="TikTok"><BsTiktok /></a>
-                        <a href="https://www.facebook.com/profile.php?id=61578009051256&mibextid=wwXIfr&mibextid=wwXIfr" className={styles.topBarSocialLink} aria-label="Facebook"><FaFacebookF /></a>
-                        <a href="https://www.instagram.com/doodle_dreams.colorir?igsh=eGNsbHFjeDV0azlq" className={styles.topBarSocialLink} aria-label="Instagram"><FaInstagram /></a>
+                        <a href="https://www.tiktok.com/@reveste.se" className={styles.topBarSocialLink} aria-label="TikTok"><BsTiktok /></a>
+                        <a href="https://www.facebook.com/revestese" className={styles.topBarSocialLink} aria-label="Facebook"><FaFacebookF /></a>
+                        <a href="https://www.instagram.com/reveste.se" className={styles.topBarSocialLink} aria-label="Instagram"><FaInstagram /></a>
                     </div>
                 </div>
             </div>
@@ -179,11 +185,11 @@ const Header = () => {
         <div className={styles.mainBar}>
             {/* ...código da mainBar... */}
             <div className={styles.mainBarContent}>
-            <Link href="/" className={styles.mainLogo}><span>Doodle Dreams</span></Link>
+            <Link href="/" className={styles.mainLogo}><span>Reveste-se</span></Link>
             
             <div className={styles.searchContainerWrapper} ref={searchContainerRef}>
                 <div className={styles.searchContainer}>
-                    <input type="text" placeholder="Buscar livros, coleções..." className={styles.searchInput} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} onFocus={() => setIsSearchFocused(true)} />
+                    <input type="text" placeholder="Buscar peças, categorias..." className={styles.searchInput} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} onFocus={() => setIsSearchFocused(true)} />
                     <button className={styles.searchButton} aria-label="Buscar"><BsSearch className={styles.searchIcon} /></button>
                 </div>
 

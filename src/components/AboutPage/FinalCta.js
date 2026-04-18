@@ -1,26 +1,56 @@
-'use client'; // Marcar como Client Component permite usar Framer Motion para animações de hover
+'use client';
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import styles from './FinalCta.module.css';
+import { BsArrowRight } from 'react-icons/bs';
 
 const FinalCta = () => {
   return (
-    <div className={styles.ctaSection}>
-      <h2 className={styles.ctaTitle}>Pronto para começar sua aventura?</h2>
-      <p className={styles.ctaDescription}>
-        Nossas coleções estão repletas de mundos esperando para serem coloridos. Encontre o seu próximo livro favorito hoje mesmo!
-      </p>
+    <section className={styles.section}>
+      <div className={styles.bgImageWrapper}>
+        <Image
+          src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1800&q=80"
+          alt="Moda circular — Reveste-se"
+          fill
+          sizes="100vw"
+          className={styles.bgImage}
+        />
+        <div className={styles.overlay} />
+      </div>
+
       <motion.div
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        className={styles.content}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
       >
-        <Link href="/catalog" className={styles.ctaButton}>
-          Explorar Coleções
-        </Link>
+        <p className={styles.eyebrow}>Pronta para começar?</p>
+        <h2 className={styles.title}>
+          Vista-se com propósito.<br />
+          <em>Faça parte do movimento.</em>
+        </h2>
+        <p className={styles.body}>
+          Explore o acervo, encontre sua próxima peça favorita ou consigne o que parou de usar. O Reveste-se existe para isso.
+        </p>
+        <div className={styles.buttons}>
+          <Link href="/catalog" className={styles.btnPrimary}>
+            Ver o acervo <BsArrowRight />
+          </Link>
+          <a
+            href="https://wa.me/5511954728628?text=Ol%C3%A1%21+Quero+saber+mais+sobre+o+Reveste-se."
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.btnSecondary}
+          >
+            Fale conosco
+          </a>
+        </div>
       </motion.div>
-    </div>
+    </section>
   );
 };
 

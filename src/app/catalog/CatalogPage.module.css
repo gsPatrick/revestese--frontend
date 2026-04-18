@@ -1,65 +1,168 @@
-/* src/app/catalog/CatalogPage.module.css */
+/* ── Page wrapper ── */
+.main {
+  min-height: 100vh;
+  background: var(--reveste-bg);
+}
 
+/* ── Header band ── */
 .pageHeader {
+  background: var(--reveste-bg-surface);
+  border-bottom: 1px solid var(--reveste-border);
+  padding: 3rem 1.5rem 2.5rem;
+}
+
+.headerInner {
   max-width: 1400px;
-  margin: 2rem auto;
-  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  font-family: var(--font-raleway-next);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--reveste-crimson);
+  margin: 0 0 0.5rem;
 }
 
 .pageTitle {
-  font-family: var(--font-mali-next);
-  font-size: 3rem;
-  color: var(--doodle-dark-grey);
+  font-family: var(--font-cormorant-next);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--reveste-text);
+  margin: 0 0 0.5rem;
+  line-height: 1.1;
 }
 
 .pageSubtitle {
-  font-size: 1.1rem;
-  color: var(--doodle-placeholder-text);
-  margin-top: 0.5rem;
+  font-family: var(--font-raleway-next);
+  font-size: 0.88rem;
+  color: var(--reveste-text-muted);
+  font-weight: 300;
+  margin: 0;
+  line-height: 1.6;
 }
 
+.totalCount {
+  color: var(--reveste-crimson);
+  font-weight: 600;
+}
+
+/* ── Mobile filter button ── */
+.mobileFilterButton {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  font-family: var(--font-raleway-next);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--reveste-crimson);
+  border: 1.5px solid var(--reveste-crimson);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.mobileFilterButton:hover {
+  background: var(--reveste-crimson);
+  color: white;
+}
+
+/* ── Catalog layout ── */
 .catalogLayout {
   display: grid;
-  grid-template-columns: 300px 1fr; /* Coluna do filtro e coluna dos produtos */
-  gap: 2.5rem;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
   max-width: 1400px;
   margin: 0 auto;
   align-items: flex-start;
+  padding: 2rem 1.5rem 5rem;
+  gap: 2.5rem;
 }
 
-/* Esconde o botão de filtro em telas grandes */
-.mobileFilterButton {
-  display: none;
+.desktopSidebar {
+  position: sticky;
+  top: 80px;
 }
 
-/* --- Responsividade para Tablet e Mobile --- */
+.gridArea {
+  min-width: 0;
+}
+
+/* ── Pagination ── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.pageBtn {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--reveste-border);
+  background: var(--reveste-bg-surface);
+  color: var(--reveste-text-mid);
+  font-family: var(--font-raleway-next);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  border-radius: 1px;
+}
+
+.pageBtn:hover:not(:disabled) {
+  border-color: var(--reveste-crimson);
+  color: var(--reveste-crimson);
+}
+
+.pageBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pageBtnActive {
+  background: var(--reveste-crimson);
+  border-color: var(--reveste-crimson);
+  color: white;
+}
+
+.pageBtnActive:hover {
+  background: var(--reveste-crimson-dark);
+  border-color: var(--reveste-crimson-dark);
+  color: white !important;
+}
+
+/* ── Responsive ── */
 @media (max-width: 991px) {
   .catalogLayout {
-    /* Em telas menores, o grid de produtos ocupa a tela toda */
     grid-template-columns: 1fr;
+    padding: 1.5rem 1rem 4rem;
   }
-  
-  /* Esconde a barra lateral de filtros do desktop */
-  .desktopSidebar {
-    display: none;
-  }
-  
-  /* Mostra o botão para abrir os filtros */
-  .mobileFilterButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 2rem;
-    font-family: var(--font-mali-next);
-    font-size: 1.1rem;
-    font-weight: 700;
-    background-color: var(--doodle-white);
-    color: var(--doodle-purple-soft);
-    border: 2px solid var(--doodle-purple-soft);
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  }
+  .desktopSidebar { display: none; }
+  .mobileFilterButton { display: flex; }
+  .headerInner { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .pageHeader { padding: 2rem 1rem 1.5rem; }
+  .catalogLayout { padding: 1rem 1rem 3rem; }
 }

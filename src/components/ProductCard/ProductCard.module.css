@@ -1,160 +1,212 @@
 /* src/components/ProductCard/ProductCard.module.css */
 
 .productCard {
-  background-color: var(--doodle-white);
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  padding: 1rem;
+  background-color: var(--reveste-bg-surface);
+  border: 1px solid var(--reveste-border);
+  border-radius: 2px;
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: all 0.3s ease;
   overflow: hidden;
   height: 100%;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
+
 .productCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border-color: var(--reveste-border-strong);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
-.productLink {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  flex-grow: 1; /* Permite que o link ocupe o espaço restante */
-}
-
-.newBadge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: var(--doodle-yellow-mustard);
-  color: var(--doodle-white);
-  font-family: var(--font-mali-next);
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  z-index: 10;
-}
-
+/* ── Image area ── */
 .productImageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  margin-bottom: 1rem;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
-  border-radius: 8px;
+  background-color: var(--reveste-bg-muted);
 }
 
 .productImage {
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
-.productLink:hover .productImage {
-  transform: scale(1.03);
+.productCard:hover .productImage {
+  transform: scale(1.07);
 }
 
-.productInfo {
-    text-align: center;
-    width: 100%;
-    /* Removido flex-grow aqui, pois o link agora tem flex-grow */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* ── Badges (top-left) ── */
+.badgesWrapper {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 3;
 }
 
-.productName {
-  font-family: var(--font-mali-next);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--doodle-dark-grey);
-  margin: 0 0 0.5rem 0;
-  min-height: 3rem;
-  line-height: 1.3;
-}
-
-/* 1. Preço REMOVIDO */
-/* .productPrice { ... } */
-
-
-/* 2. Nova seção para ações (botões) */
-.cardActions {
-    width: 100%;
-    padding-top: 1rem;
-    border-top: 1px dashed var(--doodle-input-border); /* Linha divisória */
-    margin-top: 1rem; /* Espaço entre info e ações */
-    display: flex;
-    flex-direction: column; /* Botões empilhados */
-    gap: 0.75rem; /* Espaço entre os botões */
-    align-items: center; /* Centraliza os botões */
-}
-
-/* 3. Estilo para o botão "Ver Detalhes" */
-.viewDetailsButton {
-  background-color: var(--doodle-purple-soft); /* Cor principal da loja */
+.newBadge {
+  background: var(--reveste-crimson);
   color: white;
-  font-family: var(--font-mali-next);
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px; /* Botão arredondado */
-  border: 2px solid var(--doodle-purple-soft);
-  cursor: pointer;
-  width: 100%; /* Ocupa a largura total da seção de ações */
-  text-align: center;
-  transition: all 0.2s ease;
-  text-decoration: none; /* Como é um Link, remove sublinhado */
+  font-family: var(--font-raleway-next);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.55rem;
+  border-radius: 1px;
 }
 
-.viewDetailsButton:hover {
-  background-color: var(--doodle-purple-light);
-  border-color: var(--doodle-purple-light);
+.conditionBadge {
+  font-family: var(--font-raleway-next);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.55rem;
+  border-radius: 1px;
 }
 
-/* 4. Estilo para o botão "Adicionar/Remover dos Favoritos" */
-.addToFavoritesButton {
-  background: none;
+.conditionBadge.novo {
+  background: var(--reveste-gold);
+  color: var(--reveste-dark, #120408);
+}
+
+.conditionBadge.seminovo {
+  background: var(--reveste-bg-muted);
+  color: var(--reveste-text-mid);
+  border: 1px solid var(--reveste-border);
+}
+
+.conditionBadge.vintage {
+  background: var(--reveste-crimson-deeper, #2e0509);
+  color: var(--reveste-gold-light);
+}
+
+/* ── Wishlist button (top-right, always visible) ── */
+.wishlistButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
   border: none;
-  cursor: pointer;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mali-next);
-  font-size: 0.95rem; /* Tamanho do texto do botão */
-  font-weight: 600;
-  color: var(--doodle-blue-soft); /* Cor padrão para não favorito */
-  transition: color 0.2s ease;
-  padding: 0.5rem; /* Adiciona um pouco de padding para área de clique */
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  color: var(--reveste-text-muted);
+  font-size: 1rem;
 }
 
-.addToFavoritesButton:hover {
-  color: var(--doodle-purple-soft); /* Cor no hover */
+.wishlistButton:hover {
+  background: white;
+  transform: scale(1.1);
+  color: var(--reveste-crimson);
 }
 
-.addToFavoritesButton svg {
-  font-size: 1.2rem; /* Tamanho do ícone de coração */
+.wishlistButton.isFavorite {
+  color: var(--reveste-crimson);
+  background: white;
 }
 
-/* Estilo para quando o produto É favorito */
-.addToFavoritesButton.isFavorite {
-  color: var(--doodle-pink-pastel); /* Cor do coração preenchido */
-}
-
-.addToFavoritesButton.isFavorite:hover {
-  filter: brightness(0.9); /* Escurece um pouco no hover quando já favorito */
-}
-
-/* Estilo para quando o botão está desabilitado (ex: carregando) */
-.addToFavoritesButton:disabled {
-  opacity: 0.6;
+.wishlistButton:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
-/* Removido styles.addToCartButton e styles.addToFavoritesButton antigos se existiam */
-/* .addToCartButton { ... } */
-/* .addToFavoritesButton { ... } */
+/* ── Hover overlay: quick view button ── */
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 16, 8, 0);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1.25rem;
+  transition: background 0.3s ease;
+  z-index: 2;
+}
+
+.productCard:hover .imageOverlay {
+  background: rgba(28, 16, 8, 0.2);
+}
+
+.quickViewBtn {
+  font-family: var(--font-raleway-next);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--reveste-crimson);
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 1px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.productCard:hover .quickViewBtn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quickViewBtn:hover {
+  background: var(--reveste-crimson-dark);
+}
+
+/* ── Product info (below image) ── */
+.productInfo {
+  padding: 0.9rem 0.9rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.productName {
+  font-family: var(--font-cormorant-next);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--reveste-text);
+  margin: 0 0 0.3rem;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.productPrice {
+  font-family: var(--font-raleway-next);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--reveste-crimson);
+  margin: 0;
+}
+
+.productPriceOriginal {
+  font-size: 0.78rem;
+  color: var(--reveste-text-muted);
+  text-decoration: line-through;
+  font-weight: 400;
+  margin-left: 0.4rem;
+}
+
+/* Hidden link for productLink compat */
+.productLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

@@ -9,30 +9,20 @@ const ContactHero = () => {
   const textRef = useRef(null);
 
   useEffect(() => {
-    // Animação de entrada do título e texto
     gsap.fromTo(
       [titleRef.current, textRef.current],
       { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease: 'power4.out',
-        stagger: 0.2,
-        delay: 0.3,
-      }
+      { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out', stagger: 0.2, delay: 0.3 }
     );
   }, []);
 
   return (
     <div className={styles.heroContainer}>
       <h1 ref={titleRef} className={styles.heroTitle}>
-        Onde os <span className={styles.highlight}>Sonhos</span> Encontram os <span className={styles.highlight}>Rabiscos</span>.
+        Fale com o <span className={styles.highlight}>Reveste-se</span>.
       </h1>
       <p ref={textRef} className={styles.heroText}>
-        Cada história começa com uma conversa, cada obra de arte com um traço.
-        Estamos aqui para ouvir a sua. Seja uma dúvida, uma ideia brilhante ou
-        apenas um "olá" colorido, sua mensagem é a próxima página da nossa jornada.
+        Tem uma dúvida sobre uma peça? Quer saber sobre trocas ou envio? Estamos aqui para te ajudar. Cada mensagem é respondida com cuidado — porque para nós, você não é só um cliente, é parte da nossa comunidade circular.
       </p>
     </div>
   );

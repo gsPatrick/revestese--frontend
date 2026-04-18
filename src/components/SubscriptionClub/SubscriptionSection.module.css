@@ -1,19 +1,25 @@
-/* src/components/Subscription/SubscriptionSection.module.css */
-
-/*
-  Variáveis de Cores e Fontes são definidas em src/app/globals.css
-  e podem ser acessadas aqui usando var(--nome-da-variavel).
-*/
+/* src/components/SubscriptionClub/SubscriptionSection.module.css */
 
 .subscriptionSection {
   padding: 6rem 1.5rem;
-  background-color: var(--doodle-page-bg);
+  background-color: var(--reveste-bg-alt);
   position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 80vh;
+}
+
+/* Decorative arc */
+.subscriptionSection::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  border: 1px solid var(--reveste-border);
+  pointer-events: none;
 }
 
 .subscriptionContent {
@@ -24,53 +30,23 @@
   max-width: 1100px;
   margin: 0 auto;
   gap: 5rem;
-  padding: 0;
   position: relative;
-  z-index: 5; /* Garante que o conteúdo principal fique acima de qualquer fundo */
+  z-index: 1;
 }
 
-/* --- Responsividade --- */
-@media (max-width: 991px) { /* Tablet e Mobile */
-  .subscriptionContent {
-    flex-direction: column;
-    text-align: center;
-    gap: 3rem;
-    padding: 0;
-    max-width: 90%;
-  }
-  .subscriptionSection {
-    padding: 4rem 1rem;
-  }
-  .imagePanel {
-    padding: 0;
-  }
+@media (max-width: 991px) {
+  .subscriptionContent { flex-direction: column; text-align: center; gap: 3rem; max-width: 90%; }
+  .subscriptionSection { padding: 4rem 1rem; }
+  .imagePanel { padding: 0; }
 }
-@media (max-width: 767px) { /* Mobile */
-  .subscriptionContent {
-    gap: 2rem;
-  }
-  .sectionTitle {
-    font-size: 2rem;
-  }
-  .sectionDescription {
-    font-size: 0.9rem;
-  }
-  .benefitsList {
-    font-size: 0.9rem;
-  }
-  /* Ajustado tamanho do ícone para mobile */
-  .benefitIcon { /* <-- Classe renomeada */
-    width: 0.9rem;
-    height: 0.9rem;
-  }
-  .explorePlansButton {
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-  }
+@media (max-width: 767px) {
+  .subscriptionContent { gap: 2rem; }
+  .sectionTitle { font-size: 2rem; }
+  .sectionDescription { font-size: 0.88rem; }
+  .benefitsList { font-size: 0.88rem; }
+  .explorePlansButton { padding: 0.8rem 2rem; font-size: 0.8rem; }
 }
 
-
-/* --- Painel Esquerdo: Imagem --- */
 .imagePanel {
   flex-shrink: 0;
   width: 45%;
@@ -78,189 +54,138 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-  border-radius: 20px;
+  border-radius: 3px;
   overflow: hidden;
+  border: 1px solid var(--reveste-border);
+  box-shadow: 0 12px 36px rgba(120,14,26,0.1);
 }
 @media (max-width: 991px) {
-  .imagePanel {
-    width: 70%;
-    max-width: 300px;
-    order: -1;
-  }
+  .imagePanel { width: 70%; max-width: 300px; order: -1; }
 }
 
-.decorativeImage {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
+.decorativeImage { width: 100%; height: auto; display: block; object-fit: cover; }
 
-
-/* --- Painel Direito: Conteúdo --- */
 .textPanel {
   flex-grow: 1;
-  max-width: 580px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
 }
 @media (max-width: 991px) {
-  .textPanel {
-    align-items: center;
-    text-align: center;
-  }
+  .textPanel { align-items: center; text-align: center; }
 }
 
 .sectionSubheading {
-  font-family: var(--font-mali-next);
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--doodle-blue-soft); /* Cor base para o texto que não tem gradiente */
-  margin-bottom: 0.8rem;
-  line-height: 1.2;
-  display: inline-block; /* Para permitir o span interno */
+  font-family: var(--font-raleway-next);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--reveste-crimson);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
-/* Para centralizar em mobile */
+.sectionSubheading::after {
+  content: ''; display: inline-block; width: 30px; height: 1px;
+  background: var(--reveste-crimson); opacity: 0.5;
+}
 @media (max-width: 991px) {
-    .sectionSubheading {
-        display: block; /* Volta a ser block para centralizar facilmente */
-    }
+  .sectionSubheading { display: block; }
 }
 
-/* Estilo para a palavra "imaginação" no subtítulo com degradê deslizante */
 .subheadingImaginationWord {
-    font-weight: 800;
-    background-image: linear-gradient(
-        to right,
-        var(--doodle-purple-soft),
-        var(--doodle-pink-pastel),
-        var(--doodle-blue-soft),
-        var(--doodle-green-pastel),
-        var(--doodle-yellow-mustard),
-        var(--doodle-blue-sky),
-        var(--doodle-purple-light),
-        var(--doodle-purple-soft)
-    );
-    background-size: 600% 100%;
-    background-position: 0% 0;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent; /* Fallback */
-    display: inline-block; /* Garante que o span se comporte como um bloco inline para o background */
-    font-size: 1.8rem; /* <-- AUMENTADO: Tamanho maior para destaque */
+  font-weight: 700;
+  color: var(--reveste-crimson);
 }
-
 
 .sectionTitle {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 2.8rem;
-  font-weight: 700;
-  color: var(--doodle-dark-grey); /* Cor base para o texto do título */
+  font-weight: 400;
+  font-style: italic;
+  color: var(--reveste-text);
   margin-bottom: 1.2rem;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
-/* Estilo para a palavra "DoodleDreams" no título com degradê deslizante */
-.doodleDreamsTitleWord {
-    font-weight: 800;
-    background-image: linear-gradient(
-        to right,
-        var(--doodle-purple-soft),
-        var(--doodle-pink-pastel),
-        var(--doodle-blue-soft),
-        var(--doodle-green-pastel),
-        var(--doodle-yellow-mustard),
-        var(--doodle-blue-sky),
-        var(--doodle-purple-light),
-        var(--doodle-purple-soft)
-    );
-    background-size: 600% 100%;
-    background-position: 0% 0;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent; /* Fallback */
-    display: inline-block; /* Essencial para propriedades de background */
+.revesteSeTitleWord {
+  font-weight: 700;
+  font-style: normal;
+  background-image: linear-gradient(135deg, var(--reveste-crimson-dark), var(--reveste-crimson), var(--reveste-gold-dark), var(--reveste-crimson));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  animation: shimmer-gold 5s ease-in-out infinite alternate;
 }
 
+@keyframes shimmer-gold {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
 
 .sectionDescription {
-  font-family: sans-serif;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--doodle-placeholder-text);
+  font-family: var(--font-raleway-next);
+  font-size: 0.93rem;
+  line-height: 1.8;
+  color: var(--reveste-text-mid);
   margin-bottom: 2rem;
+  font-weight: 300;
 }
 
 .benefitsList {
   list-style: none;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 2.5rem;
-  text-align: left;
-  width: 100%;
+  padding: 0; margin: 0 0 2.5rem 0;
+  text-align: left; width: 100%;
 }
 @media (max-width: 991px) {
-  .benefitsList {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-  .benefitItem {
-      justify-content: center; /* Centraliza o conteúdo do item de benefício */
-  }
+  .benefitsList { display: flex; flex-direction: column; align-items: center; }
+  .benefitItem { justify-content: center; }
 }
-
 
 .benefitItem {
   display: flex;
-  align-items: flex-start; /* Mantém o ícone alinhado ao topo do texto */
-  gap: 0.8rem;
-  font-family: sans-serif;
-  font-size: 1rem;
-  color: var(--doodle-dark-grey);
-  margin-bottom: 0.9rem;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: var(--font-raleway-next);
+  font-size: 0.9rem;
+  color: var(--reveste-text-mid);
+  margin-bottom: 0.75rem;
 }
 
-/* Estilo para o ícone de benefício (estrela) */
-.benefitIcon { /* <-- Classe renomeada */
-  color: var(--doodle-blue-soft); /* Cor da estrela */
-  width: 1.2rem;
-  height: 1.2rem;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
-  filter: drop-shadow(0 2px 3px rgba(122, 151, 204, 0.4)); /* Sombra suave */
+.benefitIcon {
+  color: var(--reveste-gold-dark);
+  width: 1rem; height: 1rem;
+  flex-shrink: 0; margin-top: 0.15rem;
 }
 
 .buttonWrapper {
-  display: inline-block;
-  outline: none;
-  border: none;
-  background: transparent;
-  padding: 0;
+  display: inline-block; outline: none; border: none; background: transparent; padding: 0;
 }
 
 .explorePlansButton {
-  background-color: var(--doodle-purple-light);
-  color: var(--doodle-white);
-  font-family: var(--font-mali-next);
-  font-size: 1.15rem;
+  background: var(--reveste-crimson);
+  color: white;
+  font-family: var(--font-raleway-next);
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 1.1rem 2.8rem;
-  border-radius: 9999px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  border-radius: 2px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   white-space: nowrap;
-  letter-spacing: 0.025em;
-  filter: drop-shadow(0 4px 8px rgba(144, 122, 204, 0.3));
 }
-
 .explorePlansButton:hover {
-  background-color: var(--doodle-purple-soft);
-  filter: drop-shadow(0 8px 16px rgba(144, 122, 204, 0.5));
+  background: var(--reveste-crimson-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(120,14,26,0.25);
 }

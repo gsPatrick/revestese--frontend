@@ -2,119 +2,97 @@
 
 .latestProductsSection {
   padding: 6rem 1.5rem;
-  background-color: var(--doodle-background);
+  background-color: var(--reveste-bg-alt);
   text-align: center;
-  position: relative; /* Para os elementos decorativos */
-  overflow: hidden; /* Garante que os elementos animados fiquem dentro */
+  position: relative;
+  overflow: hidden;
 }
 
-/* --- Elementos Decorativos de Background --- */
+.latestProductsSection::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  border: 1px solid var(--reveste-border);
+  pointer-events: none;
+}
+
 .decorativeElementsContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0; /* Fica no fundo */
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%; pointer-events: none; z-index: 0;
 }
-
-.decorativeElement {
-    position: absolute;
-    opacity: 0.6;
-    filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
-}
-
-/* Posições dos elementos decorativos (ajuste conforme o SVG) */
-.starTopLeft { top: 10%; left: 5%; width: 50px; height: 50px; transform: rotate(10deg); }
-.spiralTopRight { top: 15%; right: 10%; width: 40px; height: 40px; transform: rotate(-20deg); }
-.diamondBottomLeft { bottom: 20%; left: 15%; width: 30px; height: 30px; transform: rotate(30deg); }
-.sparkleBottomRight { bottom: 10%; right: 5%; width: 25px; height: 25px; }
-.heartCenter { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-5deg); width: 40px; height: 40px; }
-
 
 .sectionTitle {
-  font-family: var(--font-mali-next);
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--doodle-dark-grey);
-  margin-bottom: 1rem;
-  position: relative; /* Acima dos elementos decorativos */
-  z-index: 1;
+  font-family: var(--font-cormorant-next);
+  font-size: 2.8rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--reveste-text);
+  margin-bottom: 0.6rem;
+  position: relative; z-index: 1;
 }
 
 .sectionSubtitle {
-  font-family: sans-serif;
-  font-size: 1.1rem;
-  color: var(--doodle-placeholder-text);
+  font-family: var(--font-raleway-next);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--reveste-text-muted);
   margin-bottom: 3.5rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  z-index: 1;
+  max-width: 500px;
+  margin-left: auto; margin-right: auto;
+  position: relative; z-index: 1;
 }
 
-/* --- Wrapper do Grid para Centralização --- */
 .productsGridWrapper {
-  max-width: 1400px; /* Aumentado para acomodar 5 cards maiores */
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center; /* Centraliza o grid */
+  max-width: 1400px; margin-left: auto; margin-right: auto;
+  display: flex; justify-content: center;
 }
 
-/* --- Grid de Produtos (Configurado para 5 colunas em desktop) --- */
 .productsGrid {
   display: grid;
-  /* Força 5 colunas igualmente espaçadas em desktop.
-     minmax(180px, 1fr) garante que o item não fique minúsculo, mas se estenda. */
   grid-template-columns: repeat(5, minmax(180px, 1fr));
-  gap: 1.5rem; /* Espaçamento entre os cards, ligeiramente reduzido para 5 colunas */
-  width: 100%;
+  gap: 1.25rem; width: 100%;
 }
 
-/* Ajustes Responsivos: */
-/* Para telas de laptop grandes (>= 1200px) */
-@media (max-width: 1400px) {
-    .productsGrid {
-        grid-template-columns: repeat(4, minmax(180px, 1fr)); /* Volta para 4 colunas */
-        gap: 1.5rem;
-        max-width: 1200px; /* Reduz max-width */
-    }
+.cardPlaceholder {
+  border-radius: 2px;
+  background: linear-gradient(135deg, var(--reveste-bg-muted), var(--reveste-bg-surface));
+  border: 1px solid var(--reveste-border);
+  min-height: 300px;
+  animation: pulse-shimmer 1.8s ease-in-out infinite;
 }
 
-/* Para tablets (>= 900px) */
-@media (max-width: 1200px) {
-  .productsGrid {
-    grid-template-columns: repeat(3, minmax(180px, 1fr)); /* 3 colunas */
-    max-width: 900px;
-  }
+@keyframes pulse-shimmer {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
 }
 
-/* Para tablets menores (>= 600px) */
-@media (max-width: 900px) {
-    .productsGrid {
-        grid-template-columns: repeat(2, minmax(180px, 1fr)); /* 2 colunas */
-        max-width: 600px;
-    }
+.errorText { color: var(--reveste-crimson); font-family: var(--font-raleway-next); }
+
+.emptyContainer { padding: 3rem; }
+
+.emptyMessage {
+  font-family: var(--font-cormorant-next);
+  font-size: 1.8rem; font-style: italic;
+  color: var(--reveste-text);
 }
 
-/* Mobile */
-@media (max-width: 600px) {
-  .latestProductsSection {
-    padding: 3rem 1rem;
-  }
-  .sectionTitle {
-    font-size: 2.2rem;
-  }
-  .sectionSubtitle {
-    font-size: 1rem;
-    margin-bottom: 2.5rem;
-  }
-  .productsGrid {
-    grid-template-columns: 1fr; /* Uma coluna em mobile */
-    gap: 1.5rem;
-    max-width: 320px; /* Limita a largura do card em mobile */
-  }
+.highlight { color: var(--reveste-crimson); }
+
+.emptySubMessage {
+  font-family: var(--font-raleway-next);
+  color: var(--reveste-text-muted); font-size: 0.88rem; margin-top: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 1400px) { .productsGrid { grid-template-columns: repeat(4, minmax(180px, 1fr)); } }
+@media (max-width: 1200px) { .productsGrid { grid-template-columns: repeat(3, minmax(180px, 1fr)); } }
+@media (max-width: 900px)  { .productsGrid { grid-template-columns: repeat(2, minmax(160px, 1fr)); } }
+@media (max-width: 600px)  {
+  .latestProductsSection { padding: 3rem 1rem; }
+  .sectionTitle { font-size: 2rem; }
+  .productsGrid { grid-template-columns: 1fr; gap: 1.25rem; max-width: 320px; }
 }

@@ -6,9 +6,9 @@
 }
 
 .pageTitle {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 2.8rem;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   text-align: center;
   margin: 2rem 0 3rem 0;
 }
@@ -29,47 +29,47 @@
   text-align: center;
   padding: 4rem 1rem;
   margin-top: 2rem;
-  background-color: var(--doodle-beige-light);
+  background-color: var(--reveste-bg-alt);
   border-radius: 20px;
 }
 
 .emptyCartIcon {
   font-size: 5rem;
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
   margin-bottom: 1.5rem;
 }
 
 .emptyCartContainer h1 {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 2.5rem;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 
 .emptyCartContainer p {
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   font-size: 1.1rem;
   max-width: 500px;
   margin: 1rem 0 2rem 0;
 }
 
 .emptyCartButton {
-  background-color: var(--doodle-purple-light);
+  background-color: var(--reveste-crimson);
   color: white;
   padding: 1rem 2.5rem;
   border-radius: 99px;
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-weight: 600;
   transition: background-color 0.3s;
 }
 
 .emptyCartButton:hover {
-  background-color: var(--doodle-purple-soft);
+  background-color: var(--reveste-crimson);
 }
 
 
 /* Coluna dos itens do carrinho */
 .cartItemsColumn {
-  background-color: var(--doodle-white);
+  background-color: var(--reveste-white);
   border-radius: 16px;
   padding: 1rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.05);
@@ -86,7 +86,7 @@
   display: flex;
   gap: 1.5rem;
   padding: 1rem;
-  border-bottom: 1px solid var(--doodle-input-border);
+  border-bottom: 1px solid var(--reveste-input-border);
 }
 .cartItem:last-child {
   border-bottom: none;
@@ -106,22 +106,22 @@
 }
 
 .itemName {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 
 .itemVariation {
   font-size: 0.9rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   margin-bottom: 1rem;
 }
 
 .quantitySelector {
   display: flex;
   align-items: center;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
   border-radius: 99px;
   width: fit-content;
 }
@@ -132,7 +132,7 @@
   padding: 0.5rem 0.8rem;
   cursor: pointer;
   font-size: 1rem;
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
 }
 
 .quantitySelector span {
@@ -148,14 +148,14 @@
   font-family: sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin-bottom: 1rem;
 }
 
 .removeButton {
   background: none;
   border: none;
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-crimson-light);
   font-size: 1.5rem;
   cursor: pointer;
   transition: color 0.2s;
@@ -171,19 +171,19 @@
 }
 
 .summaryContainer {
-  background-color: var(--doodle-white);
+  background-color: var(--reveste-white);
   border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .summaryContainer h2 {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.8rem;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--doodle-input-border);
+  border-bottom: 1px solid var(--reveste-input-border);
 }
 
 .summaryRow {
@@ -193,20 +193,20 @@
   font-size: 1.1rem;
 }
 .summaryRow span:first-child {
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
 }
 .summaryRow span:last-child {
   font-weight: 700;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 .totalRow {
   font-size: 1.4rem;
   padding-top: 1rem;
   margin-top: 1rem;
-  border-top: 1px solid var(--doodle-input-border);
+  border-top: 1px solid var(--reveste-input-border);
 }
 .totalRow span {
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 
 /* Seção de Frete */
@@ -216,7 +216,7 @@
 .shippingSection h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin-bottom: 0.8rem;
 }
 .shippingForm {
@@ -226,29 +226,29 @@
 .cepInput {
   flex-grow: 1;
   padding: 0.75rem;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
   border-radius: 8px;
 }
 .shippingForm button {
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   border: none;
-  background-color: var(--doodle-blue-soft);
+  background-color: var(--reveste-gold-dark);
   color: white;
   font-weight: 600;
   cursor: pointer;
 }
 .shippingForm button:disabled {
-  background-color: var(--doodle-placeholder-text);
+  background-color: var(--reveste-text-muted);
   cursor: not-allowed;
 }
 
 .shippingResult {
   margin-top: 1rem;
-  color: var(--doodle-blue-soft);
+  color: var(--reveste-gold-dark);
 }
 .shippingResult span {
-    color: var(--doodle-blue-soft);
+    color: var(--reveste-gold-dark);
 }
 
 .checkoutButton {
@@ -257,19 +257,19 @@
   margin-top: 1rem;
   border: none;
   border-radius: 12px;
-  background-color: var(--doodle-purple-soft);
+  background-color: var(--reveste-crimson);
   color: white;
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 .checkoutButton:hover {
-  background-color: var(--doodle-purple-light);
+  background-color: var(--reveste-crimson);
 }
 .checkoutButton:disabled {
-  background-color: var(--doodle-placeholder-text);
+  background-color: var(--reveste-text-muted);
   cursor: not-allowed;
 }
 
@@ -309,13 +309,13 @@
 
 /* --- NOVO: Estilos para Exibição do Endereço do Usuário --- */
 .addressDisplay {
-  background-color: var(--doodle-beige-light);
-  border: 1px solid var(--doodle-input-border);
+  background-color: var(--reveste-bg-alt);
+  border: 1px solid var(--reveste-input-border);
   border-radius: 8px;
   padding: 1rem;
   font-size: 0.95rem;
   line-height: 1.5;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
 }
 
 .addressDisplay p {
@@ -323,13 +323,13 @@
 }
 
 .addressDisplay p strong {
-  color: var(--doodle-dark-grey);
-  font-family: var(--font-mali-next);
+  color: var(--reveste-text);
+  font-family: var(--font-cormorant-next);
 }
 
 /* NOVO: Estilo para erro no cálculo de frete */
 .shippingError {
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-crimson-light);
   font-size: 0.9rem;
   margin-top: 0.5rem;
 }
@@ -347,31 +347,31 @@
   font-weight: 600;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 .selectInput,
 .textInput {
   width: 100%;
   padding: 0.8rem;
   border-radius: 8px;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
   font-size: 1rem;
-  background-color: var(--doodle-white);
-  color: var(--doodle-dark-grey);
+  background-color: var(--reveste-white);
+  color: var(--reveste-text);
 }
 .selectInput:focus,
 .textInput:focus {
   outline: none;
-  border-color: var(--doodle-purple-soft);
+  border-color: var(--reveste-crimson);
   box-shadow: 0 0 0 2px rgba(144, 122, 204, 0.2);
 }
 .textInput::placeholder {
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
 }
 
 .cepStatus {
   font-size: 0.85rem;
-  color: var(--doodle-blue-soft);
+  color: var(--reveste-gold-dark);
   margin-top: 0.5rem;
 }
 
@@ -391,17 +391,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.2rem;
-  border: 2px solid var(--doodle-input-border);
+  border: 2px solid var(--reveste-input-border);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  background-color: var(--doodle-white);
+  background-color: var(--reveste-white);
   position: relative;
 }
 
 .shippingOptionCard:hover {
-  border-color: var(--doodle-purple-light);
-  background-color: var(--doodle-beige-light);
+  border-color: var(--reveste-crimson);
+  background-color: var(--reveste-bg-alt);
 }
 
 .shippingOptionCard input[type="radio"] {
@@ -410,7 +410,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid var(--doodle-input-border);
+  border: 2px solid var(--reveste-input-border);
   margin-right: 1rem;
   transition: all 0.2s ease-in-out;
   position: relative;
@@ -418,8 +418,8 @@
 }
 
 .shippingOptionCard input[type="radio"]:checked {
-  border-color: var(--doodle-purple-soft);
-  background-color: var(--doodle-purple-soft);
+  border-color: var(--reveste-crimson);
+  background-color: var(--reveste-crimson);
 }
 
 .shippingOptionCard input[type="radio"]:checked::before {
@@ -443,48 +443,48 @@
 }
 
 .shippingOptionName {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin-bottom: 0.2rem;
 }
 
 .shippingOptionTime,
 .shippingOptionDesc {
   font-size: 0.9rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
 }
 
 .shippingOptionPrice {
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
   flex-shrink: 0;
 }
 
 /* Informações extras */
 .infoText {
   font-size: 0.95rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   margin-top: 1rem;
   padding: 0.8rem;
-  background-color: var(--doodle-beige-light);
+  background-color: var(--reveste-bg-alt);
   border-radius: 8px;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
 }
 
 /* NOVO: Estilo para erro no cálculo de frete */
 .shippingError {
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-crimson-light);
   font-size: 0.9rem;
   margin-top: 0.5rem;
 }
 
 .loadingText {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   text-align: center;
   margin-top: 1rem;
 }
@@ -499,7 +499,7 @@
   align-items: center; /* Alinha tudo verticalmente */
   gap: 1.5rem; /* Espaçamento entre link, ações, etc. */
   padding: 1.5rem 0;
-  border-bottom: 1px solid var(--doodle-input-border);
+  border-bottom: 1px solid var(--reveste-input-border);
 }
 
 /* 1. Novo wrapper para o link que agrupa imagem e detalhes */
@@ -534,7 +534,7 @@
 }
 
 .itemName {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0 0 0.25rem 0;
@@ -542,7 +542,7 @@
 
 .itemVariation {
   font-size: 0.9rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   margin: 0;
 }
 
@@ -559,7 +559,7 @@
 .quantitySelector {
   display: flex;
   align-items: center;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
   border-radius: 99px;
   overflow: hidden;
 }
@@ -571,7 +571,7 @@
   height: 30px;
   cursor: pointer;
   font-size: 1rem;
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
 }
 
 .quantitySelector span {
@@ -583,7 +583,7 @@
 .itemPrice {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin: 0;
 }
 
@@ -592,7 +592,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-crimson-light);
   font-size: 1.2rem;
   padding: 0.25rem;
   line-height: 1;
@@ -601,13 +601,13 @@
 /* --- NOVOS ESTILOS: Seção de Cupom --- */
 .couponSection {
   margin: 2rem 0;
-  border-top: 1px solid var(--doodle-input-border);
+  border-top: 1px solid var(--reveste-input-border);
   padding-top: 1.5rem;
 }
 .couponSection h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin-bottom: 0.8rem;
 }
 
@@ -619,35 +619,35 @@
   flex-grow: 1;
   padding: 0.8rem;
   border-radius: 8px;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
   font-size: 1rem;
   text-transform: uppercase; /* Força o input para maiúsculas */
 }
 .couponInput:focus {
   outline: none;
-  border-color: var(--doodle-purple-soft);
+  border-color: var(--reveste-crimson);
   box-shadow: 0 0 0 2px rgba(144, 122, 204, 0.2);
 }
 .applyCouponButton {
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
   border: none;
-  background-color: var(--doodle-blue-soft);
+  background-color: var(--reveste-gold-dark);
   color: white;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 .applyCouponButton:hover {
-  background-color: var(--doodle-blue-dark);
+  background-color: var(--reveste-crimson);
 }
 .applyCouponButton:disabled {
-  background-color: var(--doodle-placeholder-text);
+  background-color: var(--reveste-text-muted);
   cursor: not-allowed;
 }
 
 .couponError {
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-crimson-light);
   font-size: 0.9rem;
   margin-top: 0.5rem;
 }
@@ -669,7 +669,7 @@
   line-height: 1.5;
 }
 .appliedCoupon strong {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-weight: 700;
   color: #0d4a13;
 }
@@ -692,33 +692,33 @@
 .subtotalAfterCouponRow {
     padding-top: 0.5rem; /* Menor que a totalRow */
     margin-top: 0.5rem;
-    border-top: 1px dashed var(--doodle-input-border);
+    border-top: 1px dashed var(--reveste-input-border);
     font-size: 1.2rem;
 }
 .subtotalAfterCouponRow span:first-child {
-    color: var(--doodle-dark-grey);
+    color: var(--reveste-text);
     font-weight: 600;
 }
 .subtotalAfterCouponRow span:last-child {
-    color: var(--doodle-green-pastel);
+    color: var(--reveste-bg-muted);
     font-weight: 700;
 }
 /* --- FIM NOVOS ESTILOS: Seção de Cupom --- */
 
 /* Estilos para a mensagem de entrega digital (NOVO) */
 .infoText strong {
-    font-family: var(--font-mali-next);
+    font-family: var(--font-cormorant-next);
     font-weight: 700;
-    color: var(--doodle-dark-grey);
+    color: var(--reveste-text);
 }
 
 /* Reafirmando o padding para o .infoText padrão no CartSummary */
 .infoText {
   font-size: 0.95rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   margin-top: 1rem;
   padding: 0.8rem;
-  background-color: var(--doodle-beige-light);
+  background-color: var(--reveste-bg-alt);
   border-radius: 8px;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
 }

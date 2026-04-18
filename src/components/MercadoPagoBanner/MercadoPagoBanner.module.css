@@ -1,7 +1,7 @@
 /* src/components/MercadoPagoBanner/MercadoPagoBanner.module.css */
 
 .mercadopagoSection {
-  background-color: var(--doodle-yellow-light); 
+  background-color: var(--reveste-bg-muted); 
   padding: 3rem 1.5rem; /* Aumentado o padding vertical */
   border-radius: 24px;
   margin: 5rem auto; 
@@ -9,7 +9,7 @@
   box-shadow: 0 15px 30px -5px rgba(246, 197, 213, 0.3); /* Sombra mais suave e rosa */
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--doodle-yellow-mustard); /* Borda mais forte */
+  border: 1px solid var(--reveste-gold); /* Borda mais forte */
 }
 
 /* --- NOVO LAYOUT EM DUAS COLUNAS --- */
@@ -58,12 +58,12 @@
   gap: 0.5rem; /* Espaço entre ícone e texto */
   font-size: 1rem; /* Fonte dos selos */
   font-weight: 600;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 
 .securityBadge svg {
   font-size: 1.5rem; /* Ícone dos selos */
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
 }
 
 /* --- COLUNA CENTRAL: Informações do Pagamento --- */
@@ -75,10 +75,10 @@
 }
 
 .title {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 2.2rem; /* Título maior */
   font-weight: 700;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   line-height: 1.2;
   margin-bottom: 0.5rem;
 }
@@ -86,7 +86,7 @@
 .description {
   font-size: 1.05rem; /* Texto ligeiramente maior */
   line-height: 1.6;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   margin-bottom: 1.5rem; /* Mais espaço antes dos ícones */
 }
 
@@ -94,7 +94,7 @@
   display: flex;
   gap: 1.2rem; /* Espaço entre os ícones de pagamento */
   font-size: 2.5rem; /* Ícones de pagamento maiores */
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
 }
 
 /* Responsividade */

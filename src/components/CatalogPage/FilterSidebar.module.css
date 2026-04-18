@@ -1,36 +1,36 @@
 /* --- ESTILOS DESKTOP --- */
 .sidebar {
-  background-color: var(--doodle-white);
+  background-color: var(--reveste-white);
   padding: 2.5rem 2rem;
   border-radius: 24px;
   box-shadow: 0 15px 30px rgba(0,0,0,0.07);
   align-self: flex-start;
   position: sticky;
   top: 120px; /* Ajuste se o header for maior/menor */
-  border: 1px solid var(--doodle-beige-light);
+  border: 1px solid var(--reveste-bg-alt);
 }
 
 .decorativeDot {
-  position: absolute; top: 20px; left: 20px; width: 12px; height: 12px; border-radius: 50%; background-color: var(--doodle-purple-soft);
+  position: absolute; top: 20px; left: 20px; width: 12px; height: 12px; border-radius: 50%; background-color: var(--reveste-crimson);
 }
 .filterSection { margin-bottom: 2.5rem; }
 .filterSection:last-of-type { margin-bottom: 0; }
-.filterTitle { font-family: var(--font-mali-next); font-size: 1.4rem; font-weight: 700; color: var(--doodle-purple-soft); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--doodle-beige-light); }
+.filterTitle { font-family: var(--font-cormorant-next); font-size: 1.4rem; font-weight: 700; color: var(--reveste-crimson); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--reveste-bg-alt); }
 .filterList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
 .checkboxItem { display: flex; align-items: center; gap: 0.75rem; }
-.checkboxItem input[type="checkbox"] { appearance: none; width: 22px; height: 22px; border: 2px solid var(--doodle-purple-light); border-radius: 6px; cursor: pointer; position: relative; transition: all 0.2s ease; }
-.checkboxItem input[type="checkbox"]:checked { background-color: var(--doodle-purple-soft); border-color: var(--doodle-purple-soft); }
+.checkboxItem input[type="checkbox"] { appearance: none; width: 22px; height: 22px; border: 2px solid var(--reveste-crimson); border-radius: 6px; cursor: pointer; position: relative; transition: all 0.2s ease; }
+.checkboxItem input[type="checkbox"]:checked { background-color: var(--reveste-crimson); border-color: var(--reveste-crimson); }
 .checkboxItem input[type="checkbox"]:checked::before { content: '✔'; font-size: 16px; color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-.checkboxItem label { font-family: sans-serif; font-size: 1rem; color: var(--doodle-dark-grey); cursor: pointer; }
+.checkboxItem label { font-family: sans-serif; font-size: 1rem; color: var(--reveste-text); cursor: pointer; }
 .priceInputs { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
 .priceField { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
-.priceField label { font-family: sans-serif; font-size: 0.8rem; color: var(--doodle-placeholder-text); margin-bottom: 0.25rem; }
-.priceField input { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--doodle-input-border); border-radius: 8px; font-family: sans-serif; font-size: 1rem; box-sizing: border-box; }
-.rangeSliderBar { width: 100%; height: 4px; background-color: var(--doodle-purple-soft); border-radius: 2px; }
+.priceField label { font-family: sans-serif; font-size: 0.8rem; color: var(--reveste-text-muted); margin-bottom: 0.25rem; }
+.priceField input { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--reveste-input-border); border-radius: 8px; font-family: sans-serif; font-size: 1rem; box-sizing: border-box; }
+.rangeSliderBar { width: 100%; height: 4px; background-color: var(--reveste-crimson); border-radius: 2px; }
 .selectWrapper { position: relative; }
-.selectWrapper::after { content: '▼'; font-size: 0.8rem; color: var(--doodle-purple-soft); position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; }
-.sortSelect { width: 100%; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--doodle-input-border); font-family: var(--font-mali-next); font-size: 1rem; background-color: var(--doodle-white); appearance: none; }
-.clearButton { width: 100%; padding: 1rem; margin-top: 2rem; border-radius: 12px; border: none; background-color: var(--doodle-purple-light); color: white; font-family: var(--font-mali-next); font-size: 1rem; font-weight: 700; cursor: pointer; transition: background-color 0.2s ease, filter 0.2s ease; }
+.selectWrapper::after { content: '▼'; font-size: 0.8rem; color: var(--reveste-crimson); position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.sortSelect { width: 100%; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--reveste-input-border); font-family: var(--font-cormorant-next); font-size: 1rem; background-color: var(--reveste-white); appearance: none; }
+.clearButton { width: 100%; padding: 1rem; margin-top: 2rem; border-radius: 12px; border: none; background-color: var(--reveste-crimson); color: white; font-family: var(--font-cormorant-next); font-size: 1rem; font-weight: 700; cursor: pointer; transition: background-color 0.2s ease, filter 0.2s ease; }
 
 /* --- NOVOS ESTILOS PARA O FILTRO MOBILE --- */
 .overlay {
@@ -46,7 +46,7 @@
   width: 90%;
   max-width: 400px;
   height: 100%;
-  background: var(--doodle-white);
+  background: var(--reveste-white);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -57,11 +57,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--doodle-input-border);
+  border-bottom: 1px solid var(--reveste-input-border);
   flex-shrink: 0;
 }
 .mobileHeader h4 {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.2rem;
   font-weight: 700;
   margin: 0;
@@ -80,13 +80,13 @@
   display: flex;
   gap: 1rem;
   padding: 1.5rem;
-  border-top: 1px solid var(--doodle-input-border);
-  background: var(--doodle-white);
+  border-top: 1px solid var(--reveste-input-border);
+  background: var(--reveste-white);
   flex-shrink: 0;
 }
 .clearButtonMobile {
-  flex-basis: 40%; padding: 1rem; border-radius: 12px; border: 2px solid var(--doodle-input-border); background: transparent; color: var(--doodle-placeholder-text); font-family: var(--font-mali-next); font-size: 1rem; font-weight: 600; cursor: pointer;
+  flex-basis: 40%; padding: 1rem; border-radius: 12px; border: 2px solid var(--reveste-input-border); background: transparent; color: var(--reveste-text-muted); font-family: var(--font-cormorant-next); font-size: 1rem; font-weight: 600; cursor: pointer;
 }
 .applyButton {
-  flex-basis: 60%; padding: 1rem; border-radius: 12px; border: none; background-color: var(--doodle-purple-soft); color: white; font-family: var(--font-mali-next); font-size: 1rem; font-weight: 700; cursor: pointer;
+  flex-basis: 60%; padding: 1rem; border-radius: 12px; border: none; background-color: var(--reveste-crimson); color: white; font-family: var(--font-cormorant-next); font-size: 1rem; font-weight: 700; cursor: pointer;
 }

@@ -1,40 +1,115 @@
-.ctaSection {
-  padding: 6rem 1.5rem;
+.section {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bgImageWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center 40%;
+  filter: grayscale(10%);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(20,4,6,0.88) 0%, rgba(46,5,9,0.75) 100%);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
   text-align: center;
-  background-color: var(--doodle-beige-light); /* Um fundo suave para diferenciar a seção */
-  border-top: 1px solid var(--doodle-input-border);
+  max-width: 680px;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.ctaTitle {
-  font-family: var(--font-mali-next);
-  font-size: 2.5rem;
+.eyebrow {
+  font-family: var(--font-raleway-next);
+  font-size: 0.68rem;
   font-weight: 700;
-  color: var(--doodle-dark-grey);
-  margin-bottom: 1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--reveste-gold);
+  margin: 0;
 }
 
-.ctaDescription {
-  max-width: 600px;
-  margin: 0 auto 2.5rem auto;
-  color: var(--doodle-placeholder-text);
-  font-size: 1.1rem;
-  line-height: 1.6;
+.title {
+  font-family: var(--font-cormorant-next);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: white;
+  margin: 0;
 }
 
-.ctaButton {
-  display: inline-block; /* Para que o padding e motion funcionem bem */
-  background-color: var(--doodle-purple-light);
-  color: var(--doodle-white);
-  font-family: var(--font-mali-next);
-  font-size: 1.15rem;
+.title em {
+  font-style: italic;
   font-weight: 600;
-  padding: 1.1rem 2.8rem;
-  border-radius: 9999px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  color: var(--reveste-gold-light, #E8C97A);
 }
 
-.ctaButton:hover {
-  background-color: var(--doodle-purple-soft);
-  box-shadow: 0 8px 25px rgba(144, 122, 204, 0.4);
+.body {
+  font-family: var(--font-raleway-next);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.65);
+  font-weight: 300;
+  margin: 0;
 }
+
+.buttons {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--reveste-gold);
+  color: var(--reveste-crimson-deeper, #2e0509);
+  font-family: var(--font-raleway-next);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 1px;
+  text-decoration: none;
+  transition: background 0.2s, gap 0.2s;
+}
+.btnPrimary:hover { background: var(--reveste-gold-light, #E8C97A); gap: 0.8rem; }
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.8);
+  font-family: var(--font-raleway-next);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 1px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btnSecondary:hover { border-color: var(--reveste-gold); color: var(--reveste-gold); }

@@ -15,21 +15,21 @@
 .tabHeaders {
   display: flex;
   gap: 1rem;
-  border-bottom: 1px solid var(--doodle-input-border);
+  border-bottom: 1px solid var(--reveste-input-border);
 }
 .tabHeaders button {
   background: none;
   border: none;
   padding: 1rem 1.5rem;
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.2rem;
   cursor: pointer;
   position: relative;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   white-space: nowrap; /* Previne quebra de linha em botões de aba */
 }
 .tabHeaders button.active {
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
 }
 .tabHeaders button.active::after {
   content: '';
@@ -38,24 +38,24 @@
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: var(--doodle-purple-soft);
+  background-color: var(--reveste-crimson);
   border-radius: 3px 3px 0 0;
 }
 .tabContent {
   padding: 2rem;
-  background: var(--doodle-white);
+  background: var(--reveste-white);
   border-radius: 0 0 16px 16px;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
   border-top: none;
 }
 .tabContent h4 {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 .tabContent p, .tabContent ul {
   line-height: 1.7;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 .tabContent ul {
   list-style: none;

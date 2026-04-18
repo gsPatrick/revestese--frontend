@@ -4,7 +4,7 @@
   justify-content: center;
   min-height: 100vh;
   padding: 2rem;
-  background-color: var(--doodle-beige-light);
+  background-color: var(--reveste-bg-alt);
   overflow: hidden; /* Importante para os elementos decorativos não causarem scroll */
   position: relative;
 }
@@ -34,7 +34,7 @@
 
 /* --- Card Principal --- */
 .card {
-  background-color: var(--doodle-white);
+  background-color: var(--reveste-white);
   border-radius: 24px;
   padding: 3rem;
   max-width: 550px;
@@ -53,7 +53,7 @@
 
 .checkIcon {
   font-size: 5rem;
-  color: var(--doodle-green-pastel);
+  color: var(--reveste-bg-muted);
   filter: drop-shadow(0 4px 10px rgba(108, 192, 114, 0.5));
   animation: bounceIcon 1s ease-out 0.8s;
 }
@@ -65,22 +65,22 @@
 }
 
 .title {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin: 0;
 }
 
 .subtitle {
   font-size: 1.1rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   margin: 0.5rem 0 2rem 0;
 }
 
 .orderDetails {
-  background-color: var(--doodle-beige-light);
-  border: 2px dashed var(--doodle-purple-light);
+  background-color: var(--reveste-bg-alt);
+  border: 2px dashed var(--reveste-crimson);
   border-radius: 12px;
   padding: 1rem;
   margin-bottom: 2rem;
@@ -89,32 +89,32 @@
 .orderDetails p {
   margin: 0;
   font-size: 0.9rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   font-weight: 600;
 }
 
 .orderDetails span {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-weight: 700;
   font-size: 1.5rem;
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
   letter-spacing: 1px;
 }
 
 .infoText {
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   margin-bottom: 1.5rem;
 }
 
 .actionButton {
   display: inline-block;
-  background-color: var(--doodle-purple-soft);
+  background-color: var(--reveste-crimson);
   color: white;
   padding: 0.8rem 2rem;
   border-radius: 99px;
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(144, 122, 204, 0.4);
@@ -127,13 +127,13 @@
 
 .redirectInfo {
   font-size: 0.9rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
 }
 
 .progressBar {
   width: 100%;
   height: 6px;
-  background-color: var(--doodle-input-border);
+  background-color: var(--reveste-input-border);
   border-radius: 3px;
   margin-top: 0.75rem;
   overflow: hidden;
@@ -141,7 +141,7 @@
 
 .progressFill {
   height: 100%;
-  background-color: var(--doodle-purple-light);
+  background-color: var(--reveste-crimson);
   border-radius: 3px;
 }
 

@@ -92,7 +92,7 @@ const ThankYouPage = () => {
         <h1 ref={el => elementsToAnimateRef.current[1] = el} className={styles.title}>Pagamento Confirmado!</h1>
         
         <p ref={el => elementsToAnimateRef.current[2] = el} className={styles.subtitle}>
-          A magia foi liberada! Sua aventura DoodleDreams está prestes a começar.
+          Obrigada por fazer parte da moda circular! Sua peça especial está a caminho.
         </p>
         
         <div ref={el => elementsToAnimateRef.current[3] = el} className={styles.orderDetails}>

@@ -3,56 +3,49 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './TrustBar.module.css';
-// Importando todos os ícones necessários
-import { BsPeople, BsShieldCheck, BsTruck, BsPatchCheck, BsStars } from 'react-icons/bs';
+import { BsShieldCheck, BsTruck, BsPatchCheck } from 'react-icons/bs';
+import { FaLeaf, FaRecycle } from 'react-icons/fa';
 
-// CORREÇÃO: Estrutura de dados com 5 itens distintos
 const trustData = [
-  { 
-    id: 'clients',
-    icon: <BsPeople />, 
-    text: "+50000 Pessoas", 
-    subtext: "Já coloriram seus sonhos" 
+  {
+    id: 'circular',
+    icon: <FaRecycle />,
+    text: 'Moda Circular',
+    subtext: 'Cada peça ganha uma nova vida',
   },
-  { 
+  {
     id: 'security',
-    icon: <BsShieldCheck />, 
-    text: "Compra Segura", 
-    subtext: "com MercadoPago" 
+    icon: <BsShieldCheck />,
+    text: 'Compra Segura',
+    subtext: 'Protegida pelo MercadoPago',
   },
-  { 
-    id: 'freeShipping', 
-    icon: <BsStars />, 
-    text: "Frete Grátis", 
-    subtext: "Para Presidente Epitácio-SP" 
+  {
+    id: 'shipping',
+    icon: <BsTruck />,
+    text: 'Frete Fixo R$ 9,90',
+    subtext: 'Para todo o Brasil',
   },
-  { 
-    id: 'nationalShipping', // CARD RESTAURADO
-    icon: <BsTruck />, 
-    text: "Frete Fixo", 
-    subtext: "R$ 9,90 para todo o Brasil" 
+  {
+    id: 'eco',
+    icon: <FaLeaf />,
+    text: 'Consumo Consciente',
+    subtext: 'Fashion com propósito',
   },
-  { 
+  {
     id: 'guarantee',
-    icon: <BsPatchCheck />, 
-    text: "Nossa Garantia", 
-    subtext: "Satisfação ou seu dinheiro de volta" 
+    icon: <BsPatchCheck />,
+    text: 'Peças Verificadas',
+    subtext: 'Autenticidade garantida',
   },
 ];
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } },
 };
 
@@ -63,14 +56,14 @@ const TrustBar = () => {
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.5 }}
+      viewport={{ once: true, amount: 0.4 }}
     >
       {trustData.map((item) => (
-        <motion.div 
-          key={item.id} 
-          className={styles.trustItem} 
+        <motion.div
+          key={item.id}
+          className={styles.trustItem}
           variants={itemVariants}
-          whileHover={{ y: -8, scale: 1.03 }}
+          whileHover={{ y: -6, scale: 1.02 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
           <div className={styles.trustIcon}>{item.icon}</div>

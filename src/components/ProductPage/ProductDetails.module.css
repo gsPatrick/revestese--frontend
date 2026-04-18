@@ -1,25 +1,25 @@
 /* src/components/ProductPage/ProductDetails.module.css */
 
 .detailsContainer { padding-left: 2rem; }
-.productTitle { font-family: var(--font-mali-next); font-size: 2.8rem; font-weight: 800; color: var(--doodle-dark-grey); margin-bottom: 0.5rem; }
-.productPrice { font-family: var(--font-mali-next); font-size: 2rem; font-weight: 700; color: var(--doodle-purple-soft); margin-bottom: 1.5rem; }
-.productShortDescription { font-size: 1.1rem; color: var(--doodle-placeholder-text); line-height: 1.6; max-width: 500px; margin-bottom: 2rem; }
+.productTitle { font-family: var(--font-cormorant-next); font-size: 2.8rem; font-weight: 800; color: var(--reveste-text); margin-bottom: 0.5rem; }
+.productPrice { font-family: var(--font-cormorant-next); font-size: 2rem; font-weight: 700; color: var(--reveste-crimson); margin-bottom: 1.5rem; }
+.productShortDescription { font-size: 1.1rem; color: var(--reveste-text-muted); line-height: 1.6; max-width: 500px; margin-bottom: 2rem; }
 
 /* Estilos para Variações */
 .variationsContainer { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; }
-.variationsLabel { font-family: sans-serif; font-size: 1rem; font-weight: 600; color: var(--doodle-dark-grey); margin-bottom: 0.25rem; }
+.variationsLabel { font-family: sans-serif; font-size: 1rem; font-weight: 600; color: var(--reveste-text); margin-bottom: 0.25rem; }
 .variationItem {
     display: flex;
     align-items: center;
     padding: 1rem 1.5rem;
-    border: 2px solid var(--doodle-input-border);
+    border: 2px solid var(--reveste-input-border);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    background-color: var(--doodle-white);
+    background-color: var(--reveste-white);
 }
 .variationItem.active {
-    border-color: var(--doodle-purple-soft);
+    border-color: var(--reveste-crimson);
     background-color: #f3f5fe;
     box-shadow: 0 4px 12px rgba(144, 122, 204, 0.1);
 }
@@ -29,14 +29,14 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 2px solid var(--doodle-input-border);
+    border: 2px solid var(--reveste-input-border);
     margin-right: 1.5rem;
     transition: all 0.2s ease-in-out;
     position: relative;
     flex-shrink: 0;
 }
 .variationItem.active .variationRadio {
-    border-color: var(--doodle-purple-soft);
+    border-color: var(--reveste-crimson);
 }
 .variationItem .variationRadio:checked::before {
     content: '';
@@ -44,26 +44,26 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: var(--doodle-purple-soft);
+    background-color: var(--reveste-crimson);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 .variationContent { display: flex; flex-direction: column; gap: 0.1rem; flex-grow: 1; }
-.variationName { font-family: sans-serif; font-weight: 600; font-size: 1.1rem; color: var(--doodle-dark-grey); }
-.variationPrice { font-family: sans-serif; font-weight: 700; color: var(--doodle-purple-soft); }
-.variationStock { font-size: 0.9rem; color: var(--doodle-placeholder-text); }
+.variationName { font-family: sans-serif; font-weight: 600; font-size: 1.1rem; color: var(--reveste-text); }
+.variationPrice { font-family: sans-serif; font-weight: 700; color: var(--reveste-crimson); }
+.variationStock { font-size: 0.9rem; color: var(--reveste-text-muted); }
 
 
 .actionsWrapper { display: flex; gap: 1rem; align-items: stretch; }
-.quantitySelector { display: flex; align-items: center; border: 1px solid var(--doodle-input-border); border-radius: 99px; }
-.quantitySelector button { background: none; border: none; padding: 0.8rem 1rem; cursor: pointer; font-size: 1.2rem; color: var(--doodle-purple-soft); }
+.quantitySelector { display: flex; align-items: center; border: 1px solid var(--reveste-input-border); border-radius: 99px; }
+.quantitySelector button { background: none; border: none; padding: 0.8rem 1rem; cursor: pointer; font-size: 1.2rem; color: var(--reveste-crimson); }
 .quantitySelector span { font-weight: 700; font-size: 1.2rem; padding: 0 0.5rem; }
-.addToCartButton { flex-grow: 1; display: flex; align-items: center; justify-content: center; gap: 0.75rem; background-color: var(--doodle-purple-soft); color: white; border: none; border-radius: 99px; padding: 1rem; font-family: var(--font-mali-next); font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background-color 0.3s ease, filter 0.3s ease; }
+.addToCartButton { flex-grow: 1; display: flex; align-items: center; justify-content: center; gap: 0.75rem; background-color: var(--reveste-crimson); color: white; border: none; border-radius: 99px; padding: 1rem; font-family: var(--font-cormorant-next); font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background-color 0.3s ease, filter 0.3s ease; }
 
 .addToCartButton.added {
-  background-color: var(--doodle-green-pastel);
+  background-color: var(--reveste-bg-muted);
   color: #1e6a25;
   cursor: not-allowed;
 }
@@ -74,10 +74,10 @@
   padding: 1rem;
   margin-top: 1rem; /* Espaçamento entre ele e o botão "Adicionar ao Carrinho" */
   border-radius: 99px;
-  border: 2px solid var(--doodle-blue-soft); /* Borda com cor de destaque */
+  border: 2px solid var(--reveste-gold-dark); /* Borda com cor de destaque */
   background-color: transparent; /* Fundo transparente */
-  color: var(--doodle-blue-soft); /* Cor do texto */
-  font-family: var(--font-mali-next);
+  color: var(--reveste-gold-dark); /* Cor do texto */
+  font-family: var(--font-cormorant-next);
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
@@ -85,7 +85,7 @@
 }
 
 .buyNowButton:hover {
-  background-color: var(--doodle-blue-soft); /* Preenche o fundo no hover */
+  background-color: var(--reveste-gold-dark); /* Preenche o fundo no hover */
   color: white; /* Muda a cor do texto no hover */
 }
 
@@ -96,7 +96,7 @@
     gap: 0.5rem; 
     background: none; 
     border: none; 
-    color: var(--doodle-blue-soft); 
+    color: var(--reveste-gold-dark); 
     font-family: sans-serif;
     font-weight: 600; 
     cursor: pointer;
@@ -106,15 +106,15 @@
 }
 
 .wishlistButton.isFavorite {
-    color: var(--doodle-pink-pastel);
+    color: var(--reveste-crimson-light);
 }
 
 .wishlistButton:hover {
-    color: var(--doodle-purple-soft);
+    color: var(--reveste-crimson);
 }
 
 .wishlistButton.isFavorite:hover {
-    color: var(--doodle-pink-pastel);
+    color: var(--reveste-crimson-light);
     filter: brightness(0.9);
 }
 

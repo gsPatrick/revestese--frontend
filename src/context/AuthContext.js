@@ -16,8 +16,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       try {
-        const storedToken = localStorage.getItem('doodle_token');
-        const storedUser = localStorage.getItem('doodle_user');
+        const storedToken = localStorage.getItem('reveste_token');
+        const storedUser = localStorage.getItem('reveste_user');
         
         if (storedToken && storedUser) {
           setToken(storedToken);
@@ -25,8 +25,8 @@ export const AuthProvider = ({ children }) => {
         }
       } catch (error) {
         console.error("Falha ao carregar dados de autenticação do localStorage", error);
-        localStorage.removeItem('doodle_token');
-        localStorage.removeItem('doodle_user');
+        localStorage.removeItem('reveste_token');
+        localStorage.removeItem('reveste_user');
       }
     }
     setIsLoading(false);
@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }) => {
   // Por padrão, ela redireciona para '/my-account', mantendo o comportamento antigo.
   // Se `redirectPath` for `null` ou `false`, o redirecionamento não acontece.
   const login = (userData, authToken, redirectPath = '/my-account') => {
-    localStorage.setItem('doodle_token', authToken);
-    localStorage.setItem('doodle_user', JSON.stringify(userData));
+    localStorage.setItem('reveste_token', authToken);
+    localStorage.setItem('reveste_user', JSON.stringify(userData));
     setToken(authToken);
     setUser(userData);
 
@@ -50,8 +50,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('doodle_token');
-    localStorage.removeItem('doodle_user');
+    localStorage.removeItem('reveste_token');
+    localStorage.removeItem('reveste_user');
     setToken(null);
     setUser(null);
     router.push('/auth');

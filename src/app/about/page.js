@@ -1,29 +1,20 @@
-// Importe os componentes necessários
-import Breadcrumb from '@/components/SubscriptionPage/Breadcrumb';
 import AboutHero from '@/components/AboutPage/AboutHero';
 import OurMission from '@/components/AboutPage/OurMission';
 import ComfortSection from '@/components/AboutPage/ComfortSection';
-import Timeline from '@/components/AboutPage/Timeline';
-import FinalCta from '@/components/AboutPage/FinalCta'; // <-- 1. Importe o novo componente
-import OpeningStatement from '@/components/AboutPage/OpeningStatement'; // <-- 1. Importe o novo componente
+import FinalCta from '@/components/AboutPage/FinalCta';
 
-// REMOVIDO: A definição const FinalCta = () => { ... } foi movida para seu próprio arquivo.
+export const metadata = {
+  title: 'Sobre Nós — Reveste-se | Moda Circular',
+  description: 'Conheça a história, os valores e a missão do Reveste-se — o brechó premium de moda circular que acredita que cada peça merece uma nova história.',
+};
 
 export default function AboutPage() {
-  const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: 'Sobre Nós', href: null },
-  ];
-
   return (
     <main>
-      <Breadcrumb items={breadcrumbItems} />
-            <OpeningStatement /> {/* <-- 2. Adicione como a primeira seção */}
-
       <AboutHero />
-      <ComfortSection />
       <OurMission />
-      <FinalCta /> {/* <-- 2. Use o componente importado aqui */}
+      <ComfortSection />
+      <FinalCta />
     </main>
   );
 }

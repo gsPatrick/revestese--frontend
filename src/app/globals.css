@@ -1,68 +1,124 @@
 /* src/app/globals.css */
 
 :root {
-  /* Paleta de Cores DoodleDreams */
-  --doodle-yellow-mustard: #CCC27A;
-  --doodle-blue-soft: #7A97CC;
-  --doodle-purple-soft: #907ACC;
-  --doodle-purple-light: #C8B8E2;
-  --doodle-pink-pastel: #F6C5D5;
-  --doodle-blue-sky: #A8D0E6;
-  --doodle-green-pastel: #BFE6C3;
-  --doodle-yellow-light: #FFF2B2;
-  --doodle-beige-light: #F6EDE3;
-  --doodle-dark-grey: #343A40;
-  --doodle-light-text-on-dark: #C8B8E2;
-  --doodle-input-border: #E0E0E0;
-  --doodle-placeholder-text: #6C757D;
-  --doodle-white: #FFFFFF;
+  /* =============================================
+     Paleta Reveste-se — Tema Claro
+  ============================================= */
 
+  /* Fundos */
+  --reveste-bg:           #FAFAF8;   /* branco quente principal */
+  --reveste-bg-alt:       #F5F0E8;   /* bege claro — seções alternadas */
+  --reveste-bg-muted:     #EDEAE2;   /* bege médio — cards, inputs */
+  --reveste-bg-surface:   #FFFFFF;   /* branco puro — cards elevados */
+  --reveste-background:   #FAFAF8;
+  --reveste-page-bg:      #F5F0E8;
 
-  /* Variáveis para as fontes - preenchidas pelo next/font no layout.js */
-  --font-mali-next: sans-serif; /* Fallback */
-  --font-magnolia-next: serif; /* Fallback */
+  /* Textos */
+  --reveste-text:         #1C1008;   /* quase preto com tom quente */
+  --reveste-text-mid:     #4A4238;   /* cinza-marrom médio */
+  --reveste-text-muted:   #8A8178;   /* cinza-bege suave */
+
+  /* Vinhos / Vermelhos — acentos */
+  --reveste-crimson:        #780e1a;
+  --reveste-crimson-dark:   #4a0811;
+  --reveste-crimson-deeper: #2e0509;
+  --reveste-crimson-light:  #a01525;
+  --reveste-crimson-muted:  rgba(120, 14, 26, 0.12);
+  --reveste-crimson-wash:   rgba(120, 14, 26, 0.06);
+
+  /* Dourados — acentos */
+  --reveste-gold:       #C9A84C;
+  --reveste-gold-light: #E8C97A;
+  --reveste-gold-dark:  #9A7A2E;
+  --reveste-gold-muted: rgba(201, 168, 76, 0.2);
+  --reveste-gold-shine: rgba(232, 201, 122, 0.12);
+
+  /* Bordas */
+  --reveste-border:        #DDD7CC;
+  --reveste-border-strong: #C5BDAF;
+  --reveste-input-border:  #D0C9BE;
+  --reveste-placeholder-text: #A09890;
+
+  /* Misc */
+  --reveste-white: #FFFFFF;
+  --reveste-cream: #F5F0E8;
+  --reveste-cream-muted: rgba(245, 240, 232, 0.85);
+  --reveste-cream-dim:   rgba(245, 240, 232, 0.55);
+
+  /* Fontes */
+  --font-cormorant-next: serif;
+  --font-raleway-next: sans-serif;
 }
 
-
-
 body {
-  background-color: var(--doodle-background); /* Aplicando o novo fundo aqui */
+  background-color: var(--reveste-bg);
+  color: var(--reveste-text);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
+  font-family: var(--font-raleway-next), sans-serif;
 }
 
 a, button {
-    text-decoration: none;
-    cursor: pointer;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-/* Estilo de fundo específico para a página do catálogo */
+/* Fundo do catálogo — pontilhado bege/cinza suave */
 body.catalog-background {
-  background-image: 
-    radial-gradient(var(--doodle-pink-pastel) 1px, transparent 1px),
-    radial-gradient(var(--doodle-blue-sky) 1px, transparent 1px);
+  background-image:
+    radial-gradient(var(--reveste-crimson-muted) 1px, transparent 1px),
+    radial-gradient(var(--reveste-gold-muted) 1px, transparent 1px);
   background-position: 0 0, 25px 25px;
   background-size: 50px 50px;
-  background-color: var(--doodle-page-bg);
-  animation: move-confetti 60s linear infinite;
+  background-color: var(--reveste-bg-alt);
+  animation: move-pattern 80s linear infinite;
 }
 
-@keyframes move-confetti {
-  from {
-    background-position: 0 0, 25px 25px;
-  }
-  to {
-    background-position: 500px 500px, 525px 525px;
-  }
+/* =============================================
+   Keyframes globais
+============================================= */
+
+@keyframes move-pattern {
+  from { background-position: 0 0, 25px 25px; }
+  to   { background-position: 500px 500px, 525px 525px; }
 }
 
-/* ALTERAÇÃO: Media query para remover o padding em telas mobile */
+@keyframes shimmer-gold {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float-circular {
+  0%   { transform: rotate(0deg) translateY(0px); }
+  25%  { transform: rotate(2deg) translateY(-8px); }
+  50%  { transform: rotate(0deg) translateY(-14px); }
+  75%  { transform: rotate(-2deg) translateY(-8px); }
+  100% { transform: rotate(0deg) translateY(0px); }
+}
+
+@keyframes marquee-slide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(201, 168, 76, 0.25); }
+  50%       { box-shadow: 0 0 22px rgba(201, 168, 76, 0.55); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Mobile: header is sticky so no padding-top needed on body */
 @media (max-width: 767px) {
-    body {
-        /* No mobile, o header é fixo, então o padding deve ser ajustado para a altura do header mobile */
-        /* A altura do seu mainBar no mobile é aproximadamente 65px (1rem de padding + altura do logo/icones) */
-        padding-top: 65px; 
-    }
+  body { padding-top: 0; }
 }

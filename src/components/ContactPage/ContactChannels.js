@@ -9,27 +9,27 @@ import { BsEnvelopeHeart } from 'react-icons/bs';
 const channels = [
   {
     icon: <FaWhatsapp />,
-    title: 'Conversa Rápida',
-    description: 'Nosso WhatsApp está aberto para suas dúvidas e ideias instantâneas.',
-    href: 'https://wa.me/5511954728628', // Coloque seu número de WhatsApp aqui
-    bgColor: '#e0f8e4', // Verde pastel
+    title: 'WhatsApp',
+    description: 'Atendimento rápido para dúvidas sobre peças, trocas e envios. Respondemos em minutos.',
+    href: 'https://wa.me/5511954728628?text=Ol%C3%A1%21+Tenho+uma+d%C3%BAvida+sobre+o+Reveste-se.',
+    bgColor: 'var(--reveste-bg-surface)',
     iconColor: '#25D366'
   },
   {
     icon: <BsEnvelopeHeart />,
-    title: 'Carta Mágica',
-    description: 'Para mensagens mais detalhadas, envie-nos um email carinhoso.',
-    href: 'mailto:contato@doodledreams.com.br',
-    bgColor: '#fce8f0', // Rosa pastel
-    iconColor: '#e73b7a'
+    title: 'E-mail',
+    description: 'Para assuntos mais detalhados — parcerias, consignação e atendimento pós-venda.',
+    href: 'mailto:contato@reveste-se.com.br',
+    bgColor: 'var(--reveste-bg-surface)',
+    iconColor: 'var(--reveste-crimson)'
   },
   {
     icon: <FaInstagram />,
-    title: 'Galeria de Sonhos',
-    description: 'Inspire-se e fale conosco através do nosso Instagram.',
-    href: 'https://www.instagram.com/doodle_dreams.colorir?igsh=eGNsbHFjeDV0azlq', // Coloque o link do seu Instagram
-    bgColor: '#f3f0f9', // Roxo pastel
-    iconColor: '#C13584'
+    title: 'Instagram',
+    description: 'Acompanhe as novas chegadas, bastidores da curadoria e o universo do Reveste-se.',
+    href: 'https://www.instagram.com/reveste.se',
+    bgColor: 'var(--reveste-bg-surface)',
+    iconColor: 'var(--reveste-gold-dark)'
   }
 ];
 
@@ -78,7 +78,7 @@ const ContactChannels = () => {
           <h3 className={styles.channelTitle}>{channel.title}</h3>
           <p className={styles.channelDescription}>{channel.description}</p>
           <div className={styles.channelLink}>
-            Conectar Agora →
+            Entrar em contato →
           </div>
         </motion.a>
       ))}

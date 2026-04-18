@@ -14,7 +14,7 @@ const DIGITAL_DELIVERY_METHOD = {
   id: 'digital_delivery',
   name: 'Entrega Digital',
   price: '0.00',
-  company: { name: 'Doodle Dreams' },
+  company: { name: 'Reveste-se' },
   delivery_time: 0,
   custom_description: 'Seu produto será entregue por e-mail e estará disponível para download na sua conta.',
 };

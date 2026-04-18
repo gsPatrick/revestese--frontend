@@ -1,0 +1,294 @@
+.section {
+  padding: 6rem 0 6rem;
+  background-color: var(--reveste-bg-alt);
+  border-top: 1px solid var(--reveste-border);
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.sectionHead {
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  font-family: var(--font-raleway-next);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--reveste-crimson);
+  margin: 0 0 0.5rem;
+}
+
+.title {
+  font-family: var(--font-cormorant-next);
+  font-size: 2.4rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--reveste-text);
+  margin: 0 0 0.6rem;
+}
+
+.subtitle {
+  font-family: var(--font-raleway-next);
+  font-size: 0.88rem;
+  color: var(--reveste-text-muted);
+  line-height: 1.7;
+  max-width: 460px;
+  font-weight: 300;
+  margin: 0;
+}
+
+.headRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.9rem;
+  flex-shrink: 0;
+}
+
+.viewAllLink {
+  font-family: var(--font-raleway-next);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--reveste-crimson);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: gap 0.2s;
+  white-space: nowrap;
+}
+.viewAllLink:hover { gap: 0.7rem; }
+
+/* Nav arrows */
+.navButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.navBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--reveste-border-strong);
+  background: var(--reveste-bg-surface);
+  color: var(--reveste-text-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.navBtn:hover {
+  background: var(--reveste-crimson);
+  border-color: var(--reveste-crimson);
+  color: white;
+}
+
+/* ── Carousel track ── */
+.carouselWrapper {
+  width: 100%;
+  padding-left: max(1.5rem, calc((100vw - 1100px) / 2));
+}
+
+.track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 1.5rem;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+}
+.track::-webkit-scrollbar { display: none; }
+
+/* ── Card ── */
+.card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  background: var(--reveste-bg-surface);
+  border: 1px solid var(--reveste-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow 0.25s, border-color 0.25s;
+}
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  border-color: var(--reveste-border-strong);
+  z-index: 1;
+}
+
+/* Image */
+.imageWrapper {
+  display: block;
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+.card:hover .cardImage { transform: scale(1.06); }
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--reveste-bg-muted) 0%, var(--reveste-bg-alt) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+.card:hover .imagePlaceholder {
+  background: linear-gradient(135deg, var(--reveste-bg-alt) 0%, var(--reveste-crimson-wash, rgba(120,14,26,0.06)) 100%);
+}
+
+.hangerIcon {
+  font-size: 3.5rem;
+  color: var(--reveste-border-strong);
+  transition: color 0.3s, transform 0.3s;
+}
+.card:hover .hangerIcon { color: var(--reveste-crimson); transform: scale(1.1) rotate(-5deg); }
+
+.cardTag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: var(--reveste-crimson-deeper, #2e0509);
+  color: var(--reveste-gold-light);
+  font-family: var(--font-raleway-next);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.5rem;
+}
+
+/* Body */
+.cardBody {
+  padding: 1rem 0.9rem 1.25rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.cardBrand {
+  font-family: var(--font-raleway-next);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--reveste-text-muted);
+  margin: 0;
+}
+
+.cardName {
+  font-family: var(--font-cormorant-next);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--reveste-text);
+  margin: 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.1rem;
+}
+
+.conditionDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--reveste-gold);
+  flex-shrink: 0;
+}
+
+.cardCondition {
+  font-family: var(--font-raleway-next);
+  font-size: 0.7rem;
+  color: var(--reveste-text-muted);
+}
+
+.cardCta {
+  margin-top: auto;
+  padding-top: 0.8rem;
+  font-family: var(--font-raleway-next);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--reveste-crimson);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-top: 1px solid var(--reveste-border);
+  transition: gap 0.2s;
+}
+.cardCta:hover { gap: 0.6rem; }
+
+/* ── Skeleton ── */
+.cardSkeleton {
+  flex: 0 0 260px;
+  aspect-ratio: 3/5;
+  background: linear-gradient(90deg, var(--reveste-bg-muted) 25%, var(--reveste-bg-alt) 50%, var(--reveste-bg-muted) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 2px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Empty ── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem 2rem;
+  color: var(--reveste-text-muted);
+  font-family: var(--font-raleway-next);
+  font-size: 0.9rem;
+  width: 100%;
+}
+.emptyIcon { font-size: 3rem; color: var(--reveste-border-strong); }
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .card { flex: 0 0 220px; }
+  .cardSkeleton { flex: 0 0 220px; }
+  .sectionHead { align-items: flex-start; }
+  .headRight { flex-direction: row; align-items: center; }
+}
+
+@media (max-width: 480px) {
+  .card { flex: 0 0 180px; }
+  .cardSkeleton { flex: 0 0 180px; }
+  .title { font-size: 2rem; }
+}

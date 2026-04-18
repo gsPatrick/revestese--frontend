@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: center;
   padding: 4rem;
-  background-color: var(--doodle-beige-light);
+  background-color: var(--reveste-bg-alt);
   border-radius: 16px;
   text-align: center;
   width: 100%;
@@ -30,14 +30,14 @@
 /* Estilos para textos de carregamento e erro */
 .loadingText,
 .errorText {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
 }
 
 .errorText {
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-crimson-light);
 }
 
 
@@ -59,10 +59,10 @@
 
 /* Título principal da mensagem (a frase) */
 .noResultsTitle {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: clamp(2.5rem, 6vw, 4rem); /* Grande e responsivo */
   font-weight: 800;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   line-height: 1.3;
 }
 
@@ -70,7 +70,7 @@
 .noResultsTitle .highlight {
   position: relative;
   display: inline-block;
-  color: var(--doodle-purple-soft); /* Cor do texto destacado */
+  color: var(--reveste-crimson); /* Cor do texto destacado */
 }
 
 /* Efeito de "pincelada" amarela atrás das palavras destacadas */
@@ -81,7 +81,7 @@
   left: -5%;
   width: 110%;
   height: 15px; /* Altura da pincelada */
-  background-color: var(--doodle-yellow-light);
+  background-color: var(--reveste-bg-muted);
   opacity: 0.8;
   z-index: -1;
   transform: skewX(-15deg) rotate(-2deg);

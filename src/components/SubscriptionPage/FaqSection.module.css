@@ -4,10 +4,10 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin-bottom: 3rem;
 }
 
@@ -20,8 +20,8 @@
 }
 
 .accordionItem {
-  background-color: var(--doodle-white);
-  border: 1px solid var(--doodle-input-border);
+  background-color: var(--reveste-white);
+  border: 1px solid var(--reveste-input-border);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -36,10 +36,10 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   transition: background-color 0.2s ease;
 }
 
@@ -49,7 +49,7 @@
 
 .chevronIcon {
   font-size: 1.5rem;
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
   flex-shrink: 0;
   margin-left: 1rem;
 }
@@ -59,6 +59,6 @@
   text-align: left;
   font-family: sans-serif;
   font-size: 0.95rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   line-height: 1.6;
 }

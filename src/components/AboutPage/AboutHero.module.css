@@ -1,130 +1,120 @@
 .heroSection {
-  background: linear-gradient(180deg, var(--doodle-beige-light) 0%, var(--doodle-page-bg) 100%);
-  padding: 6rem 1.5rem;
+  position: relative;
+  min-height: 96vh;
+  display: flex;
+  align-items: flex-end;
   overflow: hidden;
+}
+
+.bgImageWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center 30%;
+  filter: grayscale(15%);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 4, 6, 0.3) 0%,
+    rgba(20, 4, 6, 0.55) 50%,
+    rgba(20, 4, 6, 0.9) 100%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 0 6vw 6rem;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.eyebrow {
+  font-family: var(--font-raleway-next);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--reveste-gold);
+  margin: 0;
+}
+
+.headline {
+  font-family: var(--font-cormorant-next);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+  color: #fff;
+  margin: 0;
+}
+
+.headline em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--reveste-gold-light, #E8C97A);
+}
+
+.sub {
+  font-family: var(--font-raleway-next);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+  max-width: 560px;
+  margin: 0;
+}
+
+.scrollIndicator {
   display: flex;
   align-items: center;
-  min-height: 80vh;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
-.heroContent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.leftPanel {
-  flex: 1;
+.scrollLine {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--reveste-gold);
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1000px; /* Para a animação 3D de rotação */
+  overflow: hidden;
 }
 
-.imageWrapper {
-  position: relative;
-  z-index: 10;
-}
-
-.bookImage {
-  width: 100%;
-  max-width: 450px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  transform: rotateZ(-5deg); /* Leve inclinação para dar mais vida */
-  transition: transform 0.3s ease;
-}
-
-.bookImage:hover {
-  transform: rotateZ(0deg) scale(1.03);
-}
-
-.rightPanel {
-  flex: 1;
-  max-width: 600px;
-}
-
-.heroTitle {
-  font-family: var(--font-mali-next);
-  font-size: clamp(2.8rem, 6vw, 4rem);
-  font-weight: 800;
-  color: var(--doodle-dark-grey);
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-}
-
-.highlight {
-  color: var(--doodle-purple-soft);
-  display: inline-block;
-  position: relative;
-}
-
-.highlight::after {
+.scrollLine::after {
   content: '';
   position: absolute;
-  bottom: 5px;
-  left: 0;
-  width: 100%;
-  height: 10px;
-  background-color: var(--doodle-pink-pastel);
-  opacity: 0.5;
-  z-index: -1;
-  transform: skewX(-15deg);
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: white;
+  animation: slide 2s ease-in-out infinite;
 }
 
-.heroSubtitle {
-  font-family: sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--doodle-placeholder-text);
+@keyframes slide {
+  0%   { left: -100%; }
+  50%  { left: 0; }
+  100% { left: 100%; }
 }
 
-/* --- Elementos Decorativos Animados --- */
-.decorativeIcon {
-  position: absolute;
-  font-size: 2.5rem;
-  opacity: 0; /* Começam invisíveis */
-  z-index: 5;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+.scrollText {
+  font-family: var(--font-raleway-next);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
 }
 
-.heartIcon {
-  color: var(--doodle-pink-pastel);
-  top: 10%;
-  left: 5%;
-}
-
-.starIcon {
-  color: var(--doodle-yellow-mustard);
-  bottom: 15%;
-  right: 10%;
-  font-size: 2rem;
-}
-
-.brushIcon {
-  color: var(--doodle-blue-soft);
-  top: 20%;
-  right: 0%;
-  font-size: 2.2rem;
-}
-
-/* --- Responsividade --- */
-@media (max-width: 991px) {
-  .heroContent {
-    flex-direction: column-reverse; /* Texto vem primeiro em telas menores */
-    text-align: center;
-    gap: 3rem;
-  }
-  .highlight::after {
-    bottom: 2px;
-    height: 8px;
-  }
-  .leftPanel {
-    width: 80%;
-  }
+@media (max-width: 768px) {
+  .content { padding: 0 1.5rem 4rem; }
+  .headline { font-size: clamp(2.4rem, 10vw, 4rem); }
 }

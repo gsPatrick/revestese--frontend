@@ -1,100 +1,79 @@
-'use client'; // <-- ADICIONE ESTA LINHA NO TOPO DO ARQUIVO
+'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import styles from './ComfortSection.module.css';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+const images = [
+  {
+    src: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700&q=80',
+    alt: 'Looks curados — Reveste-se',
+    span: 'tall',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=80',
+    alt: 'Moda circular — Reveste-se',
+    span: 'normal',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=700&q=80',
+    alt: 'Peças únicas selecionadas',
+    span: 'normal',
+  },
+];
 
 const ComfortSection = () => {
-  const sectionRef = useRef(null);
-  const textContentRef = useRef(null);
-  const imageWrapperRef = useRef(null);
-
-  useEffect(() => {
-    // Animação de entrada do texto
-    const title = textContentRef.current.querySelector('h2');
-    const paragraph = textContentRef.current.querySelector('p');
-    gsap.fromTo(
-      [title, paragraph],
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-
-    // Animação de entrada da imagem do livro (vindo da direita)
-    gsap.fromTo(
-      imageWrapperRef.current,
-      { scale: 0.8, opacity: 0, rotationY: 90, x: 100 },
-      {
-        scale: 1,
-        opacity: 1,
-        rotationY: 0,
-        x: 0,
-        duration: 1.5,
-        ease: 'elastic.out(1, 0.7)',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-
-    // Efeito de Parallax na imagem ao rolar
-    gsap.to(imageWrapperRef.current, {
-      y: -50, // Move a imagem para cima mais devagar que o scroll
-      ease: 'none',
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top bottom', // Começa quando o topo da seção atinge a base da tela
-        end: 'bottom top',   // Termina quando a base da seção atinge o topo da tela
-        scrub: true,
-      },
-    });
-
-  }, []);
-
   return (
-    <section ref={sectionRef} className={styles.comfortSection}>
-      <div className={styles.comfortContent}>
-        {/* Painel Esquerdo: Texto */}
-        <div ref={textContentRef} className={styles.leftPanel}>
-          <h2 className={styles.sectionTitle}>
-            Onde Transformamos a <span className={styles.highlight}>tristeza</span> em cor.
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            Na DoodleDreams, entendemos que todos os sentimentos são importantes. Nossos livros, como "Tristeza Vai Embora", são ferramentas gentis para ajudar crianças (e adultos!) a navegar por emoções complexas. Acreditamos que, ao dar cor à tristeza, podemos compreendê-la e encontrar o caminho de volta para o sol.
-          </p>
-        </div>
-
-        {/* Painel Direito: Imagem e Elementos Decorativos */}
-        <div className={styles.rightPanel}>
-          <div ref={imageWrapperRef} className={styles.imageWrapper}>
+    <section className={styles.section}>
+      {/* Photo collage */}
+      <motion.div
+        className={styles.collage}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8 }}
+      >
+        {images.map((img, i) => (
+          <motion.div
+            key={i}
+            className={`${styles.collageItem} ${styles[img.span]}`}
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.12, duration: 0.7 }}
+          >
             <Image
-              src="/imagens/tristezavaiembora.png"
-              alt="Livro de colorir Tristeza Vai Embora da Doodle Dreams"
-              width={500}
-              height={500}
-              className={styles.bookImage}
+              src={img.src}
+              alt={img.alt}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className={styles.collageImg}
             />
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Copy */}
+      <motion.div
+        className={styles.copy}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <p className={styles.eyebrow}>Nossa promessa</p>
+        <h2 className={styles.title}>
+          Cada peça conta.<br />
+          <span className={styles.highlight}>Cada escolha importa.</span>
+        </h2>
+        <p className={styles.body}>
+          Quando você compra no Reveste-se, você não está apenas adquirindo uma roupa — está fazendo parte de um movimento que acredita que beleza e responsabilidade andam juntas. Nossas peças chegam verificadas, limpas e com história.
+        </p>
+        <p className={styles.body}>
+          Nosso processo de curadoria garante que apenas peças em ótimo estado chegam até você. Fotografamos com cuidado, descrevemos com honestidade e embalamos com carinho.
+        </p>
+      </motion.div>
     </section>
   );
 };

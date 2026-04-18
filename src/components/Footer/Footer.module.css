@@ -1,8 +1,8 @@
 /* src/components/Footer/Footer.module.css */
 
 .footerContainer {
-  background-color: var(--doodle-page-bg); /* Usa a mesma cor de fundo da página */
-  color: var(--doodle-dark-grey);
+  background-color: var(--reveste-crimson-deeper);
+  color: var(--reveste-cream);
   padding-top: 8rem;
   padding-bottom: 2rem;
   padding-left: 1.5rem;
@@ -11,251 +11,131 @@
   overflow: hidden;
 }
 
-/* --- Separador Ondulado para Diferenciação --- */
 .wavySeparator {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  /* Uma sombra sutil no separador para criar a sensação de profundidade */
-  filter: drop-shadow(0 -10px 8px rgba(0, 0, 0, 0.03));
+  position: absolute; top: 0; left: 0; width: 100%; overflow: hidden; line-height: 0;
 }
-
 .wavySeparator svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 120px;
+  position: relative; display: block; width: calc(100% + 1.3px); height: 120px;
 }
-
 .wavyFill {
-  /* A onda agora tem uma cor ligeiramente diferente, um lilás bem claro, para fazer a transição */
-  fill: var(--doodle-purple-light);
-  opacity: 0.2; /* Com opacidade para ser bem sutil */
+  fill: var(--reveste-bg);
 }
 
-/* --- Conteúdo Principal do Footer --- */
 .footerContent {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: grid;
-  /* Layout de grid para dar mais peso à primeira coluna */
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 2.5rem;
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem;
 }
 
 .footerColumn {
-  display: flex;
-  flex-direction: column;
-  /* Garante alinhamento à esquerda em telas grandes */
-  align-items: flex-start;
+  display: flex; flex-direction: column; align-items: flex-start;
 }
 
-.footerLogo {
-  margin-bottom: 1rem;
-  display: inline-block; /* Garante que o link ocupe apenas o espaço da imagem */
-  transition: transform 0.3s ease;
+.footerLogoLink {
+  margin-bottom: 1rem; display: inline-block; transition: opacity 0.3s ease;
 }
+.footerLogoLink:hover { opacity: 0.8; }
 
-.footerLogo:hover {
-  transform: scale(1.03); /* Efeito de hover na logo */
-}
-
-.logoImage {
-  object-fit: contain; /* Garante que a logo não distorça */
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05)); /* Pequena sombra na logo */
+.footerLogoText {
+  font-family: var(--font-cormorant-next);
+  font-size: 2.2rem;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--reveste-gold-light);
 }
 
 .footerDescription {
-  font-family: sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--doodle-placeholder-text);
+  font-family: var(--font-raleway-next);
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: rgba(245,240,232,0.6);
   margin-bottom: 1.5rem;
 }
 
 .socialIcons {
-  display: flex;
-  gap: 1.5rem;
-  font-size: 1.5rem;
+  display: flex; gap: 1.25rem; font-size: 1.2rem;
 }
-
 .socialIcons a {
-  color: var(--doodle-purple-light);
+  color: rgba(245,240,232,0.5);
   transition: color 0.3s ease, transform 0.3s ease;
 }
-
 .socialIcons a:hover {
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-gold-light);
   transform: translateY(-3px);
 }
 
 .footerTitle {
-  font-family: var(--font-mali-next);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--doodle-purple-soft);
+  font-family: var(--font-raleway-next);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--reveste-gold);
   margin-bottom: 1.5rem;
 }
 
-/* Adicionado para espaçar os títulos dentro da mesma coluna */
-.marginTop {
-  margin-top: 2rem;
-}
+.marginTop { margin-top: 2rem; }
 
 .footerList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 0.65rem;
 }
 
 .footerLink {
-  font-family: sans-serif;
-  font-size: 1rem;
-  color: var(--doodle-dark-grey);
+  font-family: var(--font-raleway-next);
+  font-size: 0.88rem;
+  color: rgba(245,240,232,0.55);
   position: relative;
   transition: color 0.3s ease;
 }
-
 .footerLink::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--doodle-pink-pastel);
+  content: ''; position: absolute; width: 0; height: 1px; bottom: -3px; left: 0;
+  background: var(--reveste-gold);
   transition: width 0.3s ease;
 }
+.footerLink:hover { color: var(--reveste-cream); }
+.footerLink:hover::after { width: 100%; }
 
-.footerLink:hover {
-  color: var(--doodle-blue-soft);
-}
-
-.footerLink:hover::after {
-  width: 100%;
-}
-
-/* Nova classe para os itens de contato */
 .contactItem {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: sans-serif;
-  font-size: 1rem;
-  color: var(--doodle-dark-grey);
+  display: flex; align-items: center; gap: 0.7rem;
+  font-family: var(--font-raleway-next); font-size: 0.85rem;
+  color: rgba(245,240,232,0.55);
 }
+.contactItem svg { color: var(--reveste-gold); flex-shrink: 0; }
 
-.contactItem svg {
-  color: var(--doodle-purple-soft);
-}
-
-
-/* --- Barra Inferior --- */
-.footerBottomBar {
-  max-width: 1280px;
-  margin: 3rem auto 0 auto;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(144, 122, 204, 0.2); /* Borda mais sutil */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.875rem;
-  color: var(--doodle-placeholder-text);
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.developerCredit a {
-  color: var(--doodle-blue-soft);
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.developerCredit a:hover {
-  color: var(--doodle-purple-soft);
-  text-decoration: underline;
-}
-
-/* --- Responsividade Adicional --- */
-/* Para tablets */
-@media (max-width: 992px) {
-  .footerContent {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-
-/* Para mobile */
-@media (max-width: 767px) {
-  .footerContent {
-    text-align: center;
-    grid-template-columns: 1fr;
-  }
-  .footerColumn {
-    align-items: center; /* Centraliza o conteúdo da coluna no mobile */
-  }
-  .footerBottomBar {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-/* REMOVIDO: Estilos de newsletter que não são mais necessários */
-/* .newsletterForm, .newsletterInput, .newsletterButton {...} */
-
-
-/* src/components/Footer/Footer.module.css */
-
-/* ... (Estilos existentes do footer) ... */
-
-/* --- NOVO: Estilos para a Seção de Segurança --- */
+/* Security strip */
 .footerSecurity {
-  max-width: 1280px;
-  margin: 3rem auto 0 auto;
-  padding: 1.5rem;
-  border-top: 1px solid rgba(144, 122, 204, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap; /* Para responsividade */
+  max-width: 1280px; margin: 2.5rem auto 0 auto; padding: 1.25rem;
+  border-top: 1px solid rgba(245,240,232,0.1);
+  display: flex; justify-content: center; align-items: center; gap: 2.5rem; flex-wrap: wrap;
 }
-
 .securityItem {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--doodle-placeholder-text);
-  font-size: 0.9rem;
+  display: flex; align-items: center; gap: 0.6rem;
+  color: rgba(245,240,232,0.45); font-size: 0.82rem; font-family: var(--font-raleway-next);
 }
+.securityItem svg { font-size: 1.3rem; color: var(--reveste-gold); flex-shrink: 0; }
 
-.securityItem svg {
-  font-size: 1.5rem;
-  color: var(--doodle-purple-soft);
-  flex-shrink: 0;
-}
-
-
-/* --- Barra Inferior --- */
-/* Modificado para ter uma margem menor em relação à nova seção */
+/* Bottom bar */
 .footerBottomBar {
-  max-width: 1280px;
-  margin: 1.5rem auto 0 auto;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(144, 122, 204, 0.2);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.875rem;
-  color: var(--doodle-placeholder-text);
-  flex-wrap: wrap;
-  gap: 1rem;
+  max-width: 1280px; margin: 1.25rem auto 0 auto; padding-top: 1.25rem;
+  border-top: 1px solid rgba(245,240,232,0.08);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.75rem; color: rgba(245,240,232,0.35);
+  font-family: var(--font-raleway-next); letter-spacing: 0.04em;
+  flex-wrap: wrap; gap: 1rem;
 }
+.developerCredit a {
+  color: var(--reveste-gold); font-weight: 600; transition: color 0.3s ease;
+}
+.developerCredit a:hover { color: var(--reveste-gold-light); text-decoration: underline; }
 
-/* ... (Resto do CSS existente) ... */
+/* Responsive */
+@media (max-width: 992px) {
+  .footerContent { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 767px) {
+  .footerContent { text-align: center; grid-template-columns: 1fr; }
+  .footerColumn { align-items: center; }
+  .footerBottomBar { flex-direction: column; text-align: center; }
+  .footerSecurity { gap: 1.25rem; }
+}

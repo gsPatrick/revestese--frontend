@@ -1,88 +1,88 @@
 /* Layout Geral */
 .mainContainer { padding: 0 1.5rem 6rem 1.5rem; }
 .checkoutHeader { text-align: center; margin: 2rem 0; }
-.checkoutHeader h1 { font-family: var(--font-mali-next); font-size: 2.8rem; color: var(--doodle-dark-grey); }
-.checkoutHeader p { font-size: 1.1rem; color: var(--doodle-placeholder-text); }
+.checkoutHeader h1 { font-family: var(--font-cormorant-next); font-size: 2.8rem; color: var(--reveste-text); }
+.checkoutHeader p { font-size: 1.1rem; color: var(--reveste-text-muted); }
 .checkoutLayout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; max-width: 1280px; margin: 2rem auto 0; align-items: flex-start; }
 
 /* Indicador de Passos */
 .stepIndicatorContainer { display: flex; align-items: center; justify-content: center; max-width: 800px; margin: 2rem auto; }
 .stepNode { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-.stepIcon { width: 50px; height: 50px; border-radius: 50%; background-color: var(--doodle-input-border); color: var(--doodle-placeholder-text); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.4s ease; }
-.stepLabel { font-family: var(--font-mali-next); font-size: 0.9rem; color: var(--doodle-placeholder-text); transition: all 0.4s ease; }
-.stepNode.active .stepIcon { background-color: var(--doodle-purple-soft); color: white; }
-.stepNode.active .stepLabel { color: var(--doodle-dark-grey); font-weight: 600; }
-.stepConnector { flex-grow: 1; height: 2px; background-color: var(--doodle-input-border); transition: background-color 0.4s ease; }
-.stepConnector.active { background-color: var(--doodle-purple-soft); }
+.stepIcon { width: 50px; height: 50px; border-radius: 50%; background-color: var(--reveste-input-border); color: var(--reveste-text-muted); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.4s ease; }
+.stepLabel { font-family: var(--font-cormorant-next); font-size: 0.9rem; color: var(--reveste-text-muted); transition: all 0.4s ease; }
+.stepNode.active .stepIcon { background-color: var(--reveste-crimson); color: white; }
+.stepNode.active .stepLabel { color: var(--reveste-text); font-weight: 600; }
+.stepConnector { flex-grow: 1; height: 2px; background-color: var(--reveste-input-border); transition: background-color 0.4s ease; }
+.stepConnector.active { background-color: var(--reveste-crimson); }
 
 /* Acordeão */
-.accordionItem { margin-bottom: 1.5rem; border: 1px solid var(--doodle-input-border); border-radius: 16px; overflow: hidden; background-color: var(--doodle-white); transition: border-color 0.3s ease; }
-.accordionItem.completed { border-color: var(--doodle-green-pastel); }
+.accordionItem { margin-bottom: 1.5rem; border: 1px solid var(--reveste-input-border); border-radius: 16px; overflow: hidden; background-color: var(--reveste-white); transition: border-color 0.3s ease; }
+.accordionItem.completed { border-color: var(--reveste-bg-muted); }
 .accordionHeader { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; background: none; border: none; cursor: pointer; font-size: 1.2rem; }
-.stepTitle { font-family: var(--font-mali-next); font-weight: 700; color: var(--doodle-dark-grey); display: flex; align-items: center; gap: 1rem; }
-.stepNumber { width: 30px; height: 30px; border-radius: 50%; background-color: var(--doodle-purple-light); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background-color 0.3s ease; }
-.accordionItem.completed .stepNumber { background-color: var(--doodle-green-pastel); }
+.stepTitle { font-family: var(--font-cormorant-next); font-weight: 700; color: var(--reveste-text); display: flex; align-items: center; gap: 1rem; }
+.stepNumber { width: 30px; height: 30px; border-radius: 50%; background-color: var(--reveste-crimson); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background-color 0.3s ease; }
+.accordionItem.completed .stepNumber { background-color: var(--reveste-bg-muted); }
 .accordionItem.completed .stepNumber svg { color: #1e6a25; }
 .accordionContent { padding: 0 1.5rem 1.5rem 1.5rem; }
 
 /* Formulários nos Passos */
-.subheading { font-family: var(--font-mali-next); font-size: 1.2rem; margin: 1.5rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px dashed var(--doodle-input-border); }
+.subheading { font-family: var(--font-cormorant-next); font-size: 1.2rem; margin: 1.5rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px dashed var(--reveste-input-border); }
 .formGroup { margin-bottom: 1rem; }
 .formGroup label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; }
-.formGroup input { width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--doodle-input-border); font-size: 1rem; }
+.formGroup input { width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--reveste-input-border); font-size: 1rem; }
 .formGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .fullWidth { grid-column: 1 / -1; }
-.loginToggle { text-align: center; background-color: var(--doodle-beige-light); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; }
+.loginToggle { text-align: center; background-color: var(--reveste-bg-alt); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; }
 .loginToggle p { margin: 0 0 0.5rem 0; }
-.loginToggle button { background: none; border: none; color: var(--doodle-purple-soft); font-weight: 700; cursor: pointer; text-decoration: underline; }
-.loginButton { width: 100%; padding: 0.8rem; border-radius: 8px; border: none; background-color: var(--doodle-blue-soft); color: white; font-weight: 600; margin-top: 1rem; }
+.loginToggle button { background: none; border: none; color: var(--reveste-crimson); font-weight: 700; cursor: pointer; text-decoration: underline; }
+.loginButton { width: 100%; padding: 0.8rem; border-radius: 8px; border: none; background-color: var(--reveste-gold-dark); color: white; font-weight: 600; margin-top: 1rem; }
 
 /* Ações dos Passos (botões) */
-.stepActions { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; border-top: 1px solid var(--doodle-input-border); padding-top: 1.5rem; }
+.stepActions { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; border-top: 1px solid var(--reveste-input-border); padding-top: 1.5rem; }
 .nextButton, .prevButton, .finalizeButton { padding: 0.8rem 2rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
-.nextButton { background-color: var(--doodle-purple-soft); color: white; }
-.nextButton:disabled { background-color: var(--doodle-placeholder-text); cursor: not-allowed; }
-.prevButton { background-color: transparent; color: var(--doodle-placeholder-text); }
-.finalizeButton { background-color: var(--doodle-green-pastel); color: #1e6a25; font-size: 1.1rem; padding: 1rem 2rem; }
+.nextButton { background-color: var(--reveste-crimson); color: white; }
+.nextButton:disabled { background-color: var(--reveste-text-muted); cursor: not-allowed; }
+.prevButton { background-color: transparent; color: var(--reveste-text-muted); }
+.finalizeButton { background-color: var(--reveste-bg-muted); color: #1e6a25; font-size: 1.1rem; padding: 1rem 2rem; }
 
 /* Frete */
 .cepForm { margin-bottom: 2rem; }
 .inputWithButton { display: flex; gap: 0.5rem; }
 .inputWithButton input { flex-grow: 1; }
-.inputWithButton button { padding: 0 1.5rem; border-radius: 8px; border: none; background-color: var(--doodle-blue-soft); color: white; font-weight: 600; }
+.inputWithButton button { padding: 0 1.5rem; border-radius: 8px; border: none; background-color: var(--reveste-gold-dark); color: white; font-weight: 600; }
 .shippingOptions { display: flex; flex-direction: column; gap: 1rem; }
-.shippingOption { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; border: 2px solid var(--doodle-input-border); border-radius: 12px; cursor: pointer; transition: all 0.2s ease; }
-.shippingOption.selected { border-color: var(--doodle-purple-soft); background-color: #f3f0f9; }
+.shippingOption { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; border: 2px solid var(--reveste-input-border); border-radius: 12px; cursor: pointer; transition: all 0.2s ease; }
+.shippingOption.selected { border-color: var(--reveste-crimson); background-color: #f3f0f9; }
 .shippingOption input { display: none; }
 .shippingDetails { display: flex; align-items: center; gap: 1rem; }
-.shippingDetails svg { font-size: 1.8rem; color: var(--doodle-purple-soft); }
+.shippingDetails svg { font-size: 1.8rem; color: var(--reveste-crimson); }
 .shippingDetails p { margin: 0; font-weight: 600; }
-.shippingDetails span { font-size: 0.9rem; color: var(--doodle-placeholder-text); }
+.shippingDetails span { font-size: 0.9rem; color: var(--reveste-text-muted); }
 .shippingPrice { font-weight: 700; font-size: 1.1rem; }
 
 /* Pagamento */
-.paymentMethodSelector { display: flex; border: 1px solid var(--doodle-input-border); border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+.paymentMethodSelector { display: flex; border: 1px solid var(--reveste-input-border); border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
 .paymentMethodSelector label { flex-grow: 1; text-align: center; padding: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: background-color 0.2s; }
 .paymentMethodSelector input { display: none; }
-.paymentMethodSelector label.active { background-color: var(--doodle-beige-light); font-weight: 700; }
-.paymentInfo { text-align: center; padding: 2rem; border: 2px dashed var(--doodle-input-border); border-radius: 12px; }
-.paymentInfo svg { font-size: 3rem; color: var(--doodle-purple-soft); margin-bottom: 1rem; }
+.paymentMethodSelector label.active { background-color: var(--reveste-bg-alt); font-weight: 700; }
+.paymentInfo { text-align: center; padding: 2rem; border: 2px dashed var(--reveste-input-border); border-radius: 12px; }
+.paymentInfo svg { font-size: 3rem; color: var(--reveste-crimson); margin-bottom: 1rem; }
 .paymentInfo h4 { margin: 0 0 0.5rem 0; }
 
 /* Resumo do Pedido */
 .summaryColumn { position: sticky; top: 190px; }
-.summaryContainer { background-color: var(--doodle-white); border-radius: 16px; padding: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-.summaryContainer h3 { font-family: var(--font-mali-next); font-size: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--doodle-input-border); margin-bottom: 1rem; }
+.summaryContainer { background-color: var(--reveste-white); border-radius: 16px; padding: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.summaryContainer h3 { font-family: var(--font-cormorant-next); font-size: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--reveste-input-border); margin-bottom: 1rem; }
 .summaryItemsList { max-height: 300px; overflow-y: auto; padding-right: 0.5rem; }
 .summaryItem { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
 .summaryItemImage { position: relative; }
 .summaryItemImage img { border-radius: 8px; }
-.summaryItemQuantity { position: absolute; top: -10px; right: -10px; width: 22px; height: 22px; border-radius: 50%; background-color: var(--doodle-purple-soft); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+.summaryItemQuantity { position: absolute; top: -10px; right: -10px; width: 22px; height: 22px; border-radius: 50%; background-color: var(--reveste-crimson); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
 .summaryItemDetails { flex-grow: 1; font-size: 0.9rem; }
 .summaryItemDetails p { font-weight: 600; margin: 0; }
-.summaryItemDetails span { color: var(--doodle-placeholder-text); }
+.summaryItemDetails span { color: var(--reveste-text-muted); }
 .summaryItemPrice { font-weight: 600; }
-.summaryTotals { border-top: 1px solid var(--doodle-input-border); padding-top: 1rem; margin-top: 1rem; }
+.summaryTotals { border-top: 1px solid var(--reveste-input-border); padding-top: 1rem; margin-top: 1rem; }
 .summaryRow { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
 .summaryTotalRow { font-size: 1.2rem; font-weight: 700; margin-top: 1rem; }
 
@@ -133,17 +133,17 @@
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
     border: none;
-    background-color: var(--doodle-blue-soft);
+    background-color: var(--reveste-gold-dark);
     color: white;
     font-weight: 600;
     cursor: pointer;
      transition: background-color 0.2s ease;
 }
 .inputWithButton button:hover {
-   background-color: var(--doodle-blue-dark);
+   background-color: var(--reveste-crimson);
 }
 .inputWithButton button:disabled {
-    background-color: var(--doodle-placeholder-text);
+    background-color: var(--reveste-text-muted);
     cursor: not-allowed;
 }
 
@@ -165,16 +165,16 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.2rem;
-  border: 2px solid var(--doodle-input-border);
+  border: 2px solid var(--reveste-input-border);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  background-color: var(--doodle-white);
+  background-color: var(--reveste-white);
   position: relative;
 }
 
 .shippingOption.selected {
-  border-color: var(--doodle-purple-soft);
+  border-color: var(--reveste-crimson);
   background-color: #f3f0f9; /* Roxo claro sutil */
 }
 
@@ -185,7 +185,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid var(--doodle-input-border);
+  border: 2px solid var(--reveste-input-border);
   margin-right: 1rem;
   transition: all 0.2s ease-in-out;
   position: relative;
@@ -193,8 +193,8 @@
 }
 
 .shippingOption input[type="radio"]:checked {
-  border-color: var(--doodle-purple-soft);
-  background-color: var(--doodle-purple-soft);
+  border-color: var(--reveste-crimson);
+  background-color: var(--reveste-crimson);
 }
 
 .shippingOption input[type="radio"]:checked::before {
@@ -219,18 +219,18 @@
 
 .shippingDetails svg {
     font-size: 1.5rem;
-    color: var(--doodle-purple-soft);
+    color: var(--reveste-crimson);
 }
 
 .shippingDetails p {
   margin: 0;
   font-weight: 600;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 
 .shippingDetails span {
   font-size: 0.9rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   display: block; /* Nova linha para prazo/descrição */
   margin-top: 0.2em;
 }
@@ -242,7 +242,7 @@
 .shippingPrice {
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--doodle-purple-soft);
+  color: var(--reveste-crimson);
   flex-shrink: 0; /* Impede que o preço encolha */
 }
 
@@ -251,7 +251,7 @@
     width: 100%;
     padding: 0.8rem;
     border-radius: 8px;
-    border: 1px solid var(--doodle-input-border);
+    border: 1px solid var(--reveste-input-border);
     font-size: 1rem;
 }
 
@@ -267,14 +267,14 @@
     -webkit-appearance: none;
     width: 18px;
     height: 18px;
-    border: 1px solid var(--doodle-input-border);
+    border: 1px solid var(--reveste-input-border);
     border-radius: 4px;
     cursor: pointer;
     position: relative;
 }
 .checkboxGroup input[type="checkbox"]:checked {
-     background-color: var(--doodle-purple-soft);
-     border-color: var(--doodle-purple-soft);
+     background-color: var(--reveste-crimson);
+     border-color: var(--reveste-crimson);
 }
 .checkboxGroup input[type="checkbox"]:checked::before {
     content: '✔';
@@ -289,7 +289,7 @@
 .checkboxGroup label {
     font-weight: normal; /* Não negrito */
     font-size: 1rem;
-    color: var(--doodle-dark-grey);
+    color: var(--reveste-text);
     cursor: pointer;
     margin-bottom: 0; /* Remove margem inferior */
 }
@@ -302,17 +302,17 @@
 .couponSection {
   padding: 1rem 0;
   margin: 1rem 0;
-  border-top: 1px solid var(--doodle-input-border);
-  border-bottom: 1px solid var(--doodle-input-border);
+  border-top: 1px solid var(--reveste-input-border);
+  border-bottom: 1px solid var(--reveste-input-border);
 }
 .couponSection h4 {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
 .couponInfo {
   font-size: 0.85rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   margin-bottom: 1rem;
 }
 .couponInputGroup {
@@ -323,7 +323,7 @@
   flex-grow: 1;
   padding: 0.8rem;
   border-radius: 8px;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
   font-size: 1rem;
   text-transform: uppercase;
 }
@@ -335,14 +335,14 @@
   padding: 0 1.5rem;
   border-radius: 8px;
   border: none;
-  background-color: var(--doodle-blue-soft);
+  background-color: var(--reveste-gold-dark);
   color: white;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
 }
 .applyCouponButton:disabled {
-  background-color: var(--doodle-placeholder-text);
+  background-color: var(--reveste-text-muted);
   cursor: not-allowed;
 }
 .couponError {

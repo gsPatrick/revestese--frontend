@@ -15,7 +15,7 @@
 }
 
 .modalContainer {
-  background-color: var(--doodle-white);
+  background-color: var(--reveste-white);
   border-radius: 20px;
   padding: 2rem;
   width: 100%;
@@ -29,13 +29,13 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px dashed var(--doodle-input-border);
+  border-bottom: 1px dashed var(--reveste-input-border);
 }
 
 .modalHeader h3 {
-  font-family: var(--font-mali-next);
+  font-family: var(--font-cormorant-next);
   font-size: 1.5rem;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin: 0;
 }
 
@@ -43,12 +43,12 @@
   background: none;
   border: none;
   font-size: 1.8rem;
-  color: var(--doodle-placeholder-text);
+  color: var(--reveste-text-muted);
   cursor: pointer;
   transition: color 0.2s;
 }
 .closeButton:hover {
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
 }
 
 .addressForm {
@@ -65,19 +65,19 @@
 .formGroup label {
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--doodle-dark-grey);
+  color: var(--reveste-text);
   margin-bottom: 0.5rem;
 }
 
 .formGroup input {
   padding: 0.8rem 1rem;
-  border: 1px solid var(--doodle-input-border);
+  border: 1px solid var(--reveste-input-border);
   border-radius: 8px;
   font-size: 1rem;
 }
 .formGroup input:focus {
     outline: none;
-    border-color: var(--doodle-purple-soft);
+    border-color: var(--reveste-crimson);
     box-shadow: 0 0 0 2px rgba(144, 122, 204, 0.2);
 }
 
@@ -89,17 +89,17 @@
 
 .cepStatus {
   font-size: 0.8rem;
-  color: var(--doodle-blue-soft);
+  color: var(--reveste-gold-dark);
   margin-top: 0.25rem;
 }
 .cepError {
   font-size: 0.8rem;
-  color: var(--doodle-pink-pastel);
+  color: var(--reveste-crimson-light);
   margin-top: 0.25rem;
 }
 .formError {
     text-align: center;
-    color: var(--doodle-pink-pastel);
+    color: var(--reveste-crimson-light);
     background-color: #fce8f0;
     padding: 0.5rem;
     border-radius: 8px;
@@ -125,7 +125,7 @@
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 1.5rem;
-  border-top: 1px dashed var(--doodle-input-border);
+  border-top: 1px dashed var(--reveste-input-border);
   padding-top: 1.5rem;
 }
 
@@ -140,20 +140,20 @@
 
 .cancelButton {
     background-color: transparent;
-    border-color: var(--doodle-input-border);
-    color: var(--doodle-placeholder-text);
+    border-color: var(--reveste-input-border);
+    color: var(--reveste-text-muted);
 }
 .cancelButton:hover {
-    background-color: var(--doodle-beige-light);
+    background-color: var(--reveste-bg-alt);
 }
 
 .saveButton {
-    background-color: var(--doodle-purple-soft);
-    border-color: var(--doodle-purple-soft);
+    background-color: var(--reveste-crimson);
+    border-color: var(--reveste-crimson);
     color: white;
 }
 .saveButton:disabled {
-    background-color: var(--doodle-placeholder-text);
-    border-color: var(--doodle-placeholder-text);
+    background-color: var(--reveste-text-muted);
+    border-color: var(--reveste-text-muted);
     cursor: not-allowed;
 }

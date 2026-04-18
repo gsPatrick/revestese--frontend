@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
   // Tentamos carregar do localStorage, ou começamos com um array vazio
   const [cartItems, setCartItems] = useState(() => {
     if (typeof window !== 'undefined') {
-      const savedCart = localStorage.getItem('doodleCart');
+      const savedCart = localStorage.getItem('revesteCart');
       return savedCart ? JSON.parse(savedCart) : [];
     }
     return [];
@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
 
   // Salvar no localStorage sempre que o carrinho mudar
   useEffect(() => {
-    localStorage.setItem('doodleCart', JSON.stringify(cartItems));
+    localStorage.setItem('revesteCart', JSON.stringify(cartItems));
   }, [cartItems]);
 
   // Função para adicionar um item ao carrinho

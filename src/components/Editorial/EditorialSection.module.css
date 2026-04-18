@@ -1,0 +1,260 @@
+.editorialSection {
+  display: flex;
+  align-items: stretch;
+  background-color: var(--reveste-bg-alt);
+  border-top: 1px solid var(--reveste-border);
+  border-bottom: 1px solid var(--reveste-border);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Left red accent bar */
+.leftBar {
+  width: 4px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, var(--reveste-crimson-dark), var(--reveste-crimson), var(--reveste-crimson-light));
+}
+
+/* ── Copy column ── */
+.content {
+  flex: 1;
+  padding: 5rem 4rem 5rem 3.5rem;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eyebrow {
+  font-family: var(--font-raleway-next);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--reveste-crimson);
+  margin: 0 0 1.25rem;
+}
+
+.headline {
+  font-family: var(--font-cormorant-next);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--reveste-text);
+  margin: 0 0 1.75rem;
+}
+
+.highlightWord {
+  font-weight: 700;
+  font-style: normal;
+  color: var(--reveste-crimson);
+}
+
+.body {
+  font-family: var(--font-raleway-next);
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--reveste-text-mid);
+  font-weight: 300;
+  max-width: 460px;
+  margin: 0 0 2.5rem;
+}
+
+.stats {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.statValue {
+  font-family: var(--font-cormorant-next);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--reveste-crimson);
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: var(--font-raleway-next);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--reveste-text-muted);
+  text-transform: uppercase;
+}
+
+/* ── Graphic panel ── */
+.graphicPanel {
+  flex: 1;
+  min-width: 320px;
+  background: var(--reveste-crimson-deeper, #2e0509);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 2.5rem;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle texture dots */
+.graphicPanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(201,168,76,0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.graphicCaption {
+  font-family: var(--font-raleway-next);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.45);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Orbit scene ── */
+.orbitScene {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Decorative rings */
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+}
+.ring1 { width: 280px; height: 280px; }
+.ring2 { width: 200px; height: 200px; border-color: rgba(201, 168, 76, 0.1); }
+.ring3 { width: 120px; height: 120px; border-style: dashed; border-color: rgba(201, 168, 76, 0.15); animation: spin-slow 20s linear infinite; }
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* Center hanger */
+.centerIcon {
+  position: absolute;
+  z-index: 3;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1.5px solid rgba(201, 168, 76, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+  50%       { transform: scale(1.06); box-shadow: 0 0 20px 6px rgba(201,168,76,0.12); }
+}
+
+.hangerSvg {
+  width: 36px;
+  height: 36px;
+  color: var(--reveste-gold, #C9A84C);
+}
+
+/* Orbiting items — positioned via CSS custom property --angle */
+.orbitItem {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  top: 0; left: 0;
+  transform: rotate(var(--angle));
+  animation: orbit 18s linear infinite;
+}
+
+/* Each item counter-rotates to stay upright */
+.orbitIcon {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(calc(-1 * var(--angle)));
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(245, 240, 232, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(245, 240, 232, 0.7);
+  transition: background 0.3s;
+}
+
+.orbitIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.orbitIcon:hover {
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--reveste-gold, #C9A84C);
+}
+
+@keyframes orbit {
+  from { transform: rotate(var(--angle)); }
+  to   { transform: rotate(calc(var(--angle) + 360deg)); }
+}
+
+/* Each item has its own delay so they start spaced correctly */
+.orbitItem:nth-child(4)  { animation-delay:    0s; }
+.orbitItem:nth-child(5)  { animation-delay:   -3s; }
+.orbitItem:nth-child(6)  { animation-delay:   -6s; }
+.orbitItem:nth-child(7)  { animation-delay:   -9s; }
+.orbitItem:nth-child(8)  { animation-delay:  -12s; }
+.orbitItem:nth-child(9)  { animation-delay:  -15s; }
+
+/* Circular arrow */
+.circularArrow {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  color: rgba(201, 168, 76, 0.2);
+  animation: spin-slow 30s linear infinite reverse;
+  z-index: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 991px) {
+  .editorialSection { flex-direction: column; }
+  .leftBar { width: 100%; height: 4px; }
+  .content { padding: 3.5rem 2rem 3rem; max-width: 100%; }
+  .graphicPanel { padding: 3rem 2rem 2.5rem; min-width: unset; }
+  .orbitScene { width: 240px; height: 240px; }
+  .ring1 { width: 240px; height: 240px; }
+  .orbitItem { width: 240px; height: 240px; }
+  .circularArrow { width: 196px; height: 196px; }
+}
+
+@media (max-width: 480px) {
+  .headline { font-size: 2.4rem; }
+  .stats { gap: 1.5rem; }
+  .orbitScene { width: 200px; height: 200px; }
+  .ring1 { width: 200px; height: 200px; }
+  .orbitItem { width: 200px; height: 200px; }
+  .circularArrow { width: 164px; height: 164px; }
+}

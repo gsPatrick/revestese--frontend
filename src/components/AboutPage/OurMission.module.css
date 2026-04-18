@@ -1,85 +1,198 @@
-.missionSection {
-  padding: 6rem 1.5rem;
-  text-align: center;
-  background-color: var(--doodle-page-bg);
-  border-top: 1px solid var(--doodle-input-border);
+.section {
+  background: var(--reveste-bg);
+  padding: 7rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
 }
 
-.sectionTitle {
-  font-family: var(--font-mali-next);
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: var(--doodle-dark-grey);
-  margin-bottom: 3.5rem;
-}
-
-.missionGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1280px;
+/* ── Story block ── */
+.storyBlock {
+  max-width: 1100px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
 }
 
-.missionCard {
-  background-color: var(--doodle-white);
-  padding: 2.5rem 2rem;
-  border-radius: 20px;
-  border: 1px solid var(--doodle-input-border);
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.03);
+.storyImage {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border: 1px solid var(--reveste-border);
+}
+
+.storyImg {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.storyImage:hover .storyImg { transform: scale(1.04); }
+
+.storyImageBadge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background: var(--reveste-crimson);
+  color: white;
+  padding: 0.75rem 1.1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 0.1rem;
 }
 
-.iconWrapper {
-  font-size: 3rem;
-  color: var(--doodle-blue-soft);
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
-}
-
-.missionCard:hover .iconWrapper {
-  transform: scale(1.1) rotate(-10deg);
-}
-
-.cardTitle {
-  font-family: var(--font-mali-next);
-  font-size: 1.5rem; /* Aumentado para melhor legibilidade */
+.badgeYear {
+  font-family: var(--font-cormorant-next);
+  font-size: 1.6rem;
   font-weight: 700;
-  color: var(--doodle-dark-grey);
-  margin-bottom: 0.8rem;
-  min-height: 5rem; /* Garante espaço para duas linhas */
+  line-height: 1;
+}
+
+.badgeLabel {
+  font-family: var(--font-raleway-next);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Copy */
+.eyebrow {
+  font-family: var(--font-raleway-next);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--reveste-crimson);
+  margin: 0 0 1rem;
+}
+
+.storyTitle {
+  font-family: var(--font-cormorant-next);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--reveste-text);
+  line-height: 1.15;
+  margin: 0 0 1.5rem;
+}
+
+.highlight {
+  font-weight: 700;
+  font-style: normal;
+  color: var(--reveste-crimson);
+}
+
+.storyCopy { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.storyText {
+  font-family: var(--font-raleway-next);
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--reveste-text-mid);
+  font-weight: 300;
+  margin: 0;
+}
+
+.storyText strong { color: var(--reveste-text); font-weight: 600; }
+
+.storyStats {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--reveste-border);
+}
+
+.storyStat { display: flex; flex-direction: column; gap: 0.2rem; }
+
+.storyStatN {
+  font-family: var(--font-cormorant-next);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--reveste-crimson);
+  line-height: 1;
+}
+
+.storyStatL {
+  font-family: var(--font-raleway-next);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--reveste-text-muted);
+}
+
+/* ── Values ── */
+.valuesHeader {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.valuesTitle {
+  font-family: var(--font-cormorant-next);
+  font-size: 2.4rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--reveste-text);
+  margin: 0.5rem 0 0;
+}
+
+.valuesGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--reveste-border);
+  border: 1px solid var(--reveste-border);
+}
+
+.valueCard {
+  background: var(--reveste-bg-surface);
+  padding: 2.5rem 1.75rem;
+  display: flex;
   flex-direction: column;
+  gap: 0.75rem;
+  transition: background 0.2s;
 }
 
-/* A MÁGICA ACONTECE AQUI */
-.highlightWord {
-  display: inline-block;
-  font-weight: 800;
-  color: transparent; /* O texto fica transparente */
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: linear-gradient(
-    90deg,
-    var(--doodle-pink-pastel),
-    var(--doodle-yellow-mustard),
-    var(--doodle-blue-sky),
-    var(--doodle-green-pastel)
-  );
-  /* Animação de "pintura" */
-  background-size: 0% 100%; /* Começa sem cor */
-  background-repeat: no-repeat;
-  transition: background-size 1s ease-in-out; /* Transição suave via CSS (alternativa ao GSAP) */
+.valueCard:hover { background: var(--reveste-bg-alt); }
+
+.valueIcon {
+  font-size: 1.6rem;
+  color: var(--reveste-crimson);
+  line-height: 1;
 }
 
-.cardDescription {
-  font-family: sans-serif;
-  font-size: 1rem;
-  color: var(--doodle-placeholder-text);
-  line-height: 1.6;
+.valueTitle {
+  font-family: var(--font-cormorant-next);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--reveste-text);
+  margin: 0.25rem 0 0;
+}
+
+.valueDesc {
+  font-family: var(--font-raleway-next);
+  font-size: 0.85rem;
+  color: var(--reveste-text-muted);
+  line-height: 1.75;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .storyBlock { grid-template-columns: 1fr; gap: 2.5rem; }
+  .valuesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .valuesGrid { grid-template-columns: 1fr; }
+  .section { padding: 5rem 1.25rem; gap: 4rem; }
 }

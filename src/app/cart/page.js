@@ -10,7 +10,7 @@ import Breadcrumb from '@/components/SubscriptionPage/Breadcrumb';
 import CartItemList from '@/components/CartPage/CartItemList';
 import CartSummary from '@/components/CartPage/CartSummary';
 import styles from '@/components/CartPage/CartPage.module.css';
-import { BsEmojiFrown } from 'react-icons/bs';
+import { GiHanger } from 'react-icons/gi';
 import api from '@/services/api';
 
 export default function CartPage() {
@@ -55,11 +55,11 @@ export default function CartPage() {
       <main className={styles.mainContainer}>
         <Breadcrumb items={breadcrumbItems} />
         <div className={styles.emptyCartContainer}>
-          <BsEmojiFrown className={styles.emptyCartIcon} />
-          <h1>Seu carrinho de sonhos está vazio!</h1>
-          <p>Parece que você ainda não adicionou nenhuma magia. Que tal explorar nosso catálogo?</p>
+          <GiHanger className={styles.emptyCartIcon} />
+          <h1>Seu carrinho está vazio</h1>
+          <p>Nenhuma peça selecionada ainda. Que tal dar uma olhada no nosso acervo?</p>
           <Link href="/catalog" className={styles.emptyCartButton}>
-            Explorar Catálogo
+            Ver o acervo
           </Link>
         </div>
       </main>
@@ -69,7 +69,7 @@ export default function CartPage() {
   return (
     <main className={styles.mainContainer}>
       <Breadcrumb items={breadcrumbItems} />
-      <h1 className={styles.pageTitle}>Meu Carrinho de Sonhos</h1>
+      <h1 className={styles.pageTitle}>Meu Carrinho</h1>
       <div className={styles.cartLayout}>
         <div className={styles.cartItemsColumn}>
           <CartItemList />

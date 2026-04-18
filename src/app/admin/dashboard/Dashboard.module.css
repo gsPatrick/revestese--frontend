@@ -1,207 +1,70 @@
-/* src/app/admin/dashboard/Dashboard.module.css */
+.loading { padding: 4rem; text-align: center; color: #9ca3af; font-size: 0.9rem; }
 
-.dashboardContainer {
-  padding: 2rem;
-  background-color: var(--doodle-beige-light);
-  min-height: 100vh;
-}
+.page { display: flex; flex-direction: column; gap: 1.5rem; }
 
-.mainTitle {
-  font-family: var(--font-mali-next);
-  font-size: 2.5rem;
-  color: var(--doodle-dark-grey);
-  margin-bottom: 2rem;
-}
+.kpiGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 
-/* Grid de cards de estatísticas */
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.statCard {
-  background-color: var(--doodle-white);
-  border-radius: 16px;
-  padding: 1.5rem;
+.kpiCard {
+  background: white;
+  border-radius: 6px;
+  padding: 1.25rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border-left: 5px solid;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.statCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border: 1px solid #f3f4f6;
 }
 
-/* Cores das bordas dos cards */
-.statCard.purple { border-color: var(--doodle-purple-soft); }
-.statCard.blue { border-color: var(--doodle-blue-soft); }
-.statCard.yellow { border-color: var(--doodle-yellow-mustard); }
-.statCard.green { border-color: var(--doodle-green-pastel); }
-
-.cardIcon {
-  font-size: 2.5rem;
-  padding: 0.8rem;
+.kpiIcon {
+  width: 44px; height: 44px;
   border-radius: 50%;
-  color: var(--doodle-white);
-}
-.purple .cardIcon { background-color: var(--doodle-purple-soft); }
-.blue .cardIcon { background-color: var(--doodle-blue-soft); }
-.yellow .cardIcon { background-color: var(--doodle-yellow-mustard); }
-.green .cardIcon { background-color: var(--doodle-green-pastel); }
-
-.cardContent {
-  text-align: left;
-}
-.cardTitle {
-  font-size: 1rem;
-  color: var(--doodle-placeholder-text);
-  margin-bottom: 0.25rem;
-}
-.cardValue {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--doodle-dark-grey);
-}
-
-/* Grid principal (gráfico/listas) */
-.contentGrid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-.mainContent {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* Estilos comuns para containers de lista/gráfico */
-.listContainer, .chartContainer {
-  background-color: var(--doodle-white);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.sectionTitle {
-  font-family: var(--font-mali-next);
-  font-size: 1.5rem;
-  color: var(--doodle-dark-grey);
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--doodle-input-border);
-}
-
-/* Tabela de Pedidos Recentes */
-.tableWrapper {
-  overflow-x: auto;
-}
-.ordersTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-.ordersTable th, .ordersTable td {
-  padding: 0.8rem;
-  text-align: left;
-  border-bottom: 1px solid var(--doodle-input-border);
-  font-size: 0.9rem;
-}
-.ordersTable th {
-  font-weight: 600;
-  color: var(--doodle-placeholder-text);
-}
-.ordersTable tbody tr:last-child td {
-  border-bottom: none;
-}
-.ordersTable tbody tr:hover {
-  background-color: #f9f9fb;
-}
-
-.statusBadge {
-  padding: 0.25rem 0.6rem;
-  border-radius: 99px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: capitalize;
-}
-.statusBadge.pendente { background-color: #fff3cd; color: #856404; }
-.statusBadge.pago { background-color: var(--doodle-green-pastel); color: #155724; }
-.statusBadge.enviado { background-color: var(--doodle-blue-sky); color: #004085; }
-.statusBadge.entregue { background-color: #d1ecf1; color: #0c5460; }
-.statusBadge.cancelado { background-color: #f8d7da; color: #721c24; }
-
-
-/* Lista de Produtos Mais Vendidos */
-.topProductsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-.productItem {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.productImage {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
   flex-shrink: 0;
 }
-.productInfo {
-  flex-grow: 1;
-}
-.productName {
-  font-weight: 600;
-  color: var(--doodle-dark-grey);
-  margin: 0;
-}
-.productSales {
-  font-size: 0.9rem;
-  color: var(--doodle-placeholder-text);
+
+.kpiLabel { font-size: 0.72rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 0.25rem; }
+.kpiValue { font-size: 1.35rem; font-weight: 700; color: #111827; margin: 0; }
+
+.row { display: flex; gap: 1.25rem; }
+
+.card {
+  flex: 1;
+  background: white;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border: 1px solid #f3f4f6;
+  min-width: 0;
 }
 
-/* Contêineres de status (loading/error) */
-.statusContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 50vh;
-  font-family: var(--font-mali-next);
-  font-size: 1.5rem;
-  color: var(--doodle-placeholder-text);
-}
-.statusContainer.error {
-  color: var(--doodle-pink-pastel);
-}
+.cardTitle { font-size: 0.85rem; font-weight: 700; color: #374151; margin: 0 0 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
-/* Responsividade */
-@media (max-width: 1024px) {
-  .contentGrid {
-    grid-template-columns: 1fr;
-  }
+.topList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem; }
+
+.topItem { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; }
+.topRank { width: 18px; height: 18px; border-radius: 50%; background: #f3f4f6; color: #6b7280; font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.topName { flex: 1; color: #374151; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topQty { font-weight: 700; color: #780e1a; flex-shrink: 0; }
+
+.empty { text-align: center; color: #9ca3af; font-size: 0.8rem; padding: 1rem 0; }
+
+.tableWrap { overflow-x: auto; }
+
+.table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.table th { text-align: left; padding: 0.5rem 0.75rem; color: #6b7280; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #f3f4f6; }
+.table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid #f9fafb; vertical-align: middle; }
+.table tr:last-child td { border-bottom: none; }
+
+.tdMono { font-family: monospace; font-size: 0.78rem; color: #780e1a; font-weight: 600; }
+.tdMuted { color: #9ca3af; }
+
+.badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; }
+
+@media (max-width: 900px) {
+  .kpiGrid { grid-template-columns: repeat(2, 1fr); }
+  .row { flex-direction: column; }
 }
-@media (max-width: 768px) {
-  .dashboardContainer {
-    padding: 1rem;
-  }
-  .mainTitle {
-    font-size: 2rem;
-  }
-  .statCard {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
+@media (max-width: 500px) {
+  .kpiGrid { grid-template-columns: 1fr 1fr; }
 }

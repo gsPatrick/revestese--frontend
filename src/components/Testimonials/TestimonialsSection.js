@@ -10,32 +10,32 @@ const testimonialsData = [
   {
     name: "Juliana R. & Filho",
     location: "São Paulo, SP",
-    testimonial: "Chegou rapidinho, já comecei a colorir com meu filho e ele amou! Uma ótima atividade para fazermos juntos. As cores ganharam vida!",
-    imagePath: "/imagens/depoimento1.jpg", 
-    bookImagePath: "/imagens/livro-infantil.png", 
-    audioPath: "/audios/juliana_depoimento.mp3", 
-    bgColorVar: 'var(--doodle-blue-sky)',
-    borderColorVar: 'var(--doodle-blue-soft)'
+    testimonial: "Encontrei um blazer incrível que estava procurando há meses. Chegou impecável, melhor do que esperava. O processo foi super simples e seguro!",
+    imagePath: "/imagens/depoimento1.jpg",
+    bookImagePath: "/imagens/livro-infantil.png",
+    audioPath: "/audios/juliana_depoimento.mp3",
+    bgColorVar: 'var(--reveste-bg-alt)',
+    borderColorVar: 'var(--reveste-border)'
   },
   {
     name: "Carlos M.",
     location: "Belo Horizonte, MG",
-    testimonial: "As ilustrações são lindas e a qualidade do papel é ótima. Dá gosto de pintar e o resultado fica incrível. Superou minhas expectativas!",
-    imagePath: "/imagens/depoimento2.jpg", 
-    bookImagePath: "/imagens/livro-adulto.png", 
-    audioPath: "/audios/carlos_depoimento.mp3", 
-    bgColorVar: 'var(--doodle-pink-pastel)',
-    borderColorVar: 'var(--doodle-purple-soft)'
+    testimonial: "Comprei um casaco vintage que se tornou minha peça favorita. A curadoria é excelente — tudo verificado e bem descrito. Voltarei com certeza!",
+    imagePath: "/imagens/depoimento2.jpg",
+    bookImagePath: "/imagens/livro-adulto.png",
+    audioPath: "/audios/carlos_depoimento.mp3",
+    bgColorVar: 'var(--reveste-bg-surface)',
+    borderColorVar: 'var(--reveste-border-strong)'
   },
   {
     name: "Ana P. & Família",
     location: "Curitiba, PR",
-    testimonial: "Comprei para relaxar depois do trabalho e virou nosso passatempo favorito. A conexão que criamos colorindo é mágica!",
-    imagePath: "/imagens/depoimento3.jpg", 
-    bookImagePath: "/imagens/livro-familia.png", 
-    audioPath: "/audios/ana_depoimento.mp3", 
-    bgColorVar: 'var(--doodle-green-pastel)',
-    borderColorVar: 'var(--doodle-yellow-mustard)'
+    testimonial: "Adoro a proposta do Reveste-se. Comprar aqui é consumir com consciência. As peças são únicas e a entrega foi super rápida. Recomendo a todas!",
+    imagePath: "/imagens/depoimento3.jpg",
+    bookImagePath: "/imagens/livro-familia.png",
+    audioPath: "/audios/ana_depoimento.mp3",
+    bgColorVar: 'var(--reveste-bg-muted)',
+    borderColorVar: 'var(--reveste-border)'
   }
 ];
 

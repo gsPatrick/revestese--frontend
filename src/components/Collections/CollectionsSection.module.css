@@ -2,210 +2,145 @@
 
 .collectionsSection {
   padding: 6rem 1.5rem;
-  background-color: var(--doodle-background);
+  background-color: var(--reveste-bg);
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-/* --- Elementos Decorativos de Background (sem alteração) --- */
-.decorativeElements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.decorativeElement {
-    position: absolute;
-    opacity: 0.6;
-    filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
-}
-
-.cloud1 { top: 8%; left: 8%; width: 100px; height: 70px; transform: rotate(5deg); }
-.star1 { top: 20%; right: 15%; width: 40px; height: 40px; transform: rotate(-15deg); }
-.butterfly1 { bottom: 10%; left: 10%; width: 50px; height: 35px; transform: rotate(20deg); }
-.pencil1 { top: 40%; left: 2%; width: 35px; height: 70px; transform: rotate(-5deg); }
-.rainbow1 { bottom: 3%; right: 8%; width: 100px; height: 70px; transform: rotate(10deg); }
-.spiral1 { top: 3%; right: 35%; width: 40px; height: 40px; }
-.diamond1 { bottom: 25%; left: 20%; width: 25px; height: 25px; }
-
-
 .sectionTitle {
-  font-family: var(--font-mali-next);
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--doodle-dark-grey);
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 1;
+  font-family: var(--font-cormorant-next);
+  font-size: 2.8rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--reveste-text);
+  margin-bottom: 0.6rem;
+  position: relative; z-index: 1;
 }
 
 .sectionSubtitle {
-  font-family: sans-serif;
-  font-size: 1.1rem;
-  color: var(--doodle-placeholder-text);
+  font-family: var(--font-raleway-next);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--reveste-text-muted);
   margin-bottom: 3.5rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  z-index: 1;
+  max-width: 500px;
+  margin-left: auto; margin-right: auto;
+  position: relative; z-index: 1;
 }
 
-/* --- Grid de Coleções: Ajustado para 5 colunas --- */
 .collectionsGrid {
   display: grid;
-  /* 5 colunas em telas grandes */
   grid-template-columns: repeat(5, 1fr);
-  gap: 1.5rem; /* Gap menor para acomodar os 5 cards */
+  gap: 1.25rem;
   max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-  align-items: flex-start;
+  margin: 0 auto;
 }
 
-/* Responsividade para Tablet (3 colunas) */
-@media (max-width: 1024px) {
-  .collectionsGrid {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 90%;
-  }
-}
-
-/* Responsividade para Mobile (2 colunas) */
+@media (max-width: 1024px) { .collectionsGrid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 767px) {
-  .collectionsSection {
-    padding: 3rem 1rem;
-  }
-  .sectionTitle {
-    font-size: 2.2rem;
-  }
-  .sectionSubtitle {
-    font-size: 1rem;
-    margin-bottom: 2.5rem;
-  }
-  .collectionsGrid {
-    grid-template-columns: repeat(2, 1fr); /* Duas colunas em mobile */
-    gap: 1rem;
-    max-width: 100%;
-  }
-  .collectionCard {
-    padding: 1.5rem 1rem;
-  }
-  .collectionName {
-    font-size: 1.2rem;
-  }
-  .collectionDescription {
-    font-size: 0.8rem;
-  }
-  .viewCollectionLink {
-    font-size: 0.9rem;
-  }
+  .collectionsSection { padding: 3rem 1rem; }
+  .sectionTitle { font-size: 2rem; }
+  .collectionsGrid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
 }
 
-/* --- Collection Card: Menor e mais delicado --- */
 .collectionCard {
-  background-color: var(--doodle-white);
-  border-radius: 16px;
-  padding: 2rem 1rem; /* Padding reduzido */
+  background-color: var(--reveste-bg-surface);
+  border: 1px solid var(--reveste-border);
+  border-radius: 3px;
+  padding: 2rem 1rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  z-index: 1;
-  min-height: 250px; /* Garante uma altura mínima para consistência */
+  min-height: 220px;
 }
 
-/* --- Animações de Hover --- */
+/* Bottom accent line on hover */
+.collectionCard::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-accent, var(--reveste-crimson));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.collectionCard:hover {
+  border-color: var(--reveste-border-strong);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.collectionCard:hover::after { transform: scaleX(1); }
+
 .collectionIconContainer {
-    position: relative;
-    width: 60px; /* Tamanho reduzido */
-    height: 60px; /* Tamanho reduzido */
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 52px; height: 52px; margin-bottom: 1rem;
+  display: flex; justify-content: center; align-items: center;
 }
 
 .collectionIcon {
-  width: 100%;
-  height: 100%;
-  animation: float 4s ease-in-out infinite;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transição para o hover */
+  font-size: 2.4rem;
+  animation: float 5s ease-in-out infinite;
+  transition: transform 0.35s ease;
 }
 
 .collectionCard:hover .collectionIcon {
-  transform: scale(1.2) rotate(-10deg); /* Ícone cresce e gira no hover */
+  transform: scale(1.2) rotate(-8deg);
 }
 
 .collectionName {
-  font-family: var(--font-mali-next);
-  font-size: 1.4rem; /* Fonte reduzida */
-  font-weight: 700;
-  color: var(--doodle-dark-grey);
-  margin-bottom: 0.5rem;
-  transition: transform 0.3s ease-in-out; /* Transição para o hover */
+  font-family: var(--font-cormorant-next);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--reveste-text);
+  margin-bottom: 0.35rem;
+  transition: transform 0.25s ease;
 }
 
-.collectionCard:hover .collectionName {
-  transform: translateY(-10px); /* Sobe no hover */
-}
+.collectionCard:hover .collectionName { transform: translateY(-8px); }
 
 .collectionDescription {
-  font-family: sans-serif;
-  font-size: 0.85rem; /* Fonte reduzida */
-  color: var(--doodle-placeholder-text);
-  margin-bottom: 1.5rem;
-  min-height: 35px; /* Altura mínima para consistência */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease-in-out; /* Transição para o hover */
+  font-family: var(--font-raleway-next);
+  font-size: 0.78rem;
+  color: var(--reveste-text-muted);
+  margin-bottom: 1.25rem;
+  min-height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s ease;
 }
 
-.collectionCard:hover .collectionDescription {
-  transform: translateY(-10px); /* Sobe no hover */
-}
+.collectionCard:hover .collectionDescription { transform: translateY(-8px); }
 
 .viewCollectionLink {
-  font-family: var(--font-mali-next);
-  font-size: 0.95rem; /* Fonte reduzida */
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  position: absolute; /* Posição absoluta para animação */
-  bottom: 1.5rem;
-  opacity: 0; /* Começa invisível */
-  transform: translateY(10px); /* Começa deslocado para baixo */
-  transition: opacity 0.3s 0.1s ease, transform 0.3s 0.1s ease; /* Transição com delay */
+  font-family: var(--font-raleway-next);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--reveste-crimson);
+  display: flex; align-items: center; gap: 0.4rem;
+  position: absolute;
+  bottom: 1.25rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s 0.05s ease, transform 0.25s 0.05s ease;
 }
 
 .collectionCard:hover .viewCollectionLink {
-  opacity: 1; /* Fica visível no hover */
-  transform: translateY(0); /* Sobe para a posição final */
+  opacity: 1; transform: translateY(0);
 }
 
-.arrowIcon {
-  font-size: 1.2rem;
-  display: inline-block;
-}
+.arrowIcon { font-size: 1rem; display: inline-block; }
 
 @keyframes float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  25% { transform: translateY(-5px) rotate(1deg); }
-  50% { transform: translateY(0px) rotate(0deg); }
-  75% { translateY: (5px) rotate(-1deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
 }

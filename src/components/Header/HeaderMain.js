@@ -13,7 +13,7 @@ const HeaderMain = ({ onMenuToggle }) => { // Recebe prop para toggle do menu
       <div className={styles.mainBarContent}>
         {/* Logo */}
         <Link href="/" className={styles.mainLogo}>
-          <span>Doodle Dreams</span>
+          <span>Reveste-se</span>
         </Link>
 
         {/* Search Bar (Oculta em mobile) */}

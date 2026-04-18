@@ -1,15 +1,15 @@
 /* src/components/TrustBar/TrustBar.module.css */
 
 .trustBarSection {
-  background-color: var(--doodle-white);
-  padding: 2.5rem 2rem;
+  padding: 2rem 2rem;
   display: grid;
-  /* CORREÇÃO: Grid que se adapta bem a 5 itens */
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  max-width: 1400px; /* Aumentado para melhor acomodar 5 cards */
-  margin: 4rem auto; 
-  border-radius: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  max-width: 1300px;
+  margin: 2.5rem auto;
+  background-color: var(--reveste-bg-surface);
+  border: 1px solid var(--reveste-border);
+  border-radius: 4px;
 }
 
 .trustItem {
@@ -18,78 +18,58 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 0.75rem; 
-  padding: 2rem 1rem;
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  background-color: var(--doodle-yellow-light); 
-  border: 1px solid var(--doodle-yellow-mustard);
-  box-shadow: 0 8px 25px -10px rgba(204, 194, 122, 0.4);
+  gap: 0.6rem;
+  padding: 1.5rem 0.75rem;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.trustItem:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 12px 30px -8px rgba(204, 194, 122, 0.5);
+.trustItem::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 40px;
+  height: 2px;
+  background: var(--reveste-crimson);
+  transition: transform 0.3s ease;
 }
+
+.trustItem:hover { transform: translateY(-4px); }
+.trustItem:hover::after { transform: translateX(-50%) scaleX(1); }
 
 .trustIcon {
-  font-size: 3rem;
-  color: var(--doodle-yellow-mustard);
-  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: var(--reveste-crimson);
   flex-shrink: 0;
 }
 
 .trustText h4 {
-  font-family: var(--font-mali-next);
-  font-size: 1.3rem; 
-  font-weight: 700;
-  color: var(--doodle-dark-grey);
-  margin: 0 0 0.25rem 0;
+  font-family: var(--font-cormorant-next);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--reveste-text);
+  margin: 0 0 0.15rem 0;
 }
 
 .trustText p {
-  font-size: 1rem; 
-  color: var(--doodle-dark-grey);
-  font-weight: 500;
+  font-family: var(--font-raleway-next);
+  font-size: 0.78rem;
+  color: var(--reveste-text-muted);
+  font-weight: 400;
   margin: 0;
   line-height: 1.5;
-}
-
-/* Responsividade para 5 cards */
-@media (max-width: 1300px) {
-  /* Em telas um pouco menores, força um layout 3x2, que é visualmente agradável */
-  .trustBarSection {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 991px) {
-  /* Em tablets, um layout 2x2x1 */
-  .trustBarSection {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    padding: 1.5rem;
-    gap: 1.5rem;
-  }
+  .trustBarSection { padding: 1.5rem; gap: 1rem; }
 }
-
 @media (max-width: 767px) {
-  .trustBarSection {
-    grid-template-columns: 1fr;
-    margin: 2rem auto;
-  }
-  .trustItem {
-    flex-direction: row;
-    justify-content: flex-start;
-    text-align: left;
-    padding: 1.5rem;
-  }
-  .trustIcon {
-    font-size: 2.5rem;
-  }
-  .trustText h4 {
-    font-size: 1.2rem;
-  }
-  .trustText p {
-    font-size: 0.9rem;
-  }
+  .trustBarSection { grid-template-columns: 1fr; margin: 2rem auto; }
+  .trustItem { flex-direction: row; justify-content: flex-start; text-align: left; padding: 1rem 1.25rem; }
+  .trustIcon { font-size: 1.7rem; }
 }
