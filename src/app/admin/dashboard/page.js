@@ -175,13 +175,20 @@ export default function DashboardPage() {
             <h2 className={styles.cardTitle}>Mais vendidos</h2>
           </div>
           <ul className={styles.rankList}>
-            {topProds.slice(0, 7).map((p, i) => (
-              <li key={i} className={styles.rankItem}>
-                <span className={styles.rankBadge} style={{ background: i < 3 ? '#780e1a22' : '#f3f4f6', color: i < 3 ? '#780e1a' : '#6b7280' }}>{i + 1}</span>
-                <span className={styles.rankName}>{p.nome || p.name || '—'}</span>
-                <span className={styles.rankVal}>{p.quantidade ?? '—'} un.</span>
-              </li>
-            ))}
+            {topProds.slice(0, 7).map((p, i) => {
+              const nomeProd = p.produto?.nome || p.nome || p.name || `Produto #${p.id}`;
+              const slug = p.produto?.slug || p.produto?.id;
+              return (
+                <li key={i} className={styles.rankItem}>
+                  <span className={styles.rankBadge} style={{ background: i < 3 ? '#780e1a22' : '#f3f4f6', color: i < 3 ? '#780e1a' : '#6b7280' }}>{i + 1}</span>
+                  {slug
+                    ? <a href={`/product/${slug}`} target="_blank" rel="noreferrer" className={styles.rankLink}>{nomeProd}</a>
+                    : <span className={styles.rankName}>{nomeProd}</span>
+                  }
+                  <span className={styles.rankVal}>{p.quantidade ?? '—'} un.</span>
+                </li>
+              );
+            })}
             {topProds.length === 0 && <li className={styles.emptyList}>Sem vendas registradas</li>}
           </ul>
         </div>

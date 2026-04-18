@@ -101,6 +101,8 @@
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .rankName { flex: 1; color: #374151; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rankLink { flex: 1; color: #780e1a; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+.rankLink:hover { text-decoration: underline; }
 .rankVal  { font-weight: 700; color: #780e1a; flex-shrink: 0; }
 .emptyList { color: #9ca3af; font-size: 0.8rem; text-align: center; padding: 1rem 0; }
 

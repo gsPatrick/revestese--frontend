@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from './admin.module.css';
 import {
   BsSpeedometer2, BsBox, BsTags, BsReceipt, BsTicketPerforated,
-  BsPeople, BsBoxArrowRight, BsList, BsX, BsGear,
+  BsPeople, BsBoxArrowRight, BsList, BsX, BsGear, BsCartX,
 } from 'react-icons/bs';
 import { GiHanger } from 'react-icons/gi';
 
@@ -16,6 +16,8 @@ const NAV = [
   { href: '/admin/categorias',     icon: <BsTags />,               label: 'Categorias'   },
   { href: '/admin/pedidos',        icon: <BsReceipt />,            label: 'Pedidos'      },
   { href: '/admin/cupons',         icon: <BsTicketPerforated />,   label: 'Cupons'       },
+  { href: '/admin/clientes',       icon: <BsPeople />,             label: 'Clientes'     },
+  { href: '/admin/carrinhos',      icon: <BsCartX />,              label: 'Carrinhos'    },
   { href: '/admin/configuracoes',  icon: <BsGear />,               label: 'Configurações'},
 ];
 
