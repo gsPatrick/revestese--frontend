@@ -9,7 +9,7 @@ export default function CategoriasPage() {
   const [categorias, setCategorias] = useState([]);
   const [loading,    setLoading]    = useState(true);
   const [modal,      setModal]      = useState(false);
-  const [form,       setForm]       = useState({ nome: '', descricao: '' });
+  const [form,       setForm]       = useState({ nome: '', descricao: '', ativo: true });
   const [editing,    setEditing]    = useState(null);
   const [saving,     setSaving]     = useState(false);
   const [confirm,    setConfirm]    = useState(null);
@@ -26,8 +26,8 @@ export default function CategoriasPage() {
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000); };
 
-  const openCreate = () => { setForm({ nome: '', descricao: '' }); setEditing(null); setModal(true); };
-  const openEdit   = (c) => { setForm({ nome: c.nome || '', descricao: c.descricao || '' }); setEditing(c.id); setModal(true); };
+  const openCreate = () => { setForm({ nome: '', descricao: '', ativo: true }); setEditing(null); setModal(true); };
+  const openEdit   = (c) => { setForm({ nome: c.nome || '', descricao: c.descricao || '', ativo: c.ativo ?? true }); setEditing(c.id); setModal(true); };
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -73,7 +73,7 @@ export default function CategoriasPage() {
           <div className={styles.tableWrap}>
             <table className={styles.table}>
               <thead>
-                <tr><th>#</th><th>Nome</th><th>Descrição</th><th>Ações</th></tr>
+                <tr><th>#</th><th>Nome</th><th>Descrição</th><th>Status</th><th>Ações</th></tr>
               </thead>
               <tbody>
                 {categorias.map(c => (
@@ -81,6 +81,11 @@ export default function CategoriasPage() {
                     <td className={styles.tdMono}>#{c.id}</td>
                     <td style={{ fontWeight: 600, color: '#111827' }}>{c.nome}</td>
                     <td className={styles.tdMuted}>{c.descricao || '—'}</td>
+                    <td>
+                      <span className={styles.badge} style={c.ativo ? { background: '#d1fae5', color: '#059669' } : { background: '#f3f4f6', color: '#9ca3af' }}>
+                        {c.ativo ? 'Ativa' : 'Inativa'}
+                      </span>
+                    </td>
                     <td>
                       <div className={styles.actionsCell}>
                         <button className={styles.btnIcon} onClick={() => openEdit(c)} title="Editar"><BsPencil/></button>
@@ -90,7 +95,7 @@ export default function CategoriasPage() {
                   </tr>
                 ))}
                 {categorias.length === 0 && (
-                  <tr><td colSpan={4} className={styles.empty}>Nenhuma categoria encontrada.</td></tr>
+                  <tr><td colSpan={5} className={styles.empty}>Nenhuma categoria encontrada.</td></tr>
                 )}
               </tbody>
             </table>
@@ -114,6 +119,12 @@ export default function CategoriasPage() {
                 <div className={`${styles.field} ${styles.fullWidth}`}>
                   <label>Descrição</label>
                   <textarea rows={2} value={form.descricao} onChange={e => setForm(p => ({ ...p, descricao: e.target.value }))} placeholder="Breve descrição da categoria..."/>
+                </div>
+                <div className={styles.field}>
+                  <label className={styles.checkLabel}>
+                    <input type="checkbox" checked={form.ativo} onChange={e => setForm(p => ({ ...p, ativo: e.target.checked }))}/>
+                    Categoria ativa
+                  </label>
                 </div>
               </div>
               <div className={styles.modalFooter}>

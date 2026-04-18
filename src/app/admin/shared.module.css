@@ -236,6 +236,41 @@
 .loadingText { text-align: center; color: #9ca3af; padding: 3rem; font-size: 0.9rem; }
 .empty { text-align: center; color: #9ca3af; padding: 3rem 1rem; font-size: 0.85rem; grid-column: 1/-1; }
 
+/* ── Section label ── */
+.sectionLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #780e1a;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1.5px solid #fdf2f4;
+}
+
+/* ── Variation rows ── */
+.varList { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.5rem; }
+
+.varRow {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  background: #fafafa;
+  border: 1px solid #f3f4f6;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+}
+.varName { font-weight: 600; color: #111827; flex: 1; min-width: 80px; }
+.varPrice { color: #780e1a; font-weight: 700; }
+.varStock { color: #6b7280; }
+
+.varInputRow {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+}
+
 /* ── Inline form (for small CRUDs) ── */
 .inlineForm {
   display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap;

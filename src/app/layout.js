@@ -1,13 +1,10 @@
 import Script from 'next/script';
 import { Cormorant_Garamond, Raleway } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
 import { CartProvider } from '@/context/CartContext';
 import { AuthProvider } from '@/context/AuthContext';
 import { FilterProvider } from '@/context/FilterContext';
-import CouponPopup from '@/components/CouponPopup/CouponPopup';
-import WhatsAppCta from '@/components/WhatsAppCta/WhatsAppCta';
+import SiteShell from '@/components/SiteShell/SiteShell';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -67,11 +64,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <CartProvider>
             <FilterProvider>
-              <Header />
-              <main>{children}</main>
-              <Footer />
-              <CouponPopup />
-              <WhatsAppCta />
+              <SiteShell>{children}</SiteShell>
             </FilterProvider>
           </CartProvider>
         </AuthProvider>
