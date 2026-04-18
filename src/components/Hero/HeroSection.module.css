@@ -1,5 +1,6 @@
 /* src/components/Hero/HeroSection.module.css */
 
+/* ── Section ───────────────────────────────────── */
 .heroSection {
   display: flex;
   justify-content: center;
@@ -12,7 +13,6 @@
   min-height: 92vh;
 }
 
-/* Soft warm radial glow */
 .heroSection::before {
   content: '';
   position: absolute;
@@ -25,7 +25,6 @@
   pointer-events: none;
 }
 
-/* Decorative circle ring */
 .heroSection::after {
   content: '';
   position: absolute;
@@ -38,7 +37,7 @@
   pointer-events: none;
 }
 
-/* --- Marquee strip --- */
+/* ── Marquee ───────────────────────────────────── */
 .marqueeWrapper {
   width: 100%;
   overflow: hidden;
@@ -75,120 +74,7 @@
   margin: 0 0.4rem;
 }
 
-/* --- Tablet --- */
-@media (max-width: 991px) {
-  .heroSection {
-    min-height: auto;
-    padding: calc(80px + 3rem) 2rem 4rem;
-  }
-  .heroContent {
-    flex-direction: column;
-    text-align: center;
-    gap: 2rem;
-  }
-  .heroTextContainer {
-    max-width: 100%;
-    order: 2;
-  }
-  .heroImageContainer {
-    order: 1;
-    width: 55%;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  .heroButtons { justify-content: center; }
-  .heroTagline { justify-content: center; }
-}
-
-/* --- Mobile --- */
-@media (max-width: 767px) {
-  .heroSection {
-    min-height: auto;
-    padding: calc(70px + 2rem) 1.25rem 3.5rem;
-    overflow: hidden;
-  }
-
-  /* hide decorative rings — they cause overflow on small screens */
-  .heroSection::after { display: none; }
-  .heroImageContainer::before { display: none; }
-
-  .heroContent {
-    flex-direction: column;
-    text-align: center;
-    gap: 1.5rem;
-  }
-
-  .heroImageContainer {
-    width: 65%;
-    max-width: 220px;
-    margin: 0 auto;
-  }
-
-  .heroImage {
-    max-width: 100%;
-  }
-
-  .heroTagline {
-    justify-content: center;
-    font-size: 0.65rem;
-  }
-
-  .heroTitle {
-    font-size: 2.4rem;
-    line-height: 1.15;
-    margin-bottom: 1rem;
-  }
-
-  .titleLineBreak { margin-top: -0.4rem; }
-
-  .heroDescription {
-    font-size: 0.9rem;
-    line-height: 1.75;
-    margin-bottom: 1.75rem;
-  }
-
-  .heroButtons {
-    flex-direction: column;
-    gap: 0.75rem;
-    width: 100%;
-    max-width: 280px;
-    margin: 0 auto;
-    align-items: stretch;
-  }
-
-  .buttonWrapper {
-    width: 100%;
-  }
-
-  .primaryButton,
-  .secondaryButton {
-    width: 100%;
-    text-align: center;
-    padding: 0.9rem 1.5rem;
-  }
-}
-
-/* --- Small mobile --- */
-@media (max-width: 480px) {
-  .heroSection {
-    padding: calc(64px + 1.5rem) 1rem 3rem;
-  }
-
-  .heroTitle {
-    font-size: 2rem;
-  }
-
-  .highlightWord {
-    font-size: 2.2rem;
-  }
-
-  .heroImageContainer {
-    width: 60%;
-    max-width: 180px;
-  }
-}
-
-/* --- Hero layout --- */
+/* ── Layout ────────────────────────────────────── */
 .heroContent {
   display: flex;
   flex-direction: row;
@@ -209,7 +95,6 @@
   align-items: center;
 }
 
-/* Outer dashed ring — circular fashion motif */
 .heroImageContainer::before {
   content: '';
   position: absolute;
@@ -228,7 +113,7 @@
   filter: drop-shadow(0 16px 32px rgba(120, 14, 26, 0.15));
 }
 
-/* --- Text & Buttons --- */
+/* ── Text & Buttons ────────────────────────────── */
 .heroTextContainer {
   flex-grow: 1;
   max-width: 580px;
@@ -345,6 +230,7 @@
   transform: translateY(-1px);
 }
 
+/* ── Keyframes ─────────────────────────────────── */
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
@@ -353,4 +239,104 @@
 @keyframes shimmer-gold {
   0%   { background-position: 0% center; }
   100% { background-position: 200% center; }
+}
+
+/* ── Tablet (≤ 991px) ──────────────────────────── */
+@media (max-width: 991px) {
+  .heroSection {
+    min-height: auto;
+    padding: calc(80px + 3rem) 2rem 4rem;
+  }
+  .heroContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  .heroTextContainer {
+    max-width: 100%;
+    order: 2;
+  }
+  .heroImageContainer {
+    order: 1;
+    width: 55%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .heroButtons { justify-content: center; }
+  .heroTagline { justify-content: center; }
+}
+
+/* ── Mobile (≤ 767px) ──────────────────────────── */
+@media (max-width: 767px) {
+  .heroSection {
+    min-height: auto;
+    padding: calc(70px + 2rem) 1.25rem 3.5rem;
+    overflow: hidden;
+  }
+  .heroSection::after { display: none; }
+  .heroImageContainer::before { display: none; }
+
+  .heroContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .heroImageContainer {
+    order: 1;
+    width: 65%;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  .heroTextContainer {
+    order: 2;
+    max-width: 100%;
+  }
+  .heroImage {
+    max-width: 100%;
+  }
+  .heroTagline {
+    justify-content: center;
+    font-size: 0.65rem;
+  }
+  .heroTitle {
+    font-size: 2.4rem;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .titleLineBreak { margin-top: -0.4rem; }
+  .heroDescription {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+  }
+  .heroButtons {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    align-items: stretch;
+    justify-content: center;
+  }
+  .buttonWrapper { width: 100%; }
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    text-align: center;
+    padding: 0.9rem 1.5rem;
+    white-space: normal;
+  }
+}
+
+/* ── Small mobile (≤ 480px) ───────────────────── */
+@media (max-width: 480px) {
+  .heroSection {
+    padding: calc(64px + 1.5rem) 1rem 3rem;
+  }
+  .heroTitle { font-size: 2rem; }
+  .highlightWord { font-size: 2.2rem; }
+  .heroImageContainer {
+    width: 60%;
+    max-width: 180px;
+  }
 }

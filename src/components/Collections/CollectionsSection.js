@@ -8,7 +8,7 @@ import api from '@/services/api';
 import styles from './CollectionsSection.module.css';
 import {
   GiHanger, GiTrousers, GiRunningShoe, GiSunflower, GiDiamondRing,
-  GiDress, GiClothes, GiBagHandbag, GiNecklace, GiSewingNeedle,
+  GiDress, GiClothes, GiHanger, GiNecklace, GiSewingNeedle,
 } from 'react-icons/gi';
 
 // Paleta de cores por índice
@@ -26,7 +26,7 @@ const ACCENTS = [
 // Ícone por nome da categoria (fallback = GiHanger)
 const ICONS = [
   GiHanger, GiDress, GiTrousers, GiRunningShoe,
-  GiSunflower, GiDiamondRing, GiBagHandbag, GiNecklace,
+  GiSunflower, GiDiamondRing, GiHanger, GiNecklace,
   GiClothes, GiSewingNeedle,
 ];
 
@@ -37,7 +37,7 @@ const getIcon = (nome, idx) => {
   if (n.includes('calçado') || n.includes('sapato') || n.includes('tênis') || n.includes('shoe')) return <GiRunningShoe />;
   if (n.includes('vintage') || n.includes('retrô')) return <GiSunflower />;
   if (n.includes('acessório') || n.includes('joia') || n.includes('colar') || n.includes('anel')) return <GiDiamondRing />;
-  if (n.includes('bolsa') || n.includes('bag')) return <GiBagHandbag />;
+  if (n.includes('bolsa') || n.includes('bag')) return <GiHanger />;
   const Icon = ICONS[idx % ICONS.length];
   return <Icon />;
 };
