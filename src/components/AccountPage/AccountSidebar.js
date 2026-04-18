@@ -16,7 +16,6 @@ const AccountSidebar = ({ activeView, setActiveView }) => {
     { id: 'details', label: 'Meus Dados', icon: <BsPerson /> },
   ];
 
-
   return (
     <aside className={styles.sidebar}>
       <nav className={styles.sidebarNav}>
