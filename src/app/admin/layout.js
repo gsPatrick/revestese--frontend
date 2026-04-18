@@ -6,16 +6,17 @@ import Link from 'next/link';
 import styles from './admin.module.css';
 import {
   BsSpeedometer2, BsBox, BsTags, BsReceipt, BsTicketPerforated,
-  BsPeople, BsBoxArrowRight, BsList, BsX,
+  BsPeople, BsBoxArrowRight, BsList, BsX, BsGear,
 } from 'react-icons/bs';
 import { GiHanger } from 'react-icons/gi';
 
 const NAV = [
-  { href: '/admin/dashboard', icon: <BsSpeedometer2 />, label: 'Dashboard' },
-  { href: '/admin/produtos',  icon: <BsBox />,          label: 'Produtos'   },
-  { href: '/admin/categorias',icon: <BsTags />,          label: 'Categorias' },
-  { href: '/admin/pedidos',   icon: <BsReceipt />,       label: 'Pedidos'    },
-  { href: '/admin/cupons',    icon: <BsTicketPerforated />, label: 'Cupons'  },
+  { href: '/admin/dashboard',      icon: <BsSpeedometer2 />,       label: 'Dashboard'    },
+  { href: '/admin/produtos',       icon: <BsBox />,                label: 'Produtos'     },
+  { href: '/admin/categorias',     icon: <BsTags />,               label: 'Categorias'   },
+  { href: '/admin/pedidos',        icon: <BsReceipt />,            label: 'Pedidos'      },
+  { href: '/admin/cupons',         icon: <BsTicketPerforated />,   label: 'Cupons'       },
+  { href: '/admin/configuracoes',  icon: <BsGear />,               label: 'Configurações'},
 ];
 
 export default function AdminLayout({ children }) {
@@ -86,7 +87,7 @@ export default function AdminLayout({ children }) {
             {sideOpen ? <BsX size={22} /> : <BsList size={22} />}
           </button>
           <span className={styles.topbarTitle}>
-            {NAV.find(n => pathname.startsWith(n.href))?.label ?? 'Admin'}
+            {NAV.find(n => pathname.startsWith(n.href))?.label ?? 'Painel Admin'}
           </span>
           <Link href="/" className={styles.topbarSite} target="_blank">
             Ver site →
