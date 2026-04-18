@@ -338,7 +338,7 @@ export default function ProdutosPage() {
                     </div>
                   </div>
                 </div>
-              )})}
+              ))}
 
               <div className={styles.modalFooter}>
                 <button type="button" className={styles.btnSecondary} onClick={() => setModal(false)}>Cancelar</button>
