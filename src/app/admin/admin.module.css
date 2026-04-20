@@ -51,7 +51,7 @@
   font-weight: 700 !important;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: #780e1a;
+  background: #111111;
   color: white !important;
   padding: 0.2rem 0.4rem;
   border-radius: 2px;
@@ -84,7 +84,7 @@
 .navItem:hover { background: rgba(255,255,255,0.06); color: #F5F0E8; }
 
 .navActive {
-  background: #780e1a !important;
+  background: #111111 !important;
   color: white !important;
 }
 
@@ -103,7 +103,7 @@
   transition: border-color 0.15s, color 0.15s;
 }
 
-.logoutBtn:hover { border-color: #780e1a; color: #f9a; }
+.logoutBtn:hover { border-color: #111111; color: #f9a; }
 
 /* ── Main area ── */
 .main {
@@ -145,7 +145,7 @@
 
 .topbarSite {
   font-size: 0.75rem;
-  color: #780e1a;
+  color: #111111;
   font-weight: 600;
   text-decoration: none;
 }

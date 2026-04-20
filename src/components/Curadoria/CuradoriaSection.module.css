@@ -156,7 +156,7 @@
   transition: background 0.3s;
 }
 .card:hover .imagePlaceholder {
-  background: linear-gradient(135deg, var(--reveste-bg-alt) 0%, var(--reveste-crimson-wash, rgba(120,14,26,0.06)) 100%);
+  background: linear-gradient(135deg, var(--reveste-bg-alt) 0%, var(--reveste-crimson-wash, rgba(0, 0, 0,0.06)) 100%);
 }
 
 .hangerIcon {
@@ -170,7 +170,7 @@
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background: var(--reveste-crimson-deeper, #2e0509);
+  background: var(--reveste-crimson-deeper, #000000);
   color: var(--reveste-gold-light);
   font-family: var(--font-raleway-next);
   font-size: 0.58rem;

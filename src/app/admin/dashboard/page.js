@@ -29,7 +29,7 @@ const TIPO_LABEL = {
   outro:    'Outros',
 };
 
-const COLORS = ['#780e1a', '#C9A84C', '#3b82f6', '#10b981', '#8b5cf6', '#f59e0b'];
+const COLORS = ['#111111', '#C9A84C', '#3b82f6', '#10b981', '#8b5cf6', '#f59e0b'];
 
 const fmt  = (v) => `R$ ${Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
 const fmtN = (v) => Number(v || 0).toLocaleString('pt-BR');
@@ -99,7 +99,7 @@ export default function DashboardPage() {
   };
 
   const kpis = metrics ? [
-    { icon: <BsCurrencyDollar />, label: 'Faturamento hoje',  value: fmt(metrics.faturamentoHoje), sub: 'pedidos pagos',  color: '#780e1a' },
+    { icon: <BsCurrencyDollar />, label: 'Faturamento hoje',  value: fmt(metrics.faturamentoHoje), sub: 'pedidos pagos',  color: '#111111' },
     { icon: <BsCart3 />,          label: 'Vendas hoje',       value: fmtN(metrics.vendasHoje),     sub: 'pedidos',        color: '#C9A84C' },
     { icon: <BsPeople />,         label: 'Clientes ativos',   value: fmtN(metrics.clientesTotal),  sub: 'cadastrados',    color: '#3b82f6' },
     { icon: <BsBox />,            label: 'Produtos ativos',   value: fmtN(metrics.produtosTotal),  sub: 'no catálogo',    color: '#10b981' },
@@ -162,7 +162,7 @@ export default function DashboardPage() {
                 <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#9ca3af' }} />
                 <YAxis tickFormatter={v => `R$${v}`} tick={{ fontSize: 11, fill: '#9ca3af' }} width={65} />
                 <Tooltip content={<CustomTooltip money />} />
-                <Bar dataKey="total" name="Faturamento" fill="#780e1a" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="total" name="Faturamento" fill="#111111" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : (
@@ -180,7 +180,7 @@ export default function DashboardPage() {
               const slug = p.produto?.slug || p.produto?.id;
               return (
                 <li key={i} className={styles.rankItem}>
-                  <span className={styles.rankBadge} style={{ background: i < 3 ? '#780e1a22' : '#f3f4f6', color: i < 3 ? '#780e1a' : '#6b7280' }}>{i + 1}</span>
+                  <span className={styles.rankBadge} style={{ background: i < 3 ? '#11111122' : '#f3f4f6', color: i < 3 ? '#111111' : '#6b7280' }}>{i + 1}</span>
                   {slug
                     ? <a href={`/product/${slug}`} target="_blank" rel="noreferrer" className={styles.rankLink}>{nomeProd}</a>
                     : <span className={styles.rankName}>{nomeProd}</span>
@@ -236,8 +236,8 @@ export default function DashboardPage() {
                       <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
                     </linearGradient>
                     <linearGradient id="gradProd" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%"  stopColor="#780e1a" stopOpacity={0.2} />
-                      <stop offset="95%" stopColor="#780e1a" stopOpacity={0} />
+                      <stop offset="5%"  stopColor="#111111" stopOpacity={0.2} />
+                      <stop offset="95%" stopColor="#111111" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   <Tooltip content={<CustomTooltip />} />
                   <Legend wrapperStyle={{ fontSize: '0.75rem' }} />
                   <Area type="monotone" dataKey="total"   name="Total"   stroke="#8b5cf6" fill="url(#gradTotal)" strokeWidth={2} dot={false} />
-                  <Area type="monotone" dataKey="produto" name="Produto"  stroke="#780e1a" fill="url(#gradProd)"  strokeWidth={2} dot={false} />
+                  <Area type="monotone" dataKey="produto" name="Produto"  stroke="#111111" fill="url(#gradProd)"  strokeWidth={2} dot={false} />
                   <Area type="monotone" dataKey="catalogo" name="Catálogo" stroke="#C9A84C" fill="none" strokeWidth={1.5} strokeDasharray="4 4" dot={false} />
                 </AreaChart>
               </ResponsiveContainer>

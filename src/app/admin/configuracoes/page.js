@@ -350,7 +350,7 @@ export default function ConfiguracoesPage() {
         {/* ── Senha ── */}
         <section className={styles.card}>
           <div className={styles.cardHeader}>
-            <div className={styles.cardIcon} style={{ background: '#780e1a18', color: '#780e1a' }}><BsShieldLock /></div>
+            <div className={styles.cardIcon} style={{ background: '#11111118', color: '#111111' }}><BsShieldLock /></div>
             <div>
               <h2 className={styles.cardTitle}>Alterar Senha</h2>
               <p className={styles.cardDesc}>Use uma senha forte com pelo menos 6 caracteres</p>

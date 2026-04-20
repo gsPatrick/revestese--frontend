@@ -27,7 +27,7 @@
 }
 
 .fab:hover { background: #1ebe5c; }
-.fabOpen { background: var(--reveste-crimson); box-shadow: 0 4px 20px rgba(120,14,26,0.35); }
+.fabOpen { background: var(--reveste-crimson); box-shadow: 0 4px 20px rgba(0, 0, 0,0.35); }
 .fabOpen:hover { background: var(--reveste-crimson-dark); }
 
 /* Pulse ring */
@@ -65,7 +65,7 @@
   font-size: 1.1rem; cursor: pointer;
   transition: color 0.2s ease;
 }
-.closeCard:hover { color: var(--reveste-crimson, #780e1a); }
+.closeCard:hover { color: var(--reveste-crimson, #111111); }
 
 .cardTitle {
   font-family: var(--font-cormorant-next, serif);

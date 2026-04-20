@@ -31,17 +31,17 @@
 .btnPrimary {
   display: inline-flex; align-items: center; gap: 0.45rem;
   padding: 0.68rem 1.25rem;
-  background: #780e1a; color: white;
+  background: #111111; color: white;
   border: none; border-radius: 8px;
   font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em;
   cursor: pointer;
   transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(120,14,26,0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0,0.25);
 }
 .btnPrimary:hover:not(:disabled) {
-  background: #4a0811;
-  box-shadow: 0 4px 14px rgba(120,14,26,0.35);
+  background: #000000;
+  box-shadow: 0 4px 14px rgba(0, 0, 0,0.35);
   transform: translateY(-1px);
 }
 .btnPrimary:active:not(:disabled) { transform: translateY(0); }
@@ -55,7 +55,7 @@
   font-size: 0.82rem; font-weight: 600;
   cursor: pointer; transition: all 0.2s;
 }
-.btnSecondary:hover { border-color: #780e1a; color: #780e1a; background: #fdf2f4; }
+.btnSecondary:hover { border-color: #111111; color: #111111; background: #fdf2f4; }
 
 .btnIcon {
   width: 34px; height: 34px;
@@ -91,7 +91,7 @@
   font-size: 0.85rem; outline: none; box-sizing: border-box;
   transition: border-color 0.2s;
 }
-.searchInput:focus { border-color: #780e1a; }
+.searchInput:focus { border-color: #111111; }
 .searchClear { position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #9ca3af; cursor: pointer; font-size: 1rem; }
 
 /* ── Product Grid ── */
@@ -132,7 +132,7 @@
 
 .productInfo { padding: 0.75rem 0.85rem 0.5rem; }
 .productName { font-size: 0.82rem; font-weight: 600; color: #111827; margin: 0 0 0.3rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.productPrice { font-size: 0.88rem; font-weight: 700; color: #780e1a; margin: 0 0 0.2rem; }
+.productPrice { font-size: 0.88rem; font-weight: 700; color: #111111; margin: 0 0 0.2rem; }
 .productMeta { font-size: 0.72rem; color: #9ca3af; margin: 0; }
 
 .productActions {
@@ -148,7 +148,7 @@
 .table td { padding: 0.75rem 0.85rem; border-bottom: 1px solid #f9fafb; vertical-align: middle; }
 .table tr:last-child td { border-bottom: none; }
 .table tr:hover td { background: #fafafa; }
-.tdMono { font-family: monospace; font-size: 0.78rem; color: #780e1a; font-weight: 600; }
+.tdMono { font-family: monospace; font-size: 0.78rem; color: #111111; font-weight: 600; }
 .tdMuted { color: #9ca3af; font-size: 0.78rem; }
 
 .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; }
@@ -265,9 +265,9 @@
   font-family: inherit;
 }
 .field input:focus, .field select:focus, .field textarea:focus {
-  border-color: #780e1a;
+  border-color: #111111;
   background: white;
-  box-shadow: 0 0 0 3px rgba(120, 14, 26, 0.08);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
 .field input:hover:not(:focus), .field select:hover:not(:focus), .field textarea:hover:not(:focus) {
   border-color: #d1d5db;
@@ -291,8 +291,8 @@
   transition: border-color 0.2s, background 0.2s;
   user-select: none;
 }
-.checkLabel:hover { border-color: #780e1a; background: white; }
-.checkLabel input { width: 16px; height: 16px; accent-color: #780e1a; cursor: pointer; }
+.checkLabel:hover { border-color: #111111; background: white; }
+.checkLabel input { width: 16px; height: 16px; accent-color: #111111; cursor: pointer; }
 
 /* ── Confirm box ── */
 .confirmBox {
@@ -350,7 +350,7 @@
   font-size: 0.8rem; font-weight: 600; cursor: pointer;
   transition: border-color 0.2s;
 }
-.pageBtn:hover:not(:disabled) { border-color: #780e1a; color: #780e1a; }
+.pageBtn:hover:not(:disabled) { border-color: #111111; color: #111111; }
 .pageBtn:disabled { opacity: 0.4; cursor: not-allowed; }
 .pageInfo { font-size: 0.82rem; color: #6b7280; }
 
@@ -362,13 +362,13 @@
 .sectionLabel {
   font-size: 0.68rem;
   font-weight: 800;
-  color: #780e1a;
+  color: #111111;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin: 0 0 0.85rem;
   padding: 0.5rem 0.75rem;
   background: linear-gradient(90deg, #fdf2f4, transparent);
-  border-left: 3px solid #780e1a;
+  border-left: 3px solid #111111;
   border-radius: 0 4px 4px 0;
 }
 
@@ -387,7 +387,7 @@
 }
 .varRow:hover { border-color: #e9eaec; }
 .varName { font-weight: 700; color: #111827; flex: 1; min-width: 80px; }
-.varPrice { color: #780e1a; font-weight: 700; background: #fdf2f4; padding: 0.15rem 0.5rem; border-radius: 4px; }
+.varPrice { color: #111111; font-weight: 700; background: #fdf2f4; padding: 0.15rem 0.5rem; border-radius: 4px; }
 .varStock { color: #6b7280; font-size: 0.78rem; }
 
 .varInputRow {
@@ -457,7 +457,7 @@
 
 .varTypeBtnActive {
   background: #fdf2f4 !important;
-  color: #780e1a !important;
+  color: #111111 !important;
   border-color: transparent !important;
 }
 

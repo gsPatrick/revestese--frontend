@@ -68,7 +68,7 @@ function ClienteDetalhe({ clienteId, onBack }) {
           </div>
         </div>
         <div className={styles.clienteKpi}>
-          <BsCart3 className={styles.kpiIcon} style={{ color: '#780e1a' }} />
+          <BsCart3 className={styles.kpiIcon} style={{ color: '#111111' }} />
           <div>
             <p className={styles.kpiLbl}>Pedidos pagos</p>
             <p className={styles.kpiVal}>{stats.totalPedidos}</p>

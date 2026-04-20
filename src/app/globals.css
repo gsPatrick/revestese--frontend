@@ -19,12 +19,12 @@
   --reveste-text-muted:   #8A8178;   /* cinza-bege suave */
 
   /* Vinhos / Vermelhos — acentos */
-  --reveste-crimson:        #780e1a;
-  --reveste-crimson-dark:   #4a0811;
-  --reveste-crimson-deeper: #2e0509;
-  --reveste-crimson-light:  #a01525;
-  --reveste-crimson-muted:  rgba(120, 14, 26, 0.12);
-  --reveste-crimson-wash:   rgba(120, 14, 26, 0.06);
+  --reveste-crimson:        #111111;
+  --reveste-crimson-dark:   #000000;
+  --reveste-crimson-deeper: #000000;
+  --reveste-crimson-light:  #333333;
+  --reveste-crimson-muted:  rgba(0, 0, 0, 0.10);
+  --reveste-crimson-wash:   rgba(0, 0, 0, 0.05);
 
   /* Dourados — acentos */
   --reveste-gold:       #C9A84C;

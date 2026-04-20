@@ -7,7 +7,7 @@
 }
 .spinner {
   width: 36px; height: 36px; border-radius: 50%;
-  border: 3px solid #f3f4f6; border-top-color: #780e1a;
+  border: 3px solid #f3f4f6; border-top-color: #111111;
   animation: spin 0.8s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -61,8 +61,8 @@
   border: 1px solid #e5e7eb; background: #fff; color: #6b7280;
   transition: all 0.15s;
 }
-.periodTab:hover { border-color: #780e1a; color: #780e1a; }
-.periodTabActive { background: #780e1a !important; color: #fff !important; border-color: #780e1a !important; }
+.periodTab:hover { border-color: #111111; color: #111111; }
+.periodTabActive { background: #111111 !important; color: #fff !important; border-color: #111111 !important; }
 
 /* ── Row / Card ───────────────────────────────────── */
 .row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
@@ -81,7 +81,7 @@
 .cardMeta  { font-size: 0.7rem; color: #9ca3af; }
 
 .viewAll {
-  font-size: 0.72rem; font-weight: 600; color: #780e1a;
+  font-size: 0.72rem; font-weight: 600; color: #111111;
   text-decoration: none; display: flex; align-items: center; gap: 3px;
 }
 .viewAll:hover { text-decoration: underline; }
@@ -101,9 +101,9 @@
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .rankName { flex: 1; color: #374151; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.rankLink { flex: 1; color: #780e1a; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+.rankLink { flex: 1; color: #111111; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
 .rankLink:hover { text-decoration: underline; }
-.rankVal  { font-weight: 700; color: #780e1a; flex-shrink: 0; }
+.rankVal  { font-weight: 700; color: #111111; flex-shrink: 0; }
 .emptyList { color: #9ca3af; font-size: 0.8rem; text-align: center; padding: 1rem 0; }
 
 /* ── Donut legend ─────────────────────────────────── */
@@ -126,7 +126,7 @@
 .table tr:last-child td { border-bottom: none; }
 .table tr:hover td { background: #fafafa; }
 
-.tdMono  { font-family: 'Courier New', monospace; font-size: 0.77rem; color: #780e1a; font-weight: 700; }
+.tdMono  { font-family: 'Courier New', monospace; font-size: 0.77rem; color: #111111; font-weight: 700; }
 .tdMuted { color: #9ca3af; font-size: 0.77rem; }
 
 .badge { display: inline-block; padding: 0.2rem 0.65rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; }

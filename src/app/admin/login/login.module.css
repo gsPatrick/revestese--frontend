@@ -25,7 +25,7 @@
   margin-bottom: 2rem;
 }
 
-.logoIcon { font-size: 2rem; color: #780e1a; }
+.logoIcon { font-size: 2rem; color: #111111; }
 
 .logoName {
   display: block;
@@ -42,7 +42,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: #780e1a;
+  background: #111111;
   color: white;
   padding: 0.18rem 0.4rem;
   border-radius: 2px;
@@ -85,7 +85,7 @@
   transition: border-color 0.2s;
 }
 
-.field input:focus { border-color: #780e1a; }
+.field input:focus { border-color: #111111; }
 
 .pwWrapper { position: relative; }
 .pwWrapper input { width: 100%; padding-right: 2.8rem; box-sizing: border-box; }
@@ -109,7 +109,7 @@
 
 .btn {
   padding: 0.85rem;
-  background: #780e1a;
+  background: #111111;
   color: white;
   font-size: 0.85rem;
   font-weight: 700;
@@ -121,5 +121,5 @@
   transition: background 0.2s;
   margin-top: 0.25rem;
 }
-.btn:hover:not(:disabled) { background: #4a0811; }
+.btn:hover:not(:disabled) { background: #000000; }
 .btn:disabled { opacity: 0.6; cursor: not-allowed; }

@@ -96,10 +96,10 @@
 }
 .sideLink:hover {
   background: #f0ede8;
-  color: #780e1a;
+  color: #111111;
 }
 .sideLinkActive {
-  background: #780e1a;
+  background: #111111;
   color: #fff !important;
 }
 
@@ -175,7 +175,7 @@
   color: #1a1a1a;
   transition: color .2s;
 }
-.itemOpen .question { color: #780e1a; }
+.itemOpen .question { color: #111111; }
 
 .chevron {
   flex-shrink: 0;
@@ -185,7 +185,7 @@
 }
 .chevronOpen {
   transform: rotate(180deg);
-  color: #780e1a;
+  color: #111111;
 }
 
 .answerWrap {

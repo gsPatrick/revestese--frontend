@@ -1,5 +1,5 @@
 .section {
-  background: var(--reveste-crimson-deeper, #2e0509);
+  background: var(--reveste-crimson-deeper, #000000);
   padding: 5.5rem 1.5rem;
 }
 
@@ -94,7 +94,7 @@
 .btn {
   padding: 0.9rem 1.5rem;
   background: var(--reveste-gold);
-  color: var(--reveste-crimson-deeper, #2e0509);
+  color: var(--reveste-crimson-deeper, #000000);
   font-family: var(--font-raleway-next);
   font-size: 0.8rem;
   font-weight: 800;

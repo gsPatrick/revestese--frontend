@@ -107,7 +107,7 @@
 
 .linkCliente {
   display: inline-flex; align-items: center; gap: 0.4rem;
-  font-size: 0.78rem; color: #780e1a; font-weight: 700; text-decoration: none;
+  font-size: 0.78rem; color: #111111; font-weight: 700; text-decoration: none;
   padding: 0.4rem 0;
 }
 .linkCliente:hover { text-decoration: underline; }

@@ -80,7 +80,7 @@
 }
 
 .conditionBadge.vintage {
-  background: var(--reveste-crimson-deeper, #2e0509);
+  background: var(--reveste-crimson-deeper, #000000);
   color: var(--reveste-gold-light);
 }
 

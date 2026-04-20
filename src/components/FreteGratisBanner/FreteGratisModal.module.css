@@ -33,7 +33,7 @@
   position: absolute;
   inset: 0 0 auto 0;
   height: 6px;
-  background: linear-gradient(90deg, var(--reveste-crimson-dark), var(--reveste-crimson), #c94e5d, var(--reveste-crimson-dark));
+  background: linear-gradient(90deg, var(--reveste-crimson-dark), var(--reveste-crimson), #333333, var(--reveste-crimson-dark));
   background-size: 200% 100%;
   animation: gradShift 3s linear infinite;
 }
@@ -78,7 +78,7 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--reveste-crimson), #c94e5d);
+  background: linear-gradient(135deg, var(--reveste-crimson), #333333);
   color: #fff;
   font-size: 2rem;
   animation: truckBounce 1.8s ease-in-out infinite;
@@ -131,7 +131,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, var(--reveste-crimson), #c94e5d);
+  background: linear-gradient(135deg, var(--reveste-crimson), #333333);
   color: #fff;
   border-radius: 999px;
   font-family: var(--font-raleway-next, sans-serif);
@@ -139,12 +139,12 @@
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 14px rgba(120, 14, 26, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 .ctaBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(120, 14, 26, 0.35);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .dismissBtn {

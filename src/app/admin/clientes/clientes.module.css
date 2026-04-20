@@ -6,7 +6,7 @@
 }
 .spinner {
   width: 28px; height: 28px; border-radius: 50%;
-  border: 3px solid #f3f4f6; border-top-color: #780e1a;
+  border: 3px solid #f3f4f6; border-top-color: #111111;
   animation: spin 0.8s linear infinite; flex-shrink: 0;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -27,9 +27,9 @@
   transition: border-color 0.15s;
   box-sizing: border-box;
 }
-.searchInput:focus { border-color: #780e1a; }
+.searchInput:focus { border-color: #111111; }
 .searchBtn {
-  padding: 0 1.25rem; background: #780e1a; color: #fff;
+  padding: 0 1.25rem; background: #111111; color: #fff;
   border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 700;
   cursor: pointer; white-space: nowrap; transition: background 0.15s;
 }
@@ -53,8 +53,8 @@
 
 .clienteCell { display: flex; align-items: center; gap: 0.6rem; }
 .miniAvatar {
-  width: 34px; height: 34px; border-radius: 50%; background: #780e1a18;
-  color: #780e1a; font-weight: 800; font-size: 0.85rem;
+  width: 34px; height: 34px; border-radius: 50%; background: #11111118;
+  color: #111111; font-weight: 800; font-size: 0.85rem;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .clienteCellNome { font-weight: 600; color: #111827; }
@@ -70,7 +70,7 @@
 
 .verBtn {
   display: inline-flex; align-items: center; gap: 0.35rem;
-  padding: 0.4rem 0.85rem; background: #780e1a; color: #fff;
+  padding: 0.4rem 0.85rem; background: #111111; color: #fff;
   border: none; border-radius: 6px; font-size: 0.78rem; font-weight: 700;
   cursor: pointer; transition: background 0.15s; white-space: nowrap;
 }
@@ -83,7 +83,7 @@
   background: #fff; display: flex; align-items: center; justify-content: center;
   cursor: pointer; color: #374151; transition: border-color 0.15s;
 }
-.pageBtn:hover:not(:disabled) { border-color: #780e1a; color: #780e1a; }
+.pageBtn:hover:not(:disabled) { border-color: #111111; color: #111111; }
 .pageBtn:disabled { opacity: 0.4; cursor: not-allowed; }
 .pageInfo { font-size: 0.82rem; color: #6b7280; font-weight: 600; }
 
@@ -104,11 +104,11 @@
   cursor: pointer; transition: border-color 0.15s; white-space: nowrap;
   align-self: flex-start;
 }
-.backBtn:hover { border-color: #780e1a; color: #780e1a; }
+.backBtn:hover { border-color: #111111; color: #111111; }
 
 .clienteAvatar {
   width: 60px; height: 60px; border-radius: 50%;
-  background: #780e1a; color: #fff; font-size: 1.75rem; font-weight: 800;
+  background: #111111; color: #fff; font-size: 1.75rem; font-weight: 800;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .clienteNome  { font-size: 1.3rem; font-weight: 800; color: #111827; margin: 0 0 0.25rem; }
@@ -134,8 +134,8 @@
   background: none; border: none; border-bottom: 2px solid transparent;
   cursor: pointer; margin-bottom: -2px; transition: color 0.15s, border-color 0.15s;
 }
-.tab:hover { color: #780e1a; }
-.tabActive { color: #780e1a !important; border-bottom-color: #780e1a !important; }
+.tab:hover { color: #111111; }
+.tabActive { color: #111111 !important; border-bottom-color: #111111 !important; }
 
 /* Secao de conteudo */
 .secao { display: flex; flex-direction: column; gap: 1rem; padding-top: 0.5rem; }
@@ -149,7 +149,7 @@
   display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
   margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #f3f4f6;
 }
-.pedidoId    { font-weight: 800; color: #780e1a; font-family: monospace; }
+.pedidoId    { font-weight: 800; color: #111111; font-family: monospace; }
 .pedidoBadge {
   display: inline-flex; align-items: center; gap: 0.35rem;
   padding: 0.25rem 0.7rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700;

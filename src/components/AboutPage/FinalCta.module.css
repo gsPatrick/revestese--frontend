@@ -85,7 +85,7 @@
   gap: 0.5rem;
   padding: 1rem 2rem;
   background: var(--reveste-gold);
-  color: var(--reveste-crimson-deeper, #2e0509);
+  color: var(--reveste-crimson-deeper, #000000);
   font-family: var(--font-raleway-next);
   font-size: 0.8rem;
   font-weight: 800;

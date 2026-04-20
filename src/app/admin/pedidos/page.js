@@ -104,7 +104,7 @@ export default function PedidosPage() {
                     <tr key={o.id}>
                       <td className={styles.tdMono}>#{o.id}</td>
                       <td style={{ fontWeight: 500 }}>{o.usuario?.nome || o.cliente || '—'}</td>
-                      <td style={{ fontWeight: 700, color: '#780e1a' }}>{fmt(o.total)}</td>
+                      <td style={{ fontWeight: 700, color: '#111111' }}>{fmt(o.total)}</td>
                       <td className={styles.tdMuted}>{o.itens?.length ?? o.totalItens ?? '—'}</td>
                       <td>
                         <span className={styles.badge} style={{ background: st.color + '20', color: st.color }}>
@@ -180,7 +180,7 @@ export default function PedidosPage() {
               ))}
               <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.75rem 0 0', fontWeight: 700, fontSize: '0.9rem' }}>
                 <span>Total</span>
-                <span style={{ color: '#780e1a' }}>{fmt(detail.total)}</span>
+                <span style={{ color: '#111111' }}>{fmt(detail.total)}</span>
               </div>
               {detail.enderecoEntrega && (
                 <>

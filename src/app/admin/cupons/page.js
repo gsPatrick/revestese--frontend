@@ -106,7 +106,7 @@ export default function CuponsPage() {
                 {cupons.map(c => (
                   <tr key={c.id}>
                     <td>
-                      <span style={{ fontFamily: 'monospace', fontWeight: 700, color: '#780e1a', background: '#fdf2f4', padding: '0.15rem 0.5rem', borderRadius: '3px', fontSize: '0.85rem' }}>
+                      <span style={{ fontFamily: 'monospace', fontWeight: 700, color: '#111111', background: '#fdf2f4', padding: '0.15rem 0.5rem', borderRadius: '3px', fontSize: '0.85rem' }}>
                         {c.codigo}
                       </span>
                     </td>
