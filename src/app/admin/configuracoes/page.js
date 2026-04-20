@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import api from '@/services/api';
 import styles from './configuracoes.module.css';
-import { BsPerson, BsShieldLock, BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
+import { BsPerson, BsShieldLock, BsCheckCircle, BsExclamationCircle, BsTruck } from 'react-icons/bs';
 
 function Toast({ msg, type, onClose }) {
   useEffect(() => {
@@ -34,6 +34,10 @@ export default function ConfiguracoesPage() {
   const [confirmarS,  setConfirmarS]  = useState('');
   const [savingS,     setSavingS]     = useState(false);
 
+  // Frete Grátis
+  const [freteGratis,   setFreteGratis]   = useState(false);
+  const [savingFrete,   setSavingFrete]   = useState(false);
+
   const notify = (msg, type = 'success') => setToast({ msg, type });
 
   const headers = () => {
@@ -42,13 +46,15 @@ export default function ConfiguracoesPage() {
   };
 
   useEffect(() => {
-    api.get('/usuarios/perfil', { headers: headers() })
-      .then(r => {
-        setNome(r.data.nome || '');
-        setEmail(r.data.email || '');
-        setUser(r.data);
-      })
-      .catch(() => notify('Erro ao carregar perfil', 'error'))
+    Promise.all([
+      api.get('/usuarios/perfil', { headers: headers() }),
+      api.get('/configuracoes/loja/publicas'),
+    ]).then(([perfil, cfg]) => {
+      setNome(perfil.data.nome || '');
+      setEmail(perfil.data.email || '');
+      setUser(perfil.data);
+      setFreteGratis(cfg.data.FRETE_GRATIS === true || cfg.data.FRETE_GRATIS === 'true');
+    }).catch(() => notify('Erro ao carregar configurações', 'error'))
       .finally(() => setLoading(false));
   }, []);
 
@@ -84,6 +90,22 @@ export default function ConfiguracoesPage() {
     } finally { setSavingS(false); }
   };
 
+  const handleToggleFreteGratis = async () => {
+    const novoValor = !freteGratis;
+    setSavingFrete(true);
+    try {
+      await api.put('/configuracoes/loja/FRETE_GRATIS', {
+        valor: String(novoValor),
+        tipo: 'booleano',
+        descricao: 'Ativar frete grátis para todos os pedidos',
+      }, { headers: headers() });
+      setFreteGratis(novoValor);
+      notify(novoValor ? 'Frete grátis ativado! O banner já está visível no site.' : 'Frete grátis desativado.');
+    } catch {
+      notify('Erro ao alterar configuração de frete', 'error');
+    } finally { setSavingFrete(false); }
+  };
+
   if (loading) return <div className={styles.loading}>Carregando...</div>;
 
   return (
@@ -96,6 +118,39 @@ export default function ConfiguracoesPage() {
       </div>
 
       <div className={styles.grid}>
+
+        {/* ── Frete Grátis ── */}
+        <section className={`${styles.card} ${styles.freteCard}`}>
+          <div className={styles.cardHeader}>
+            <div className={styles.cardIcon} style={{ background: freteGratis ? '#ecfdf5' : '#f3f4f6', color: freteGratis ? '#10b981' : '#9ca3af' }}>
+              <BsTruck />
+            </div>
+            <div style={{ flex: 1 }}>
+              <h2 className={styles.cardTitle}>Frete Grátis</h2>
+              <p className={styles.cardDesc}>
+                {freteGratis
+                  ? 'Ativo — todos os pedidos estão com frete grátis e o banner está visível no site.'
+                  : 'Inativo — o frete normal está sendo cobrado nos pedidos.'}
+              </p>
+            </div>
+            <button
+              onClick={handleToggleFreteGratis}
+              disabled={savingFrete}
+              className={`${styles.toggle} ${freteGratis ? styles.toggleOn : styles.toggleOff}`}
+              aria-label="Alternar frete grátis"
+            >
+              <span className={styles.toggleKnob} />
+            </button>
+          </div>
+
+          {freteGratis && (
+            <div className={styles.freteAlert}>
+              <span className={styles.freteAlertDot} />
+              O banner de <strong>Frete Grátis</strong> está sendo exibido no topo do site agora.
+              Para desativar, clique no botão acima.
+            </div>
+          )}
+        </section>
 
         {/* ── Perfil ── */}
         <section className={styles.card}>

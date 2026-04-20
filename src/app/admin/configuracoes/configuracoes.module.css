@@ -112,6 +112,64 @@
   to   { transform: translateY(0);     opacity: 1; }
 }
 
+/* ── Frete Grátis card ────────────────────────────────────────────── */
+.freteCard .cardHeader {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  align-items: center;
+}
+
+.freteAlert {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #065f46;
+}
+.freteAlertDot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #10b981; flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.25);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(16,185,129,0.25); }
+  50%       { box-shadow: 0 0 0 6px rgba(16,185,129,0.1); }
+}
+
+/* ── Toggle switch ────────────────────────────────────────────────── */
+.toggle {
+  position: relative;
+  width: 52px; height: 28px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s;
+  flex-shrink: 0;
+  padding: 0;
+}
+.toggle:disabled { opacity: 0.6; cursor: not-allowed; }
+.toggleOn  { background: #10b981; }
+.toggleOff { background: #d1d5db; }
+
+.toggleKnob {
+  position: absolute;
+  top: 3px;
+  width: 22px; height: 22px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  transition: left 0.25s;
+}
+.toggleOn  .toggleKnob { left: 27px; }
+.toggleOff .toggleKnob { left: 3px; }
+
 @media (max-width: 600px) {
   .card { padding: 1.5rem 1.25rem; }
 }
