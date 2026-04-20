@@ -41,6 +41,14 @@
 .trustItem:hover { transform: translateY(-4px); }
 .trustItem:hover::after { transform: translateX(-50%) scaleX(1); }
 
+/* Destaque especial para o card de frete grátis */
+.trustItemFrete {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 8px;
+}
+.trustItemFrete .trustIcon { color: #16a34a; }
+
 .trustIcon {
   font-size: 2rem;
   color: var(--reveste-crimson);
