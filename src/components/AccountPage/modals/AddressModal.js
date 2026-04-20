@@ -102,7 +102,7 @@ const AddressModal = ({ isOpen, onClose, onSave }) => {
             onClick={(e) => e.stopPropagation()} // Impede que o clique dentro do modal o feche
           >
             <div className={styles.modalHeader}>
-              <h3>Novo Endereço Mágico</h3>
+              <h3>Novo Endereço</h3>
               <button onClick={onClose} className={styles.closeButton}><HiXMark /></button>
             </div>
             <form onSubmit={handleSubmit} className={styles.addressForm}>

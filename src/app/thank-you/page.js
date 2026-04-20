@@ -96,13 +96,13 @@ const ThankYouPage = () => {
         </p>
         
         <div ref={el => elementsToAnimateRef.current[3] = el} className={styles.orderDetails}>
-          <p>Seu Pedido Mágico:</p>
+          <p>Seu Pedido:</p>
           <span>{orderId}</span>
         </div>
 
         <p ref={el => elementsToAnimateRef.current[4] = el} className={styles.infoText}>
-          Enviamos uma coruja-correio (também conhecida como email) com todos os detalhes.
-          Enquanto isso, que tal dar uma olhada nos seus pedidos?
+          Enviamos um e-mail com todos os detalhes do seu pedido.
+          Enquanto isso, acompanhe o status por aqui:
         </p>
 
         <motion.div ref={el => elementsToAnimateRef.current[5] = el}>

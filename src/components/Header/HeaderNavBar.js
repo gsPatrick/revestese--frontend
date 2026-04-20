@@ -22,18 +22,10 @@ const HeaderNavBar = ({ isMobile }) => {
       dropdownContent: (
         <div className={styles.catalogDropdown}>
           <div className={styles.dropdownColumn}>
-            <h4 className={styles.dropdownColumnTitle}>Por Categoria</h4>
-            <ul>
-              <li><Link href="/category/adulto" className={styles.dropdownLink}>Adulto</Link></li>
-              <li><Link href="/category/infantil" className={styles.dropdownLink}>Infantil</Link></li>
-              <li><Link href="/category/juvenil" className={styles.dropdownLink}>Juvenil</Link></li>
-            </ul>
-          </div>
-          <div className={styles.dropdownColumn}>
             <h4 className={styles.dropdownColumnTitle}>Destaques</h4>
             <ul>
-              <li><Link href="/featured/mais-vendidos" className={styles.dropdownLink}>Mais Vendidos</Link></li>
-              <li><Link href="/featured/lancamentos" className={styles.dropdownLink}>Lançamentos</Link></li>
+              <li><Link href="/catalog" className={styles.dropdownLink}>Todos os Produtos</Link></li>
+              <li><Link href="/catalog?novidades=true" className={styles.dropdownLink}>Recém Chegados</Link></li>
             </ul>
           </div>
         </div>

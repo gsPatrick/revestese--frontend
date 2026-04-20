@@ -56,7 +56,7 @@ const OrderSummary = ({
 
       {/* --- SEÇÃO DE CUPOM AGORA ESTÁ AQUI --- */}
       <div className={styles.couponSection}>
-        <h4>Tem um cupom mágico?</h4>
+        <h4>Tem um cupom de desconto?</h4>
         <p className={styles.couponInfo}>
           {isStepOneCompleted
             ? 'Adicione seu cupom abaixo para ver o desconto.'

@@ -103,7 +103,7 @@ export default function CheckoutPage() {
       <Breadcrumb items={breadcrumbItems} />
       <div className={styles.checkoutHeader}>
         <h1>Finalizar Compra</h1>
-        <p>Falta pouco para a magia chegar até você!</p>
+        <p>Você está quase lá. Conclua seu pedido com segurança.</p>
       </div>
 
       <StepIndicator currentStep={currentStep} />

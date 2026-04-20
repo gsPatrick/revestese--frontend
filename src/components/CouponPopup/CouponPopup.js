@@ -145,11 +145,10 @@ const CouponPopup = () => {
 
             {/* Título e Descrição */}
             <h2 className={styles.popupTitle}>
-              Ganhe {formattedValue} na sua próxima aventura!
+              Ganhe {formattedValue} na sua próxima compra!
             </h2>
             <p className={styles.popupDescription}>
-              Use este cupom especial para ter um desconto mágico na sua compra.
-              Aproveite para colorir seus sonhos!
+              Use este cupom exclusivo e renove seu guarda-roupa com estilo e consciência.
             </p>
 
             {/* Código do Cupom */}

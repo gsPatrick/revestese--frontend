@@ -9,10 +9,10 @@ if (typeof window !== 'undefined') {
 }
 
 const timelineData = [
-  { year: "2021", title: "O Nascimento de um Sonho", description: "Uma pequena ideia de levar mais cor e alegria para as pessoas começa a tomar forma em um sketchbook." },
-  { year: "2022", title: "Primeiro Livro Lançado", description: "Após meses de trabalho, 'A Floresta Encantada' chega ao mundo, nosso primeiro livro de colorir." },
-  { year: "2023", title: "O Clube Mágico", description: "Lançamos nosso Clube de Assinatura, criando uma comunidade de amantes da arte e da criatividade." },
-  { year: "Hoje", title: "Colorindo o Futuro", description: "Continuamos nossa jornada, buscando novas formas de inspirar e encantar, uma página de cada vez." },
+  { year: "2021", title: "O Início de Tudo", description: "Uma ideia simples: dar nova vida às peças que o mundo descartaria. O brecho Reveste-se nasce da vontade de transformar a moda em algo mais consciente." },
+  { year: "2022", title: "As Primeiras Peças", description: "Com curadoria cuidadosa, as primeiras coleções chegam — cada peça com história, estilo e um novo propósito." },
+  { year: "2023", title: "Moda Circular na Prática", description: "Lançamos nosso sistema de consignação, conectando quem quer renovar o guarda-roupa com quem busca peças únicas." },
+  { year: "Hoje", title: "Reveste-se", description: "Continuamos crescendo, acreditando que moda sustentável é moda de verdade — uma peça de cada vez." },
 ];
 
 const Timeline = () => {

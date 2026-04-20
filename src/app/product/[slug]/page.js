@@ -95,8 +95,8 @@ export default async function ProductPage({ params }) {
   if (!product) {
     return (
         <main style={{ padding: '10rem 1.5rem', textAlign: 'center' }}>
-            <h1>Oops! Rabisco não encontrado.</h1>
-            <p>Não conseguimos encontrar o produto que você está procurando.</p>
+            <h1>Produto não encontrado.</h1>
+            <p>Não conseguimos encontrar a peça que você está procurando.</p>
         </main>
     );
   }

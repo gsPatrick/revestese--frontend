@@ -290,7 +290,7 @@ const UserInfoStep = ({ onComplete, isAuthenticated, isAuthLoading, userAddresse
   let content;
 
   if (isAuthLoading) {
-    content = <p className={styles.loadingText}>Verificando sua magia...</p>;
+    content = <p className={styles.loadingText}>Verificando seus dados...</p>;
   } else if (!isAuthenticated && showAuthForms) {
     content = (
       <>

@@ -21,11 +21,8 @@ const OffCanvasMenu = ({ isOpen, onClose }) => {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Catálogo', href: '/catalog', hasSubMenu: true, subMenu: [
-        { name: 'Adulto', href: '/category/adulto' },
-        { name: 'Infantil', href: '/category/infantil' },
-        { name: 'Juvenil', href: '/category/juvenil' },
-        { name: 'Mais Vendidos', href: '/featured/mais-vendidos' },
-        { name: 'Lançamentos', href: '/featured/lancamentos' },
+        { name: 'Todos os Produtos', href: '/catalog' },
+        { name: 'Recém Chegados', href: '/catalog?novidades=true' },
     ]},
     { name: 'Sobre Nós', href: '/about' },
     { name: 'Contato', href: '/contact' },

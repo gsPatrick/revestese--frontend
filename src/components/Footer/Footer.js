@@ -62,7 +62,6 @@ const Footer = () => {
           <ul className={styles.footerList}>
             <li><Link href="/" className={styles.footerLink}>Home</Link></li>
             <li><Link href="/catalog" className={styles.footerLink}>Catálogo</Link></li>
-            <li><Link href="/subscription" className={styles.footerLink}>Assinatura</Link></li>
             <li><Link href="/about" className={styles.footerLink}>Sobre Nós</Link></li>
             <li><Link href="/contact" className={styles.footerLink}>Contato</Link></li>
           </ul>

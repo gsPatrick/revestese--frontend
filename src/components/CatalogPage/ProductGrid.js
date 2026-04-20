@@ -12,7 +12,7 @@ const ProductGrid = ({ products, isLoading, error }) => {
   if (isLoading) {
     return (
       <div className={styles.statusContainer}>
-        <p className={styles.loadingText}>Buscando novas aventuras...</p>
+        <p className={styles.loadingText}>Buscando peças...</p>
       </div>
     );
   }
@@ -57,11 +57,11 @@ const ProductGrid = ({ products, isLoading, error }) => {
             exit={{ opacity: 0, scale: 0.9 }}
           >
             <h1 className={styles.noResultsTitle}>
-              Nenhum <span className={styles.highlight}>rabisco</span>
+              Nenhuma <span className={styles.highlight}>peça</span>
               <br />
-              <span className={styles.highlight}>mágico</span> por aqui... ainda. 
+              encontrada por aqui.
               <br />
-              <span >Tente </span> mudar os <span className={styles.highlight} > filtros </span>
+              <span>Tente </span> mudar os <span className={styles.highlight}> filtros</span>
             </h1>
           </motion.div>
         )}
