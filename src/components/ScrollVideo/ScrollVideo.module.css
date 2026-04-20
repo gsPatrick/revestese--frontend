@@ -1,19 +1,32 @@
-/* ── Tall scroll container ── */
+/* ── Section wrapper ── */
 .container {
   position: relative;
   width: 100%;
-  background-color: var(--reveste-crimson-deeper, #2e0509);
+  background-color: #000;
 }
 
-/* ── Sticky panel that locks in viewport ── */
-.stickyWrapper {
-  position: sticky;
+/* ── Top wedge transition: hero (light) → section (black) ── */
+.topWedge {
+  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 10;
+  pointer-events: none;
+  line-height: 0;
+}
+.topWedge svg {
   width: 100%;
-  height: 100vh;
+  height: 64px;
+  display: block;
+}
+
+/* ── Layout: split left/right ── */
+.inner {
   display: flex;
   align-items: stretch;
-  background-color: var(--reveste-crimson-deeper, #2e0509);
+  min-height: 92vh;
   overflow: hidden;
 }
 
@@ -21,14 +34,14 @@
    Left column — copy
 ════════════════════════ */
 .leftCol {
-  flex: 0 0 38%;
+  flex: 0 0 40%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 3.5rem 0 2.5rem;
+  padding: 5rem 3.5rem 5rem 2.5rem;
   border-right: 1px solid rgba(201,168,76,0.2);
   position: relative;
-  background-color: var(--reveste-crimson-deeper, #2e0509);
+  background-color: #000;
 }
 
 /* Dot-grid texture */
@@ -55,17 +68,17 @@
 }
 
 .copyInner {
-  max-width: 320px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem;
   position: relative;
   z-index: 1;
 }
 
 .eyebrow {
   font-family: var(--font-raleway-next);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -74,10 +87,10 @@
 
 .headline {
   font-family: var(--font-cormorant-next);
-  font-size: clamp(2.4rem, 3.5vw, 3.8rem);
+  font-size: clamp(2.8rem, 4vw, 4.4rem);
   font-weight: 300;
   line-height: 1.1;
-  color: var(--reveste-cream, #F5F0E8);
+  color: #fff;
   margin: 0;
 }
 
@@ -89,9 +102,9 @@
 
 .body {
   font-family: var(--font-raleway-next);
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   line-height: 1.8;
-  color: rgba(245,240,232,0.65);
+  color: rgba(255, 255, 255, 0.62);
   font-weight: 300;
   margin: 0;
 }
@@ -101,12 +114,12 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .scrollLine {
   display: block;
-  width: 32px;
+  width: 36px;
   height: 1px;
   background: var(--reveste-crimson);
   position: relative;
@@ -132,11 +145,11 @@
 
 .scrollLabel {
   font-family: var(--font-raleway-next);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(245,240,232,0.4);
+  color: rgba(255, 255, 255, 0.38);
 }
 
 /* ════════════════════════
@@ -148,18 +161,17 @@
   align-items: center;
   justify-content: center;
   padding: 2.5rem 2.5rem 2.5rem 3rem;
-  background-color: #1a0408;
+  background-color: #000;
 }
 
-/* Video frame with subtle border */
 .videoFrame {
   width: 100%;
   height: 100%;
-  max-height: calc(100vh - 6rem);
-  border-radius: 2px;
+  max-height: calc(92vh - 4rem);
+  border-radius: 4px;
   overflow: hidden;
-  border: 1px solid var(--reveste-border);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
   position: relative;
 }
 
@@ -171,48 +183,54 @@
   pointer-events: none;
 }
 
-/* ── Top wedge transition ── */
-.topWedge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  z-index: 10;
-  pointer-events: none;
-  line-height: 0;
-}
-
-.topWedge svg {
-  width: 100%;
-  height: 64px;
-  display: block;
-}
-
 /* ── Responsive ── */
-@media (max-width: 768px) {
-  .stickyWrapper {
+@media (max-width: 900px) {
+  .inner {
     flex-direction: column;
+    min-height: auto;
   }
 
   .leftCol {
     flex: 0 0 auto;
     justify-content: flex-start;
-    padding: 2rem 1.5rem 1rem;
+    padding: 4rem 1.5rem 1.75rem;
     border-right: none;
     border-bottom: 1px solid rgba(201,168,76,0.2);
   }
 
   .leftCol::before { display: none; }
 
-  .copyInner { max-width: 100%; gap: 0.8rem; }
-  .headline { font-size: 2rem; }
+  .copyInner {
+    max-width: 100%;
+    gap: 1rem;
+  }
+
+  .headline {
+    font-size: clamp(2rem, 7vw, 3rem);
+  }
+
+  .body {
+    font-size: 0.95rem;
+  }
+
   .scrollHint { display: none; }
 
   .rightCol {
     flex: 1;
-    padding: 1rem 1.5rem 1.5rem;
+    padding: 1.25rem 1.5rem 2rem;
   }
 
-  .videoFrame { max-height: 55vh; }
+  .videoFrame {
+    max-height: 60vw;
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leftCol {
+    padding: 3.5rem 1.25rem 1.5rem;
+  }
+  .videoFrame {
+    max-height: 72vw;
+  }
 }
