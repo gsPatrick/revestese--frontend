@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import api from '@/services/api';
 import styles from '../shared.module.css';
 import catStyles from './categorias.module.css';
-import { BsPlus, BsPencil, BsTrash, BsX, BsCheckLg } from 'react-icons/bs';
+import { BsPlus, BsPencil, BsTrash, BsX, BsCheckLg, BsCloudUpload } from 'react-icons/bs';
 
 // ── Leque de ícones disponíveis ──────────────────────────────────────────────
 import {
@@ -44,7 +45,25 @@ export const ICON_MAP = {
   MdOutlineSpa:    { component: MdOutlineSpa,    label: 'Bem-estar'  },
 };
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://geral-revestese-api.r954jc.easypanel.host';
+
+function isImageUrl(name) {
+  return name && (name.startsWith('/') || name.startsWith('http'));
+}
+
 function IconPreview({ name, size = 20 }) {
+  if (isImageUrl(name)) {
+    const src = name.startsWith('http') ? name : `${API_BASE}${name}`;
+    return (
+      <img
+        src={src}
+        alt="ícone"
+        width={size}
+        height={size}
+        style={{ objectFit: 'contain', borderRadius: 4 }}
+      />
+    );
+  }
   const entry = ICON_MAP[name];
   if (!entry) return <GiHanger size={size} />;
   const Icon = entry.component;
@@ -61,6 +80,10 @@ export default function CategoriasPage() {
   const [confirm,    setConfirm]    = useState(null);
   const [toast,      setToast]      = useState('');
   const [iconTab,    setIconTab]    = useState('grid'); // 'grid' | 'custom'
+  const [iconUploadPct,  setIconUploadPct]  = useState(0);
+  const [iconUploading,  setIconUploading]  = useState(false);
+  const [iconUploadErr,  setIconUploadErr]  = useState('');
+  const iconInputRef = useRef(null);
 
   const load = async () => {
     setLoading(true);
@@ -98,6 +121,39 @@ export default function CategoriasPage() {
     } catch (err) {
       showToast(err.response?.data?.erro || 'Erro ao salvar.');
     } finally { setSaving(false); }
+  };
+
+  const handleIconUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIconUploadErr('');
+    setIconUploading(true);
+    setIconUploadPct(0);
+
+    const formData = new FormData();
+    formData.append('icone', file);
+
+    const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `${API_BASE}/api/categorias/icone/upload`);
+    if (token) xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+
+    xhr.upload.onprogress = (ev) => {
+      if (ev.lengthComputable) setIconUploadPct(Math.round((ev.loaded / ev.total) * 100));
+    };
+    xhr.onload = () => {
+      setIconUploading(false);
+      try {
+        const data = JSON.parse(xhr.responseText);
+        if (xhr.status >= 200 && xhr.status < 300 && data.url) {
+          setForm(p => ({ ...p, icone: data.url }));
+        } else {
+          setIconUploadErr(data.erro || 'Erro ao enviar imagem.');
+        }
+      } catch { setIconUploadErr('Erro ao processar resposta.'); }
+    };
+    xhr.onerror = () => { setIconUploading(false); setIconUploadErr('Falha na conexão.'); };
+    xhr.send(formData);
   };
 
   const handleDelete = async (id) => {
@@ -227,17 +283,43 @@ export default function CategoriasPage() {
                     </div>
                   )}
 
-                  {/* Campo manual (react-icons key) */}
+                  {/* Upload de imagem personalizada */}
                   {iconTab === 'custom' && (
-                    <div className={catStyles.iconCustom}>
-                      <input
-                        value={form.icone}
-                        onChange={e => setForm(p => ({ ...p, icone: e.target.value }))}
-                        placeholder="Ex: GiDress, FaTshirt, BsHandbag..."
-                      />
-                      <p className={catStyles.iconCustomHint}>
-                        Use o nome exato do ícone do <a href="https://react-icons.github.io/react-icons/" target="_blank" rel="noreferrer">react-icons</a>.
-                      </p>
+                    <div className={catStyles.iconUpload}>
+                      <label className={catStyles.iconUploadLabel}>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          ref={iconInputRef}
+                          onChange={handleIconUpload}
+                          disabled={iconUploading}
+                        />
+                        {iconUploading ? (
+                          <>
+                            <BsCloudUpload />
+                            <span>Enviando… {iconUploadPct}%</span>
+                            <div className={catStyles.iconUploadProgress}>
+                              <div className={catStyles.iconUploadProgressBar} style={{ width: `${iconUploadPct}%` }} />
+                            </div>
+                          </>
+                        ) : isImageUrl(form.icone) ? (
+                          <>
+                            <img
+                              src={form.icone.startsWith('http') ? form.icone : `${API_BASE}${form.icone}`}
+                              alt="preview"
+                              className={catStyles.iconUploadPreview}
+                            />
+                            <span style={{ fontSize: '0.78rem', color: '#6b7280' }}>Clique para trocar</span>
+                          </>
+                        ) : (
+                          <>
+                            <BsCloudUpload />
+                            <span>Clique para selecionar imagem</span>
+                          </>
+                        )}
+                      </label>
+                      {iconUploadErr && <p className={catStyles.iconUploadError}>{iconUploadErr}</p>}
+                      <p className={catStyles.iconUploadHint}>PNG, JPG ou WebP · máx. 5 MB</p>
                     </div>
                   )}
                 </div>
