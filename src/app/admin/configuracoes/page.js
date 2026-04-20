@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import api from '@/services/api';
 import styles from './configuracoes.module.css';
-import { BsPerson, BsShieldLock, BsCheckCircle, BsExclamationCircle, BsTruck } from 'react-icons/bs';
+import { BsPerson, BsShieldLock, BsCheckCircle, BsExclamationCircle, BsTruck, BsCameraVideo, BsCloudUpload } from 'react-icons/bs';
 
 function Toast({ msg, type, onClose }) {
   useEffect(() => {
@@ -37,6 +37,15 @@ export default function ConfiguracoesPage() {
   // Frete Grátis
   const [freteGratis,   setFreteGratis]   = useState(false);
   const [savingFrete,   setSavingFrete]   = useState(false);
+
+  // Upload de vídeo
+  const [videoFile,     setVideoFile]     = useState(null);
+  const [uploadPhase,   setUploadPhase]   = useState('idle'); // idle | uploading | encoding | done | error
+  const [uploadPct,     setUploadPct]     = useState(0);
+  const [encodePct,     setEncodePct]     = useState(0);
+  const [videoJobId,    setVideoJobId]    = useState(null);
+  const [videoErrMsg,   setVideoErrMsg]   = useState('');
+  const pollRef = useRef(null);
 
   const notify = (msg, type = 'success') => setToast({ msg, type });
 
@@ -106,6 +115,66 @@ export default function ConfiguracoesPage() {
     } finally { setSavingFrete(false); }
   };
 
+  /* ── Upload de vídeo ── */
+  const handleVideoUpload = () => {
+    if (!videoFile) return notify('Selecione um arquivo de vídeo', 'error');
+
+    setUploadPhase('uploading');
+    setUploadPct(0);
+    setEncodePct(0);
+    setVideoErrMsg('');
+
+    const token = localStorage.getItem('reveste_token');
+    const formData = new FormData();
+    formData.append('video', videoFile);
+
+    const xhr = new XMLHttpRequest();
+
+    // Progresso de upload (fase 1)
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) setUploadPct(Math.round((e.loaded / e.total) * 100));
+    };
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const { jobId } = JSON.parse(xhr.responseText);
+        setVideoJobId(jobId);
+        setUploadPhase('encoding');
+        setEncodePct(0);
+        // Inicia polling do progresso de encoding (fase 2)
+        pollRef.current = setInterval(async () => {
+          try {
+            const r = await api.get(`/admin/videos/status/${jobId}`, { headers: { Authorization: `Bearer ${token}` } });
+            const { progress, status, error } = r.data;
+            setEncodePct(progress || 0);
+            if (status === 'done') {
+              clearInterval(pollRef.current);
+              setUploadPhase('done');
+              setVideoFile(null);
+              notify('Vídeo atualizado com sucesso! Ele já está no ar.');
+            } else if (status === 'error') {
+              clearInterval(pollRef.current);
+              setUploadPhase('error');
+              setVideoErrMsg(error || 'Erro no encoding');
+            }
+          } catch (_) {}
+        }, 2000);
+      } else {
+        setUploadPhase('error');
+        setVideoErrMsg('Erro ao enviar o arquivo.');
+      }
+    };
+
+    xhr.onerror = () => { setUploadPhase('error'); setVideoErrMsg('Erro de rede ao enviar.'); };
+
+    xhr.open('POST', 'https://geral-revestese-api.r954jc.easypanel.host/api/admin/videos/upload');
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+    xhr.send(formData);
+  };
+
+  // Limpa polling ao desmontar
+  useEffect(() => () => { if (pollRef.current) clearInterval(pollRef.current); }, []);
+
   if (loading) return <div className={styles.loading}>Carregando...</div>;
 
   return (
@@ -148,6 +217,88 @@ export default function ConfiguracoesPage() {
               <span className={styles.freteAlertDot} />
               O banner de <strong>Frete Grátis</strong> está sendo exibido no topo do site agora.
               Para desativar, clique no botão acima.
+            </div>
+          )}
+        </section>
+
+        {/* ── Vídeo da seção principal ── */}
+        <section className={`${styles.card} ${styles.videoCard}`}>
+          <div className={styles.cardHeader}>
+            <div className={styles.cardIcon} style={{ background: '#0f0f0f18', color: '#1a1a1a' }}>
+              <BsCameraVideo />
+            </div>
+            <div style={{ flex: 1 }}>
+              <h2 className={styles.cardTitle}>Vídeo da Seção Principal</h2>
+              <p className={styles.cardDesc}>
+                Substitua o vídeo exibido na página inicial. O encoding acontece no servidor automaticamente.
+              </p>
+            </div>
+          </div>
+
+          {/* Área de seleção */}
+          {uploadPhase === 'idle' || uploadPhase === 'done' || uploadPhase === 'error' ? (
+            <div className={styles.videoUploadArea}>
+              <label className={styles.videoFileLabel}>
+                <BsCloudUpload className={styles.videoUploadIcon} />
+                <span className={styles.videoFileName}>
+                  {videoFile ? videoFile.name : 'Clique para selecionar o vídeo'}
+                </span>
+                <span className={styles.videoFileHint}>MP4, MOV, AVI — até 1 GB</span>
+                <input
+                  type="file"
+                  accept="video/*"
+                  className={styles.videoFileInput}
+                  onChange={e => { setVideoFile(e.target.files[0] || null); setUploadPhase('idle'); }}
+                />
+              </label>
+
+              {uploadPhase === 'error' && (
+                <p className={styles.videoError}><BsExclamationCircle /> {videoErrMsg}</p>
+              )}
+              {uploadPhase === 'done' && (
+                <p className={styles.videoDone}><BsCheckCircle /> Vídeo atualizado com sucesso!</p>
+              )}
+
+              <div className={styles.actions}>
+                <button
+                  className={styles.btn}
+                  onClick={handleVideoUpload}
+                  disabled={!videoFile}
+                >
+                  Enviar e processar
+                </button>
+              </div>
+            </div>
+          ) : null}
+
+          {/* Fase 1: upload */}
+          {uploadPhase === 'uploading' && (
+            <div className={styles.videoProgress}>
+              <p className={styles.videoProgressLabel}>
+                Enviando arquivo… <strong>{uploadPct}%</strong>
+              </p>
+              <div className={styles.progressTrack}>
+                <div className={styles.progressBar} style={{ width: `${uploadPct}%` }} />
+              </div>
+              <p className={styles.videoProgressHint}>Aguarde, não feche esta página.</p>
+            </div>
+          )}
+
+          {/* Fase 2: encoding */}
+          {uploadPhase === 'encoding' && (
+            <div className={styles.videoProgress}>
+              <p className={styles.videoProgressLabel}>
+                Processando com ffmpeg… <strong>{encodePct}%</strong>
+              </p>
+              <div className={styles.progressTrack}>
+                <div
+                  className={`${styles.progressBar} ${styles.progressBarEncoding}`}
+                  style={{ width: `${encodePct}%` }}
+                />
+              </div>
+              <p className={styles.videoProgressHint}>
+                Você pode navegar pelo painel — o processamento continua em background.
+              </p>
             </div>
           )}
         </section>
