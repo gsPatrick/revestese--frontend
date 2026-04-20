@@ -1,10 +1,56 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import styles from './ScrollVideo.module.css';
+import { BsVolumeUp, BsVolumeMute } from 'react-icons/bs';
 
 export default function ScrollVideo() {
+  const videoRef    = useRef(null);
+  const sectionRef  = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  /* Quando a seção entra no viewport, tenta ativar o som.
+     Browsers permitem unmute após interação do usuário (scroll já conta). */
+  useEffect(() => {
+    const section = sectionRef.current;
+    const video   = videoRef.current;
+    if (!section || !video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          /* Garante que o vídeo está tocando */
+          video.play().catch(() => {});
+
+          /* Tenta ativar o som — alguns browsers bloqueiam sem interação prévia */
+          try {
+            video.muted = false;
+            setIsMuted(false);
+          } catch (_) {
+            /* Se falhar, continua mudo — usuário pode clicar no botão */
+          }
+
+          /* Para de observar após a primeira vez */
+          observer.unobserve(section);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const next = !isMuted;
+    video.muted = next;
+    setIsMuted(next);
+  };
+
   return (
-    <section className={styles.container}>
+    <section ref={sectionRef} className={styles.container}>
 
       {/* Transition wedge from hero (light) → video (dark) */}
       <div className={styles.topWedge} aria-hidden="true">
@@ -33,21 +79,33 @@ export default function ScrollVideo() {
           </div>
         </div>
 
-        {/* Right column: video — autoplay, loop, muted */}
+        {/* Right column: video */}
         <div className={styles.rightCol}>
           <div className={styles.videoFrame}>
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
+              ref={videoRef}
               className={styles.video}
               src="/videos/brand-scroll.mp4"
               autoPlay
               loop
-              muted
+              muted          /* começa mudo para autoplay funcionar em todos os browsers */
               playsInline
               preload="auto"
               disablePictureInPicture
               controlsList="nodownload nofullscreen noremoteplayback"
             />
+
+            {/* Botão de som — fica sobre o vídeo */}
+            <button
+              className={`${styles.soundBtn} ${!isMuted ? styles.soundBtnActive : ''}`}
+              onClick={toggleMute}
+              aria-label={isMuted ? 'Ativar som' : 'Desativar som'}
+              title={isMuted ? 'Ativar som' : 'Desativar som'}
+            >
+              {isMuted ? <BsVolumeMute /> : <BsVolumeUp />}
+              <span>{isMuted ? 'Sem som' : 'Com som'}</span>
+            </button>
           </div>
         </div>
 
