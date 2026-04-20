@@ -4,19 +4,26 @@
   position: sticky;
   top: 0; left: 0; right: 0; z-index: 50;
   background-color: transparent;
-  /* will-change isola o header num layer composto — sem reflow ao rolar */
   will-change: transform;
 }
 
-/* Ao rolar: sombra sutil no fundo preto */
+/* Ao rolar: sombra sutil */
 .scrolled .mainBar {
-  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
 }
 
-/* --- Top Bar --- */
+/* Logo encolhe levemente ao rolar, sem reflow */
+.scrolled .mainLogoLink {
+  transform: scale(0.88);
+  transform-origin: left center;
+}
+
+/* ─────────────────────────────────────
+   Top Bar — fundo PRETO (era crimson)
+───────────────────────────────────── */
 .topBarWrapper { display: block; }
 .topBar {
-  background: linear-gradient(90deg, var(--reveste-crimson-dark), var(--reveste-crimson), var(--reveste-crimson-dark));
+  background: #111;          /* era gradient crimson → agora preto */
   padding: 0.45rem 0;
 }
 .topBarContent {
@@ -47,12 +54,15 @@
 }
 .topBarContact { display: none; }
 
-/* --- Main Bar --- */
+/* ─────────────────────────────────────
+   Main Bar — fundo BRANCO
+───────────────────────────────────── */
 .mainBar {
-  background-color: #000;
+  background-color: var(--reveste-bg-surface);
   padding: 0.75rem 0;
-  border-bottom: none;
+  border-bottom: 1px solid var(--reveste-border);
   display: flex; align-items: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   transition: box-shadow 0.25s ease;
   will-change: box-shadow;
 }
@@ -62,7 +72,7 @@
   align-items: center; width: 100%;
 }
 
-/* Logo — imagem PNG */
+/* Logo PNG — maior */
 .mainLogoLink {
   display: inline-flex;
   align-items: center;
@@ -70,51 +80,47 @@
   transition: opacity 0.25s ease, transform 0.25s ease;
   will-change: transform;
 }
-.mainLogoLink:hover { opacity: 0.85; }
+.mainLogoLink:hover { opacity: 0.82; }
 
 .mainLogo {
   object-fit: contain;
-  height: 64px;
+  height: 80px;          /* era 64px — agora maior */
   width: auto;
-  max-width: 180px;
+  max-width: 220px;
   display: block;
 }
 
-/* Ao rolar — logo levemente menor via scale no link */
-.scrolled .mainLogoLink {
-  transform: scale(0.88);
-  transform-origin: left center;
-}
-
-/* --- Search --- */
+/* ─────────────────────────────────────
+   Search — fundo claro, botão PRETO
+───────────────────────────────────── */
 .searchContainerWrapper {
   position: relative; flex-grow: 1; max-width: 400px; margin: 0 2rem;
 }
 .searchContainer {
   display: flex; align-items: center;
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid var(--reveste-input-border);
   border-radius: 9999px; overflow: hidden; width: 100%;
-  background-color: rgba(255,255,255,0.07);
+  background-color: var(--reveste-bg-muted);
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 .searchContainer:focus-within {
-  border-color: var(--reveste-gold, #C9A84C);
-  background-color: rgba(255,255,255,0.12);
+  border-color: #111;
+  background-color: var(--reveste-bg-surface);
 }
 .searchInput {
   flex-grow: 1; padding: 0.6rem 1.2rem; border: none; outline: none;
-  font-size: 0.9rem; color: #fff;
+  font-size: 0.9rem; color: var(--reveste-text);
   background-color: transparent; font-family: var(--font-raleway-next);
 }
-.searchInput::placeholder { color: rgba(255,255,255,0.4); }
+.searchInput::placeholder { color: var(--reveste-placeholder-text); }
+
+/* Botão busca PRETO (era crimson) */
 .searchButton {
-  background: linear-gradient(135deg, var(--reveste-crimson), var(--reveste-crimson-light));
+  background: #111;
   color: white; padding: 0.6rem 1.2rem; border: none;
   cursor: pointer; transition: background 0.2s ease;
 }
-.searchButton:hover {
-  background: linear-gradient(135deg, var(--reveste-crimson-dark), var(--reveste-crimson));
-}
+.searchButton:hover { background: #333; }
 .searchIcon { width: 1.1rem; height: 1.1rem; color: white; }
 
 .searchResultsDropdown {
@@ -139,7 +145,7 @@
   color: var(--reveste-text); font-size: 1rem;
 }
 .searchResultPrice {
-  font-size: 0.85rem; color: var(--reveste-crimson);
+  font-size: 0.85rem; color: #111;
   font-family: var(--font-raleway-next); font-weight: 600;
 }
 .searchStatusMessage {
@@ -148,45 +154,50 @@
   font-family: var(--font-raleway-next);
 }
 
-/* --- Action Icons --- */
+/* ─────────────────────────────────────
+   Action Icons — cores escuras
+───────────────────────────────────── */
 .mainActionIcons { display: flex; align-items: center; gap: 1.5rem; }
 .mainActionLink {
   display: flex; flex-direction: column; align-items: center;
-  color: rgba(255,255,255,0.75); font-family: var(--font-raleway-next);
+  color: var(--reveste-text-mid); font-family: var(--font-raleway-next);
   font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase;
   transition: color 0.2s ease; white-space: nowrap;
 }
-.mainActionLink:hover { color: var(--reveste-gold-light, #E8C97A); }
+.mainActionLink:hover { color: #111; }
 .mainIcon {
   width: 1.35rem; height: 1.35rem; margin-bottom: 0.2rem;
-  color: rgba(255,255,255,0.75); transition: color 0.2s ease;
+  color: var(--reveste-text-mid); transition: color 0.2s ease;
 }
-.mainActionLink:hover .mainIcon { color: var(--reveste-gold-light, #E8C97A); }
-.loggedInUser { color: var(--reveste-gold-light, #E8C97A); }
-.loggedInUser .mainIcon { color: var(--reveste-gold-light, #E8C97A); }
+.mainActionLink:hover .mainIcon { color: #111; }
+.loggedInUser { color: #111; }
+.loggedInUser .mainIcon { color: #111; }
 .loggedInUser span { font-weight: 600; }
 .hideOnMobile { display: flex; }
 .mobileMenuButton {
   display: none; background: none; border: none; cursor: pointer;
-  padding: 0; color: rgba(255,255,255,0.85);
+  padding: 0; color: var(--reveste-text);
 }
 .hamburgerIcon { width: 1.8rem; height: 1.8rem; }
 .cartIconWrapper { position: relative; display: flex; flex-direction: column; align-items: center; }
+
+/* Badge do carrinho PRETO (era crimson) */
 .cartBadge {
   position: absolute; top: -5px; right: -8px;
-  background: var(--reveste-crimson);
+  background: #111;
   color: white; border-radius: 50%; width: 18px; height: 18px;
   display: flex; align-items: center; justify-content: center;
   font-size: 0.65rem; font-weight: 700;
-  border: 1.5px solid #000;
+  border: 1.5px solid var(--reveste-bg-surface);
 }
 
-/* --- Nav Bar --- */
+/* ─────────────────────────────────────
+   Nav Bar — fundo branco, hover preto
+───────────────────────────────────── */
 .navBar {
-  background-color: #000;
+  background-color: var(--reveste-bg-surface);
   padding: 0.5rem 0;
-  border-bottom: none;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid var(--reveste-border);
   display: block;
 }
 .navBarContent { max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 1.5rem; }
@@ -201,15 +212,17 @@
   display: flex; align-items: center; gap: 0.2rem;
   font-family: var(--font-raleway-next); font-size: 0.78rem;
   font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.65); transition: color 0.2s ease;
+  color: var(--reveste-text-mid); transition: color 0.2s ease;
   text-decoration: none; padding-bottom: 0.25rem;
 }
-.navLink:hover { color: var(--reveste-gold-light, #E8C97A); }
+.navLink:hover { color: #111; }
 .navLinkDropdownIcon { width: 0.9rem; height: 0.9rem; margin-left: 0.2rem; transition: transform 0.2s ease; }
 .navLinkDropdownIcon.rotated { transform: rotate(-180deg); }
+
+/* Underline PRETO (era crimson) */
 .navLinkUnderline {
   position: absolute; bottom: 0; left: 0; width: 100%; height: 1.5px;
-  background: var(--reveste-gold, #C9A84C);
+  background: #111;
   transform: scaleX(0); transform-origin: center; transition: transform 0.3s ease-out;
 }
 .navItem:hover .navLinkUnderline { transform: scaleX(1); }
@@ -226,7 +239,7 @@
 .dropdownColumn { display: flex; flex-direction: column; }
 .dropdownColumnTitle {
   font-family: var(--font-raleway-next); font-size: 0.7rem; font-weight: 700;
-  color: var(--reveste-crimson); margin-bottom: 0.75rem;
+  color: #111; margin-bottom: 0.75rem;       /* era crimson */
   text-transform: uppercase; letter-spacing: 0.12em;
 }
 .dropdownColumn ul { list-style: none; padding: 0; margin: 0; }
@@ -236,9 +249,9 @@
   color: var(--reveste-text-mid); transition: color 0.2s ease;
   text-decoration: none; display: block; padding: 0.2rem 0;
 }
-.dropdownLink:hover { color: var(--reveste-crimson); }
+.dropdownLink:hover { color: #111; }         /* era crimson */
 .viewAllLink {
-  font-weight: 700; color: var(--reveste-crimson);
+  font-weight: 700; color: #111;             /* era crimson */
   margin-bottom: 0.5rem !important; padding-bottom: 0.5rem !important;
   border-bottom: 1px dashed var(--reveste-border);
 }
@@ -248,11 +261,13 @@
   background: none; border: none; padding: 0; cursor: pointer;
   color: var(--reveste-text-mid);
 }
-.logoutButton:hover { color: var(--reveste-crimson); }
+.logoutButton:hover { color: #111; }
 .logoutButton .mainIcon { color: var(--reveste-text-mid); }
-.logoutButton:hover .mainIcon { color: var(--reveste-crimson); }
+.logoutButton:hover .mainIcon { color: #111; }
 
-/* --- Mobile --- */
+/* ─────────────────────────────────────
+   Mobile
+───────────────────────────────────── */
 @media (max-width: 991px) {
   .topBarTrustBadges { gap: 1rem; justify-content: flex-start; }
   .topBarSocial { display: none; }
@@ -264,12 +279,14 @@
   .mobileMenuButton { display: block; }
   .mainBarContent { padding: 0 1rem; }
   .mainActionIcons { gap: 1.2rem; }
-  .mainLogo { height: 48px; }
+  .mainLogo { height: 60px; }      /* era 48px */
   .mainActionLink span { display: none; }
   .mainIcon { margin-bottom: 0; }
 }
 
-/* --- Off-Canvas Menu --- */
+/* ─────────────────────────────────────
+   Off-Canvas Menu
+───────────────────────────────────── */
 .overlay {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   background-color: rgba(28, 16, 8, 0.4); z-index: 55;
@@ -289,13 +306,13 @@
 }
 .menuTitle {
   font-family: var(--font-cormorant-next); font-size: 1.8rem; font-weight: 600;
-  font-style: italic; color: var(--reveste-crimson);
+  font-style: italic; color: #111;          /* era crimson */
 }
 .closeButton {
   background: none; border: none; color: var(--reveste-text-muted); font-size: 1.8rem; cursor: pointer;
   transition: color 0.2s ease;
 }
-.closeButton:hover { color: var(--reveste-crimson); }
+.closeButton:hover { color: #111; }          /* era crimson */
 .menuContent {
   flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem;
 }
@@ -309,7 +326,7 @@
   padding: 0.65rem 0; transition: color 0.2s ease;
   border-bottom: 1px solid var(--reveste-border);
 }
-.menuNavLink:hover { color: var(--reveste-crimson); }
+.menuNavLink:hover { color: #111; }          /* era crimson */
 .menuActionLinks {
   display: flex; flex-direction: column; gap: 0.75rem;
   padding-top: 1.5rem; border-top: 1px solid var(--reveste-border); margin-top: 2rem;
@@ -322,5 +339,5 @@
   transition: color 0.2s ease; background: none; border: none; padding: 0; cursor: pointer;
   text-align: left; width: 100%;
 }
-.menuActionLink:hover { color: var(--reveste-crimson); }
-.menuActionIcon { width: 1.3rem; height: 1.3rem; color: var(--reveste-crimson); }
+.menuActionLink:hover { color: #111; }       /* era crimson */
+.menuActionIcon { width: 1.3rem; height: 1.3rem; color: #111; }  /* era crimson */
