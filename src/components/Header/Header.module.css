@@ -8,18 +8,10 @@
   will-change: transform;
 }
 
-/* Ao rolar: usa box-shadow (não muda layout) e transform no logo */
+/* Ao rolar: sombra sutil no fundo preto */
 .scrolled .mainBar {
-  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
 }
-
-/* transform: scale não causa reflow — zero stutter */
-.scrolled .mainLogo {
-  transform: scale(0.88);
-  transform-origin: left center;
-}
-
-/* Sem mudança de padding para navBar — elimina jank vertical */
 
 /* --- Top Bar --- */
 .topBarWrapper { display: block; }
@@ -57,11 +49,10 @@
 
 /* --- Main Bar --- */
 .mainBar {
-  background-color: var(--reveste-bg-surface);
-  padding: 0.9rem 0;
-  border-bottom: 1px solid var(--reveste-border);
+  background-color: #000;
+  padding: 0.75rem 0;
+  border-bottom: none;
   display: flex; align-items: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   transition: box-shadow 0.25s ease;
   will-change: box-shadow;
 }
@@ -71,19 +62,29 @@
   align-items: center; width: 100%;
 }
 
-.mainLogo {
-  font-family: var(--font-cormorant-next);
-  font-size: 2rem;
-  font-weight: 600;
-  font-style: italic;
-  letter-spacing: 0.04em;
-  color: var(--reveste-gold);
-  white-space: nowrap;
-  display: inline-block;
-  transition: color 0.3s ease, transform 0.25s ease;
+/* Logo — imagem PNG */
+.mainLogoLink {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
   will-change: transform;
 }
-.mainLogo:hover { color: var(--reveste-gold-dark); }
+.mainLogoLink:hover { opacity: 0.85; }
+
+.mainLogo {
+  object-fit: contain;
+  height: 64px;
+  width: auto;
+  max-width: 180px;
+  display: block;
+}
+
+/* Ao rolar — logo levemente menor via scale no link */
+.scrolled .mainLogoLink {
+  transform: scale(0.88);
+  transform-origin: left center;
+}
 
 /* --- Search --- */
 .searchContainerWrapper {
@@ -91,21 +92,21 @@
 }
 .searchContainer {
   display: flex; align-items: center;
-  border: 1px solid var(--reveste-input-border);
+  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 9999px; overflow: hidden; width: 100%;
-  background-color: var(--reveste-bg-muted);
+  background-color: rgba(255,255,255,0.07);
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 .searchContainer:focus-within {
-  border-color: var(--reveste-crimson);
-  background-color: var(--reveste-bg-surface);
+  border-color: var(--reveste-gold, #C9A84C);
+  background-color: rgba(255,255,255,0.12);
 }
 .searchInput {
   flex-grow: 1; padding: 0.6rem 1.2rem; border: none; outline: none;
-  font-size: 0.9rem; color: var(--reveste-text);
+  font-size: 0.9rem; color: #fff;
   background-color: transparent; font-family: var(--font-raleway-next);
 }
-.searchInput::placeholder { color: var(--reveste-placeholder-text); }
+.searchInput::placeholder { color: rgba(255,255,255,0.4); }
 .searchButton {
   background: linear-gradient(135deg, var(--reveste-crimson), var(--reveste-crimson-light));
   color: white; padding: 0.6rem 1.2rem; border: none;
@@ -151,23 +152,23 @@
 .mainActionIcons { display: flex; align-items: center; gap: 1.5rem; }
 .mainActionLink {
   display: flex; flex-direction: column; align-items: center;
-  color: var(--reveste-text-mid); font-family: var(--font-raleway-next);
+  color: rgba(255,255,255,0.75); font-family: var(--font-raleway-next);
   font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase;
   transition: color 0.2s ease; white-space: nowrap;
 }
-.mainActionLink:hover { color: var(--reveste-crimson); }
+.mainActionLink:hover { color: var(--reveste-gold-light, #E8C97A); }
 .mainIcon {
   width: 1.35rem; height: 1.35rem; margin-bottom: 0.2rem;
-  color: var(--reveste-text-mid); transition: color 0.2s ease;
+  color: rgba(255,255,255,0.75); transition: color 0.2s ease;
 }
-.mainActionLink:hover .mainIcon { color: var(--reveste-crimson); }
-.loggedInUser { color: var(--reveste-crimson); }
-.loggedInUser .mainIcon { color: var(--reveste-crimson); }
+.mainActionLink:hover .mainIcon { color: var(--reveste-gold-light, #E8C97A); }
+.loggedInUser { color: var(--reveste-gold-light, #E8C97A); }
+.loggedInUser .mainIcon { color: var(--reveste-gold-light, #E8C97A); }
 .loggedInUser span { font-weight: 600; }
 .hideOnMobile { display: flex; }
 .mobileMenuButton {
   display: none; background: none; border: none; cursor: pointer;
-  padding: 0; color: var(--reveste-text);
+  padding: 0; color: rgba(255,255,255,0.85);
 }
 .hamburgerIcon { width: 1.8rem; height: 1.8rem; }
 .cartIconWrapper { position: relative; display: flex; flex-direction: column; align-items: center; }
@@ -177,14 +178,15 @@
   color: white; border-radius: 50%; width: 18px; height: 18px;
   display: flex; align-items: center; justify-content: center;
   font-size: 0.65rem; font-weight: 700;
-  border: 1.5px solid var(--reveste-bg-surface);
+  border: 1.5px solid #000;
 }
 
 /* --- Nav Bar --- */
 .navBar {
-  background-color: var(--reveste-bg-surface);
-  padding: 0.6rem 0;
-  border-bottom: 1px solid var(--reveste-border);
+  background-color: #000;
+  padding: 0.5rem 0;
+  border-bottom: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
   display: block;
 }
 .navBarContent { max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 1.5rem; }
@@ -199,15 +201,15 @@
   display: flex; align-items: center; gap: 0.2rem;
   font-family: var(--font-raleway-next); font-size: 0.78rem;
   font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--reveste-text-mid); transition: color 0.2s ease;
+  color: rgba(255,255,255,0.65); transition: color 0.2s ease;
   text-decoration: none; padding-bottom: 0.25rem;
 }
-.navLink:hover { color: var(--reveste-crimson); }
+.navLink:hover { color: var(--reveste-gold-light, #E8C97A); }
 .navLinkDropdownIcon { width: 0.9rem; height: 0.9rem; margin-left: 0.2rem; transition: transform 0.2s ease; }
 .navLinkDropdownIcon.rotated { transform: rotate(-180deg); }
 .navLinkUnderline {
   position: absolute; bottom: 0; left: 0; width: 100%; height: 1.5px;
-  background: var(--reveste-crimson);
+  background: var(--reveste-gold, #C9A84C);
   transform: scaleX(0); transform-origin: center; transition: transform 0.3s ease-out;
 }
 .navItem:hover .navLinkUnderline { transform: scaleX(1); }
@@ -262,7 +264,7 @@
   .mobileMenuButton { display: block; }
   .mainBarContent { padding: 0 1rem; }
   .mainActionIcons { gap: 1.2rem; }
-  .mainLogo { font-size: 1.5rem; }
+  .mainLogo { height: 48px; }
   .mainActionLink span { display: none; }
   .mainIcon { margin-bottom: 0; }
 }

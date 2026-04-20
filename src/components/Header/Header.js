@@ -185,7 +185,16 @@ const Header = () => {
         <div className={styles.mainBar}>
             {/* ...código da mainBar... */}
             <div className={styles.mainBarContent}>
-            <Link href="/" className={styles.mainLogo}><span>Reveste-se</span></Link>
+            <Link href="/" className={styles.mainLogoLink}>
+              <Image
+                src="/logo.png"
+                alt="Reveste-se"
+                width={180}
+                height={72}
+                className={styles.mainLogo}
+                priority
+              />
+            </Link>
             
             <div className={styles.searchContainerWrapper} ref={searchContainerRef}>
                 <div className={styles.searchContainer}>
