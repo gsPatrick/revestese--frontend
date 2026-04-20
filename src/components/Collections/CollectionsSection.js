@@ -6,10 +6,56 @@ import { motion } from 'framer-motion';
 import { useFilter } from '@/context/FilterContext';
 import api from '@/services/api';
 import styles from './CollectionsSection.module.css';
+
+// ── Todos os ícones usados no admin ──────────────────────────────────────────
 import {
-  GiHanger, GiTrousers, GiRunningShoe, GiSunflower, GiDiamondRing,
-  GiDress, GiClothes, GiNecklace, GiSewingNeedle,
+  GiHanger, GiDress, GiTrousers, GiRunningShoe, GiAmpleDress,
+  GiMonclerJacket, GiBelt, GiNecklace, GiSunglasses,
+  GiBriefcase, GiWinterHat, GiSocks, GiWool,
 } from 'react-icons/gi';
+import { BsHandbag, BsBag, BsShop } from 'react-icons/bs';
+import { FaTshirt, FaHatCowboy, FaShoePrints, FaChild } from 'react-icons/fa';
+import { MdOutlineCheckroom, MdOutlineSpa } from 'react-icons/md';
+
+const ICON_MAP = {
+  GiHanger:           GiHanger,
+  GiDress:            GiDress,
+  GiAmpleDress:       GiAmpleDress,
+  GiAmpleDressFem:    GiAmpleDress,
+  GiTrousers:         GiTrousers,
+  FaTshirt:           FaTshirt,
+  GiMonclerJacket:    GiMonclerJacket,
+  GiRunningShoe:      GiRunningShoe,
+  FaShoePrints:       FaShoePrints,
+  BsHandbag:          BsHandbag,
+  BsBag:              BsBag,
+  GiBelt:             GiBelt,
+  GiNecklace:         GiNecklace,
+  GiSunglasses:       GiSunglasses,
+  FaHatCowboy:        FaHatCowboy,
+  GiWinterHat:        GiWinterHat,
+  GiSocks:            GiSocks,
+  GiBriefcase:        GiBriefcase,
+  GiWool:             GiWool,
+  MdOutlineCheckroom: MdOutlineCheckroom,
+  FaChild:            FaChild,
+  BsShop:             BsShop,
+  MdOutlineSpa:       MdOutlineSpa,
+};
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://geral-revestese-api.r954jc.easypanel.host';
+
+function renderIcon(icone, size = 28) {
+  if (!icone) return <GiHanger size={size} />;
+  // URL de imagem (personalizado)
+  if (icone.startsWith('/') || icone.startsWith('http')) {
+    const src = icone.startsWith('http') ? icone : `${API_BASE}${icone}`;
+    return <img src={src} alt="ícone" width={size} height={size} style={{ objectFit: 'contain' }} />;
+  }
+  // Nome de react-icon
+  const Icon = ICON_MAP[icone] || GiHanger;
+  return <Icon size={size} />;
+}
 
 // Paleta de cores por índice
 const ACCENTS = [
@@ -22,25 +68,6 @@ const ACCENTS = [
   'var(--reveste-crimson)',
   'var(--reveste-gold-dark)',
 ];
-
-// Ícone por nome da categoria (fallback = GiHanger)
-const ICONS = [
-  GiHanger, GiDress, GiTrousers, GiRunningShoe,
-  GiSunflower, GiDiamondRing, GiHanger, GiNecklace,
-  GiClothes, GiSewingNeedle,
-];
-
-const getIcon = (nome, idx) => {
-  const n = nome?.toLowerCase() || '';
-  if (n.includes('feminin') || n.includes('vestido') || n.includes('dress')) return <GiDress />;
-  if (n.includes('masculin') || n.includes('calça') || n.includes('trouse')) return <GiTrousers />;
-  if (n.includes('calçado') || n.includes('sapato') || n.includes('tênis') || n.includes('shoe')) return <GiRunningShoe />;
-  if (n.includes('vintage') || n.includes('retrô')) return <GiSunflower />;
-  if (n.includes('acessório') || n.includes('joia') || n.includes('colar') || n.includes('anel')) return <GiDiamondRing />;
-  if (n.includes('bolsa') || n.includes('bag')) return <GiHanger />;
-  const Icon = ICONS[idx % ICONS.length];
-  return <Icon />;
-};
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -107,7 +134,7 @@ const CollectionsSection = () => {
             >
               <div className={styles.collectionIconContainer}>
                 <span className={styles.collectionIcon} style={{ color: ACCENTS[i % ACCENTS.length] }}>
-                  {getIcon(cat.nome, i)}
+                  {renderIcon(cat.icone)}
                 </span>
               </div>
               <h3 className={styles.collectionName}>{cat.nome}</h3>
