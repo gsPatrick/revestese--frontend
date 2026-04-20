@@ -42,7 +42,7 @@ export default function FreteGratisModal() {
     <AnimatePresence>
       {visivel && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop + centralizador — o clique no fundo fecha o modal */}
           <motion.div
             className={styles.backdrop}
             initial={{ opacity: 0 }}
@@ -50,9 +50,8 @@ export default function FreteGratisModal() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={fechar}
-          />
-
-          {/* Modal */}
+          >
+          {/* Modal — stopPropagation evita que clique interno feche */}
           <motion.div
             className={styles.modal}
             role="dialog"
@@ -62,6 +61,7 @@ export default function FreteGratisModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.88, y: 24 }}
             transition={{ type: 'spring', stiffness: 280, damping: 24 }}
+            onClick={e => e.stopPropagation()}
           >
             {/* Botão fechar */}
             <button className={styles.closeBtn} onClick={fechar} aria-label="Fechar">
@@ -91,6 +91,7 @@ export default function FreteGratisModal() {
 
             {/* Rodapé decorativo */}
             <p className={styles.fine}>Válido enquanto a promoção estiver ativa.</p>
+          </motion.div>
           </motion.div>
         </>
       )}
