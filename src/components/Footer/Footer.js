@@ -101,7 +101,7 @@ const Footer = () => {
           </ul>
           <h3 className={`${styles.footerTitle} ${styles.marginTop}`}>Contato</h3>
           <ul className={styles.footerList}>
-            <li className={styles.contactItem}><FaPhoneAlt /><span>(11) 95472-8628</span></li>
+            <li className={styles.contactItem}><FaPhoneAlt /><span>(18) 99818-4907</span></li>
             <li className={styles.contactItem}><FaEnvelope /><span>contato@reveste-se.com.br</span></li>
           </ul>
         </motion.div>

@@ -93,7 +93,7 @@ const OffCanvasMenu = ({ isOpen, onClose }) => {
           {/* Contato e Redes Sociais */}
           <div className={styles.menuContactInfo}>
             <a href="tel:+5511954728628" className={styles.menuContactLink}>
-              <BsPhone className={styles.menuContactIcon} /> (11) 95472-8628
+              <BsPhone className={styles.menuContactIcon} /> (18) 99818-4907
             </a>
             <a href="mailto:contato@reveste-se.com.br" className={styles.menuContactLink}>
               <BsEnvelope className={styles.menuContactIcon} /> contato@reveste-se.com.br

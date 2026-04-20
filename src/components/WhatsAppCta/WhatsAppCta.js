@@ -9,7 +9,7 @@ import { HiXMark } from 'react-icons/hi2';
 const WhatsAppCta = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const whatsappNumber = '5511954728628';
+  const whatsappNumber = '5518998184907';
   const whatsappMessage = encodeURIComponent(
     'Olá! Vi uma peça no Reveste-se e gostaria de saber mais.'
   );

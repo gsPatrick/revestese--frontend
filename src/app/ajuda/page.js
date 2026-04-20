@@ -152,7 +152,7 @@ export default function AjudaPage() {
           Encontre respostas para as dúvidas mais comuns ou fale direto com a nossa equipe.
         </p>
         <a
-          href="https://wa.me/5511954728628?text=Olá! Preciso de ajuda com meu pedido."
+          href="https://wa.me/5518998184907?text=Olá! Preciso de ajuda com meu pedido."
           target="_blank" rel="noopener noreferrer"
           className={styles.whatsappBtn}
         >
@@ -196,7 +196,7 @@ export default function AjudaPage() {
             <h3>Ainda com dúvidas?</h3>
             <p>Nossa equipe está pronta para te ajudar. Resposta em até 24h.</p>
             <div className={styles.ctaBtns}>
-              <a href="https://wa.me/5511954728628" target="_blank" rel="noopener noreferrer" className={styles.ctaWhatsapp}>
+              <a href="https://wa.me/5518998184907" target="_blank" rel="noopener noreferrer" className={styles.ctaWhatsapp}>
                 <BsWhatsapp /> WhatsApp
               </a>
               <Link href="/contact" className={styles.ctaContact}>Formulário de contato</Link>

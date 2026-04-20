@@ -4,21 +4,22 @@
   position: sticky;
   top: 0; left: 0; right: 0; z-index: 50;
   background-color: transparent;
-  transition: box-shadow 0.3s ease;
+  /* will-change isola o header num layer composto — sem reflow ao rolar */
+  will-change: transform;
 }
 
+/* Ao rolar: usa box-shadow (não muda layout) e transform no logo */
 .scrolled .mainBar {
-  padding: 0.55rem 0;
   box-shadow: 0 2px 16px rgba(0,0,0,0.1);
 }
 
+/* transform: scale não causa reflow — zero stutter */
 .scrolled .mainLogo {
-  font-size: 1.65rem;
+  transform: scale(0.88);
+  transform-origin: left center;
 }
 
-.scrolled .navBar {
-  padding: 0.4rem 0;
-}
+/* Sem mudança de padding para navBar — elimina jank vertical */
 
 /* --- Top Bar --- */
 .topBarWrapper { display: block; }
@@ -61,6 +62,8 @@
   border-bottom: 1px solid var(--reveste-border);
   display: flex; align-items: center;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  transition: box-shadow 0.25s ease;
+  will-change: box-shadow;
 }
 .mainBarContent {
   max-width: 1280px; margin-left: auto; margin-right: auto;
@@ -75,8 +78,10 @@
   font-style: italic;
   letter-spacing: 0.04em;
   color: var(--reveste-gold);
-  transition: color 0.3s ease;
   white-space: nowrap;
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.25s ease;
+  will-change: transform;
 }
 .mainLogo:hover { color: var(--reveste-gold-dark); }
 

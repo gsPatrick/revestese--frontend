@@ -13,7 +13,7 @@ const HeaderTopBar = () => {
         <div className={styles.topBarContact}>
           <a href="tel:+5511954728628" className={styles.topBarLink}>
             <BsPhone className={styles.topBarIcon} />
-            <span>(11) 95472-8628</span>
+            <span>(18) 99818-4907</span>
           </a>
           <a href="mailto:contato@reveste-se.com.br" className={styles.topBarLink}>
             <BsEnvelope className={styles.topBarIcon} />

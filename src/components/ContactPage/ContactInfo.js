@@ -8,7 +8,7 @@ import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 const contactMethods = [
   { icon: <BsEnvelope />, title: 'E-mail', content: 'contato@reveste-se.com.br', href: 'mailto:contato@reveste-se.com.br' },
-  { icon: <BsPhone />, title: 'Telefone', content: '(11) 95472-8628', href: 'tel:+5511954728628' },
+  { icon: <BsPhone />, title: 'WhatsApp', content: '(18) 99818-4907', href: 'tel:+5518998184907' },
   { icon: <BsPinMap />, title: 'Localização', content: 'Presidente Epitácio — SP', href: '#' },
 ];
 

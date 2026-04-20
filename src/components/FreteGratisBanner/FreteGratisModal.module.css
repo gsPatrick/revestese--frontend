@@ -1,0 +1,186 @@
+/* FreteGratisModal.module.css */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+  z-index: 9000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9001;
+  background: #fff;
+  border-radius: 20px;
+  padding: 2.5rem 2rem 1.75rem;
+  width: min(92vw, 420px);
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+/* Faixa colorida no topo */
+.modal::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--reveste-crimson-dark), var(--reveste-crimson), #c94e5d, var(--reveste-crimson-dark));
+  background-size: 200% 100%;
+  animation: gradShift 3s linear infinite;
+}
+
+@keyframes gradShift {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  background: var(--reveste-bg-muted, #f5f5f5);
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: var(--reveste-text-muted, #888);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.closeBtn:hover {
+  background: var(--reveste-crimson);
+  color: #fff;
+}
+
+/* Ícone caminhão */
+.topDecor {
+  margin-bottom: 1rem;
+}
+
+.truckWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--reveste-crimson), #c94e5d);
+  color: #fff;
+  font-size: 2rem;
+  animation: truckBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes truckBounce {
+  0%, 100% { transform: translateY(0); }
+  45%       { transform: translateY(-6px); }
+}
+
+.eyebrow {
+  font-family: var(--font-raleway-next, sans-serif);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--reveste-crimson);
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+
+.title {
+  font-family: var(--font-cormorant-next, serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--reveste-text, #1a1a1a);
+  line-height: 1.15;
+  margin: 0 0 0.85rem;
+}
+
+.desc {
+  font-family: var(--font-raleway-next, sans-serif);
+  font-size: 0.9rem;
+  color: var(--reveste-text-muted, #666);
+  line-height: 1.6;
+  margin: 0 auto 1.5rem;
+  max-width: 320px;
+}
+
+/* Botões */
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--reveste-crimson), #c94e5d);
+  color: #fff;
+  border-radius: 999px;
+  font-family: var(--font-raleway-next, sans-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(120, 14, 26, 0.3);
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(120, 14, 26, 0.35);
+}
+
+.dismissBtn {
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: 1.5px solid var(--reveste-border, #e0e0e0);
+  border-radius: 999px;
+  font-family: var(--font-raleway-next, sans-serif);
+  font-size: 0.88rem;
+  color: var(--reveste-text-muted, #777);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.dismissBtn:hover {
+  border-color: var(--reveste-crimson);
+  color: var(--reveste-crimson);
+}
+
+.fine {
+  font-size: 0.72rem;
+  color: var(--reveste-placeholder-text, #aaa);
+  font-family: var(--font-raleway-next, sans-serif);
+  margin: 0;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .modal {
+    padding: 2rem 1.25rem 1.5rem;
+  }
+  .title {
+    font-size: 1.65rem;
+  }
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .ctaBtn, .dismissBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

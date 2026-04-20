@@ -11,7 +11,7 @@ const channels = [
     icon: <FaWhatsapp />,
     title: 'WhatsApp',
     description: 'Atendimento rápido para dúvidas sobre peças, trocas e envios. Respondemos em minutos.',
-    href: 'https://wa.me/5511954728628?text=Ol%C3%A1%21+Tenho+uma+d%C3%BAvida+sobre+o+Reveste-se.',
+    href: 'https://wa.me/5518998184907?text=Ol%C3%A1%21+Tenho+uma+d%C3%BAvida+sobre+o+Reveste-se.',
     bgColor: 'var(--reveste-bg-surface)',
     iconColor: '#25D366'
   },
