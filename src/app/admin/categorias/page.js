@@ -13,7 +13,7 @@ import {
   GiBriefcase, GiWinterHat, GiSocks, GiWool,
 } from 'react-icons/gi';
 import {
-  BsHandbag, BsPersonDress, BsBag, BsShop,
+  BsHandbag, BsBag, BsShop,
 } from 'react-icons/bs';
 import { FaTshirt, FaHatCowboy, FaShoePrints, FaChild } from 'react-icons/fa';
 import { MdOutlineCheckroom, MdOutlineSpa } from 'react-icons/md';
@@ -22,6 +22,7 @@ export const ICON_MAP = {
   GiHanger:        { component: GiHanger,       label: 'Cabide'     },
   GiDress:         { component: GiDress,         label: 'Vestido'    },
   GiAmpleDress:    { component: GiAmpleDress,    label: 'Saia'       },
+  GiAmpleDressFem: { component: GiAmpleDress,    label: 'Moda Fem.'  },
   GiTrousers:      { component: GiTrousers,      label: 'Calça'      },
   FaTshirt:        { component: FaTshirt,         label: 'Camiseta'   },
   GiMonclerJacket: { component: GiMonclerJacket, label: 'Jaqueta'    },
@@ -38,7 +39,6 @@ export const ICON_MAP = {
   GiBriefcase:     { component: GiBriefcase,     label: 'Maleta'     },
   GiWool:          { component: GiWool,          label: 'Tricô/Lã'   },
   MdOutlineCheckroom: { component: MdOutlineCheckroom, label: 'Guarda-roupa' },
-  BsPersonDress:   { component: BsPersonDress,   label: 'Moda Fem.'  },
   FaChild:         { component: FaChild,         label: 'Infantil'   },
   BsShop:          { component: BsShop,          label: 'Loja'       },
   MdOutlineSpa:    { component: MdOutlineSpa,    label: 'Bem-estar'  },
