@@ -15,7 +15,7 @@ const ProductTabs = ({ product }) => {
       <div className={styles.tabContent}>
         {activeTab === 'details' && (
           <motion.div initial={{opacity: 0}} animate={{opacity: 1}}>
-            <h4>Sobre o Livro</h4>
+            <h4>Sobre a Peça</h4>
             <p>{product.description}</p>
           </motion.div>
         )}

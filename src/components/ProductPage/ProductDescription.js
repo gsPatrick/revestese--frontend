@@ -14,7 +14,7 @@ const ProductDescription = ({ product }) => {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5 }}
       >
-        <h4>Sobre o Livro</h4>
+        <h4>Sobre a Peça</h4>
         <p>{product.description}</p>
       </motion.div>
     </div>

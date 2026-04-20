@@ -20,7 +20,7 @@ const HeaderMain = ({ onMenuToggle }) => { // Recebe prop para toggle do menu
         <div className={styles.searchContainer}>
           <input
             type="text"
-            placeholder="Buscar livros, coleções..."
+            placeholder="Buscar peças, coleções..."
             className={styles.searchInput}
           />
           <button className={styles.searchButton} aria-label="Buscar">

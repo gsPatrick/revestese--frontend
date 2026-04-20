@@ -93,9 +93,9 @@ const ProductDetails = ({ product }) => {
       <h1 className={styles.productTitle}>{product.name}</h1>
       <p className={styles.productPrice}>R$ {selectedVariation.price.toFixed(2).replace('.', ',')}</p>
       
-      <p className={styles.productShortDescription}>
-        Um livro encantador para despertar a criatividade. Perfeito para tardes chuvosas e momentos de calma.
-      </p>
+      {product.description && (
+        <p className={styles.productShortDescription}>{product.description}</p>
+      )}
 
       <div className={styles.variationsContainer}>
         <h3 className={styles.variationsLabel}>Variações:</h3>
