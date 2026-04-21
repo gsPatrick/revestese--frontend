@@ -133,7 +133,7 @@ export default function CategoriasPage() {
     const formData = new FormData();
     formData.append('icone', file);
 
-    const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
+    const token = localStorage.getItem('reveste_token');
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `${API_BASE}/api/categorias/icone/upload`);
     if (token) xhr.setRequestHeader('Authorization', `Bearer ${token}`);
