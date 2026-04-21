@@ -157,12 +157,12 @@ export default function DashboardPage() {
           </div>
           {sales.length > 0 ? (
             <ResponsiveContainer width="100%" height={230}>
-              <BarChart data={sales} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
+              <BarChart data={sales} margin={{ top: 5, right: 10, left: -10, bottom: 5 }} barCategoryGap="40%">
                 <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
                 <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#9ca3af' }} />
                 <YAxis tickFormatter={v => `R$${v}`} tick={{ fontSize: 11, fill: '#9ca3af' }} width={65} />
                 <Tooltip content={<CustomTooltip money />} />
-                <Bar dataKey="total" name="Faturamento" fill="#111111" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="total" name="Faturamento" fill="#111111" radius={[4, 4, 0, 0]} maxBarSize={56} />
               </BarChart>
             </ResponsiveContainer>
           ) : (
@@ -296,17 +296,39 @@ export default function DashboardPage() {
           <div className={styles.cardHeader}>
             <h2 className={styles.cardTitle}>Produtos mais visitados</h2>
           </div>
-          {prods.length > 0 ? (
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={prods.slice(0, 8)} layout="vertical" margin={{ top: 0, right: 20, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" horizontal={false} />
-                <XAxis type="number" tick={{ fontSize: 11, fill: '#9ca3af' }} />
-                <YAxis type="category" dataKey="nome" width={120} tick={{ fontSize: 11, fill: '#374151' }} />
-                <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="views" name="Visualizações" fill="#C9A84C" radius={[0, 4, 4, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          ) : (
+          {prods.length > 0 ? (() => {
+            const truncate = (s, n = 24) => s?.length > n ? s.slice(0, n) + '…' : (s || '');
+            const prodsChart = prods.slice(0, 8).map(p => ({ ...p, nomeAbrev: truncate(p.nome) }));
+            const chartH = Math.max(260, prodsChart.length * 38);
+            return (
+              <ResponsiveContainer width="100%" height={chartH}>
+                <BarChart data={prodsChart} layout="vertical" margin={{ top: 4, right: 30, left: 8, bottom: 4 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" horizontal={false} />
+                  <XAxis type="number" tick={{ fontSize: 11, fill: '#9ca3af' }} allowDecimals={false} />
+                  <YAxis
+                    type="category"
+                    dataKey="nomeAbrev"
+                    width={170}
+                    tick={{ fontSize: 11, fill: '#374151' }}
+                    tickLine={false}
+                  />
+                  <Tooltip
+                    content={({ active, payload }) => {
+                      if (!active || !payload?.length) return null;
+                      const item = payload[0]?.payload;
+                      return (
+                        <div style={{ background: '#fff', border: '1px solid #f3f4f6', borderRadius: 6, padding: '0.5rem 0.85rem', fontSize: '0.78rem', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
+                          <p style={{ margin: '0 0 3px', fontWeight: 700, color: '#374151', maxWidth: 200 }}>{item?.nome}</p>
+                          <p style={{ margin: 0, color: '#C9A84C' }}>Visualizações: <strong>{item?.views}</strong></p>
+                        </div>
+                      );
+                    }}
+                  />
+                  <Bar dataKey="views" name="Visualizações" fill="#C9A84C" radius={[0, 4, 4, 0]} maxBarSize={22} />
+                </BarChart>
+              </ResponsiveContainer>
+            );
+          })() : (
             <div className={styles.emptyChart}>Nenhuma visualização de produto registrada</div>
           )}
         </div>
