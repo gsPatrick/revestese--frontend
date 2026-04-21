@@ -100,7 +100,11 @@ export default function PedidosPage() {
       showToast('Status atualizado!');
       setPedidos(ps => ps.map(p => p.id === pedidoId ? { ...p, status: novoStatus } : p));
       setDetails(prev => prev[pedidoId] ? { ...prev, [pedidoId]: { ...prev[pedidoId], status: novoStatus } } : prev);
-    } catch { showToast('Erro ao atualizar status.'); }
+    } catch (err) {
+      const msg = err?.response?.data?.erro || err?.response?.data?.message || err?.message || 'Erro ao atualizar status.';
+      console.error('[Admin Pedidos] Erro ao atualizar status:', err?.response?.status, msg);
+      showToast(`Erro: ${msg}`);
+    }
     finally { setUpdating(null); }
   };
 
