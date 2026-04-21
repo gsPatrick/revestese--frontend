@@ -13,9 +13,9 @@ const contactMethods = [
 ];
 
 const socialLinks = [
-  { icon: <FaInstagram />, label: 'Instagram', href: 'https://www.instagram.com/reveste.se' },
+  { icon: <FaInstagram />, label: 'Instagram', href: 'https://www.instagram.com/revestesemoda?igsh=OHBwaDltdmxqd2xw&utm_source=qr' },
   { icon: <FaFacebookF />, label: 'Facebook', href: 'https://www.facebook.com/revestese' },
-  { icon: <BsTiktok />, label: 'TikTok', href: 'https://www.tiktok.com/@reveste.se' },
+  { icon: <BsTiktok />, label: 'TikTok', href: 'https://www.tiktok.com/@revestesemodacircular0?_r=1&_t=ZS-95j8sUskzlB' },
 ];
 
 const ContactInfo = () => {

@@ -21,7 +21,7 @@ const HeaderTopBar = () => {
           </a>
         </div>
         <div className={styles.topBarSocial}>
-          <a href="https://www.tiktok.com/@reveste.se" className={styles.topBarSocialLink} aria-label="TikTok">
+          <a href="https://www.tiktok.com/@revestesemodacircular0?_r=1&_t=ZS-95j8sUskzlB" className={styles.topBarSocialLink} aria-label="TikTok">
             <BsTiktok />
           </a>
           <a href="https://www.facebook.com/profile.php?id=61578009051256&mibextid=wwXIfr&mibextid=wwXIfr" className={styles.topBarSocialLink} aria-label="Facebook">

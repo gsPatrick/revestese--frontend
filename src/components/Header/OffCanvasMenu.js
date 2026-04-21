@@ -99,7 +99,7 @@ const OffCanvasMenu = ({ isOpen, onClose }) => {
               <BsEnvelope className={styles.menuContactIcon} /> contato@reveste-se.com.br
             </a>
             <div className={styles.menuSocialLinks}>
-              <a href="https://www.tiktok.com/@reveste.se" className={styles.menuSocialLink} aria-label="TikTok"><BsTiktok /></a>
+              <a href="https://www.tiktok.com/@revestesemodacircular0?_r=1&_t=ZS-95j8sUskzlB" className={styles.menuSocialLink} aria-label="TikTok"><BsTiktok /></a>
               <a href="https://www.facebook.com/profile.php?id=61578009051256&mibextid=wwXIfr&mibextid=wwXIfr" className={styles.menuSocialLink} aria-label="Facebook"><FaFacebookF /></a>
               <a href="https://www.facebook.com/profile.php?id=61578009051256&mibextid=wwXIfr&mibextid=wwXIfr" className={styles.menuSocialLink} aria-label="Instagram"><FaInstagram /></a>
             </div>

@@ -51,9 +51,9 @@ const Footer = () => {
             Moda circular curada com amor. Damos nova vida a peças únicas e autênticas, unindo estilo, sustentabilidade e consciência. Vista o passado. Construa o futuro.
           </p>
           <div className={styles.socialIcons}>
-            <motion.a href="https://www.tiktok.com/@reveste.se" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1, y: -3 }} aria-label="TikTok"><FaTiktok /></motion.a>
+            <motion.a href="https://www.tiktok.com/@revestesemodacircular0?_r=1&_t=ZS-95j8sUskzlB" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1, y: -3 }} aria-label="TikTok"><FaTiktok /></motion.a>
             <motion.a href="https://www.facebook.com/revestese" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1, y: -3 }} aria-label="Facebook"><FaFacebookF /></motion.a>
-            <motion.a href="https://www.instagram.com/reveste.se" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1, y: -3 }} aria-label="Instagram"><FaInstagram /></motion.a>
+            <motion.a href="https://www.instagram.com/revestesemoda?igsh=OHBwaDltdmxqd2xw&utm_source=qr" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1, y: -3 }} aria-label="Instagram"><FaInstagram /></motion.a>
           </div>
         </motion.div>
 

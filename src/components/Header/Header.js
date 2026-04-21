@@ -185,9 +185,9 @@ const Header = () => {
                       ))}
                     </div>
                     <div className={styles.topBarSocial}>
-                        <a href="https://www.tiktok.com/@reveste.se" className={styles.topBarSocialLink} aria-label="TikTok"><BsTiktok /></a>
+                        <a href="https://www.tiktok.com/@revestesemodacircular0?_r=1&_t=ZS-95j8sUskzlB" className={styles.topBarSocialLink} aria-label="TikTok"><BsTiktok /></a>
                         <a href="https://www.facebook.com/revestese" className={styles.topBarSocialLink} aria-label="Facebook"><FaFacebookF /></a>
-                        <a href="https://www.instagram.com/reveste.se" className={styles.topBarSocialLink} aria-label="Instagram"><FaInstagram /></a>
+                        <a href="https://www.instagram.com/revestesemoda?igsh=OHBwaDltdmxqd2xw&utm_source=qr" className={styles.topBarSocialLink} aria-label="Instagram"><FaInstagram /></a>
                     </div>
                 </div>
             </div>

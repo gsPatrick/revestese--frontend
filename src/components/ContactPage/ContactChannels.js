@@ -27,7 +27,7 @@ const channels = [
     icon: <FaInstagram />,
     title: 'Instagram',
     description: 'Acompanhe as novas chegadas, bastidores da curadoria e o universo do Reveste-se.',
-    href: 'https://www.instagram.com/reveste.se',
+    href: 'https://www.instagram.com/revestesemoda?igsh=OHBwaDltdmxqd2xw&utm_source=qr',
     bgColor: 'var(--reveste-bg-surface)',
     iconColor: 'var(--reveste-gold-dark)'
   }
