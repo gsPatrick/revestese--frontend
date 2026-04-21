@@ -225,10 +225,10 @@ export default function ProdutosPage() {
   const handleDelete = async (id) => {
     try {
       await api.delete(`/produtos/${id}`);
-      showToast('Produto removido.');
+      showToast('Produto ocultado. Ele ainda aparece nos pedidos existentes.');
       setConfirm(null);
       load();
-    } catch { showToast('Erro ao remover produto.'); }
+    } catch { showToast('Erro ao ocultar produto.'); }
   };
 
   // ── Stock quick-adjust ──
@@ -678,14 +678,18 @@ export default function ProdutosPage() {
         </div>
       )}
 
-      {/* Confirm delete */}
+      {/* Confirm hide */}
       {confirm && (
         <div className={styles.modalOverlay} onClick={() => setConfirm(null)}>
           <div className={styles.confirmBox} onClick={e => e.stopPropagation()}>
-            <p>Excluir este produto e todas as suas imagens e variações?</p>
+            <p style={{ fontWeight: 700, marginBottom: '0.4rem' }}>Ocultar produto?</p>
+            <p style={{ fontSize: '0.82rem', color: '#6b7280', lineHeight: 1.5 }}>
+              O produto ficará invisível na loja, mas <strong>não será apagado</strong> — os pedidos já realizados continuarão mostrando os dados corretamente.<br/>
+              Você pode reativá-lo a qualquer momento pela edição do produto.
+            </p>
             <div className={styles.confirmBtns}>
               <button className={styles.btnSecondary} onClick={() => setConfirm(null)}>Cancelar</button>
-              <button className={styles.btnDangerFill} onClick={() => handleDelete(confirm)}>Excluir</button>
+              <button className={styles.btnDangerFill} onClick={() => handleDelete(confirm)}>Ocultar produto</button>
             </div>
           </div>
         </div>
