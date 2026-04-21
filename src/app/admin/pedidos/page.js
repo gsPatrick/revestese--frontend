@@ -237,7 +237,7 @@ export default function PedidosPage() {
                           const imgUrl = it.produto?.imagemUrl
                             ? it.produto.imagemUrl.startsWith('http')
                               ? it.produto.imagemUrl
-                              : `https://geral-revestese-api.r954jc.easypanel.host${it.produto.imagemUrl}`
+                              : `https://n8n-doodledreamsmidia.r954jc.easypanel.host${it.produto.imagemUrl}`
                             : null;
                           return (
                             <div key={i} className={ord.itemRow}>

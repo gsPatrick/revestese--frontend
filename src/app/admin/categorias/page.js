@@ -46,6 +46,7 @@ export const ICON_MAP = {
 };
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://geral-revestese-api.r954jc.easypanel.host';
+const FILE_SERVER = 'https://n8n-doodledreamsmidia.r954jc.easypanel.host';
 
 function isImageUrl(name) {
   return name && (name.startsWith('/') || name.startsWith('http'));
@@ -53,7 +54,7 @@ function isImageUrl(name) {
 
 function IconPreview({ name, size = 20 }) {
   if (isImageUrl(name)) {
-    const src = name.startsWith('http') ? name : `${API_BASE}${name}`;
+    const src = name.startsWith('http') ? name : `${FILE_SERVER}${name}`;
     return (
       <img
         src={src}
@@ -305,7 +306,7 @@ export default function CategoriasPage() {
                         ) : isImageUrl(form.icone) ? (
                           <>
                             <img
-                              src={form.icone.startsWith('http') ? form.icone : `${API_BASE}${form.icone}`}
+                              src={form.icone.startsWith('http') ? form.icone : `${FILE_SERVER}${form.icone}`}
                               alt="preview"
                               className={catStyles.iconUploadPreview}
                             />
