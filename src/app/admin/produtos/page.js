@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import api from '@/services/api';
 import styles from '../shared.module.css';
 import pStyles from './produtos.module.css';
-import { BsPlus, BsPencil, BsTrash, BsSearch, BsX, BsCheckLg, BsDash, BsCloudUpload, BsImage } from 'react-icons/bs';
+import { BsPlus, BsPencil, BsTrash, BsSearch, BsX, BsCheckLg, BsDash, BsCloudUpload, BsImage, BsBoxSeam, BsClockHistory } from 'react-icons/bs';
 import Image from 'next/image';
 
 const EMPTY_PRODUTO = {
@@ -42,6 +42,17 @@ export default function ProdutosPage() {
   const [saving,  setSaving]  = useState(false);
   const [toast,   setToast]   = useState('');
   const [confirm, setConfirm] = useState(null);
+
+  // Stock quick-adjust state
+  const [stockModal,  setStockModal]  = useState(null);  // { produto }
+  const [stockVars,   setStockVars]   = useState([]);
+  const [stockLoading,setStockLoading]= useState(false);
+  const [adjusting,   setAdjusting]   = useState(null);  // variacaoId being adjusted
+
+  // History state
+  const [histModal,   setHistModal]   = useState(null);  // { produto }
+  const [histData,    setHistData]    = useState([]);
+  const [histLoading, setHistLoading] = useState(false);
 
   const LIMIT = 12;
 
@@ -220,6 +231,43 @@ export default function ProdutosPage() {
     } catch { showToast('Erro ao remover produto.'); }
   };
 
+  // ── Stock quick-adjust ──
+  const openStockModal = async (p, e) => {
+    e.stopPropagation();
+    setStockModal(p);
+    setStockLoading(true);
+    try {
+      const r = await api.get(`/produtos/${p.id}/variacoes-estoque`);
+      setStockVars(r.data || []);
+    } catch { setStockVars([]); }
+    finally { setStockLoading(false); }
+  };
+
+  const handleAjustar = async (variacaoId, delta) => {
+    if (!stockModal) return;
+    setAdjusting(variacaoId);
+    try {
+      const r = await api.patch(`/produtos/${stockModal.id}/variacoes/${variacaoId}/estoque`, { delta });
+      const { estoqueDepois } = r.data;
+      setStockVars(prev => prev.map(v => v.id === variacaoId ? { ...v, estoque: estoqueDepois } : v));
+      showToast(`Estoque atualizado: ${estoqueDepois} unidade(s)`);
+    } catch (err) {
+      showToast(err.response?.data?.erro || 'Erro ao ajustar estoque.');
+    } finally { setAdjusting(null); }
+  };
+
+  // ── History ──
+  const openHistModal = async (p, e) => {
+    e.stopPropagation();
+    setHistModal(p);
+    setHistLoading(true);
+    try {
+      const r = await api.get(`/produtos/${p.id}/historico-estoque`);
+      setHistData(r.data.historico || []);
+    } catch { setHistData([]); }
+    finally { setHistLoading(false); }
+  };
+
   const totalPages = Math.ceil(total / LIMIT);
   const f = (field, val) => setForm(p => ({ ...p, [field]: val }));
 
@@ -245,6 +293,19 @@ export default function ProdutosPage() {
         <div className={styles.productGrid}>
           {produtos.map(p => (
             <div key={p.id} className={styles.productCard}>
+              {/* Quick-stock overlay on hover */}
+              <div className={styles.cardOverlay}>
+                <button className={`${styles.cardOverlayBtn} ${styles.cardOverlayBtnGold}`} onClick={(e) => openStockModal(p, e)}>
+                  <BsBoxSeam size={13}/> Ajustar Estoque
+                </button>
+                <button className={styles.cardOverlayBtn} onClick={(e) => openHistModal(p, e)}>
+                  <BsClockHistory size={13}/> Histórico
+                </button>
+                <button className={styles.cardOverlayBtn} onClick={(e) => { e.stopPropagation(); openEdit(p); }}>
+                  <BsPencil size={13}/> Editar
+                </button>
+              </div>
+
               <div className={styles.productImg}>
                 {(p.imagens?.[0] || p.ArquivoProdutos?.[0]?.url) ? (
                   <Image src={p.imagens?.[0] || p.ArquivoProdutos?.[0]?.url} alt={p.nome} fill style={{ objectFit: 'cover' }} unoptimized/>
@@ -263,6 +324,7 @@ export default function ProdutosPage() {
                 <p className={styles.productMeta}>{p.variacoes?.length ?? 0} variação(ões)</p>
               </div>
               <div className={styles.productActions}>
+                <button className={styles.btnIcon} title="Ajustar estoque" onClick={(e) => openStockModal(p, e)}><BsBoxSeam/></button>
                 <button className={styles.btnIcon} onClick={() => openEdit(p)}><BsPencil/></button>
                 <button className={`${styles.btnIcon} ${styles.btnDanger}`} onClick={() => setConfirm(p.id)}><BsTrash/></button>
               </div>
@@ -277,6 +339,117 @@ export default function ProdutosPage() {
           <button disabled={page === 1} onClick={() => setPage(p => p - 1)} className={styles.pageBtn}>← Ant.</button>
           <span className={styles.pageInfo}>{page} / {totalPages}</span>
           <button disabled={page >= totalPages} onClick={() => setPage(p => p + 1)} className={styles.pageBtn}>Próx. →</button>
+        </div>
+      )}
+
+      {/* ══ STOCK MODAL ══ */}
+      {stockModal && (
+        <div className={styles.modalOverlay} onClick={() => setStockModal(null)}>
+          <div className={pStyles.stockModal} onClick={e => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <div>
+                <p className={pStyles.stockModalTitle}><BsBoxSeam size={14} style={{ marginRight: '0.4rem' }}/>Estoque — {stockModal.nome}</p>
+                <p className={pStyles.stockModalSub}>Clique em + ou − para ajustar unidades</p>
+              </div>
+              <button className={styles.modalClose} onClick={() => setStockModal(null)}><BsX size={18}/></button>
+            </div>
+
+            <div className={pStyles.stockList}>
+              {stockLoading && <p style={{ textAlign: 'center', color: '#9ca3af', fontSize: '0.85rem' }}>Carregando variações...</p>}
+              {!stockLoading && stockVars.length === 0 && <p style={{ textAlign: 'center', color: '#9ca3af', fontSize: '0.85rem' }}>Nenhuma variação encontrada.</p>}
+              {!stockLoading && stockVars.map(v => (
+                <div key={v.id} className={pStyles.stockRow}>
+                  <span className={pStyles.stockVarName}>{v.nome}</span>
+                  {v.digital ? (
+                    <span style={{ fontSize: '0.72rem', color: '#6b7280', background: '#eff6ff', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>Digital</span>
+                  ) : (
+                    <div className={pStyles.stockControls}>
+                      <button
+                        className={`${pStyles.stockBtn} ${pStyles.stockBtnMinus}`}
+                        disabled={v.estoque === 0 || adjusting === v.id}
+                        onClick={() => handleAjustar(v.id, -1)}
+                      >−</button>
+                      <span className={`${pStyles.stockCount} ${v.estoque === 0 ? pStyles.stockZero : ''}`}>{v.estoque}</span>
+                      <button
+                        className={`${pStyles.stockBtn} ${pStyles.stockBtnPlus}`}
+                        disabled={adjusting === v.id}
+                        onClick={() => handleAjustar(v.id, 1)}
+                      >+</button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.modalFooter} style={{ justifyContent: 'space-between' }}>
+              <button className={styles.btnSecondary} onClick={(e) => { setStockModal(null); openHistModal(stockModal, e); }}>
+                <BsClockHistory size={13}/> Ver histórico
+              </button>
+              <button className={styles.btnPrimary} onClick={() => setStockModal(null)}>Fechar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ══ HISTORY MODAL ══ */}
+      {histModal && (
+        <div className={styles.modalOverlay} onClick={() => setHistModal(null)}>
+          <div className={pStyles.histModal} onClick={e => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <div>
+                <p className={pStyles.stockModalTitle}><BsClockHistory size={14} style={{ marginRight: '0.4rem' }}/>Histórico de Estoque</p>
+                <p className={pStyles.stockModalSub}>{histModal.nome}</p>
+              </div>
+              <button className={styles.modalClose} onClick={() => setHistModal(null)}><BsX size={18}/></button>
+            </div>
+
+            <div className={pStyles.histBody}>
+              {histLoading && <p className={pStyles.histEmpty}>Carregando histórico...</p>}
+              {!histLoading && histData.length === 0 && (
+                <p className={pStyles.histEmpty}>Nenhuma movimentação registrada ainda.</p>
+              )}
+              {!histLoading && histData.length > 0 && (
+                <table className={pStyles.histTable}>
+                  <thead>
+                    <tr>
+                      <th>Data</th>
+                      <th>Variação</th>
+                      <th>Movimento</th>
+                      <th>Antes</th>
+                      <th>Depois</th>
+                      <th>Admin</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {histData.map(h => (
+                      <tr key={h.id}>
+                        <td style={{ whiteSpace: 'nowrap', color: '#6b7280', fontSize: '0.75rem' }}>
+                          {new Date(h.createdAt).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                        </td>
+                        <td style={{ fontWeight: 600 }}>{h.variacao?.nome || '—'}</td>
+                        <td>
+                          <span className={h.delta > 0 ? pStyles.histDeltaPos : pStyles.histDeltaNeg}>
+                            {h.delta > 0 ? `+${h.delta}` : h.delta}
+                          </span>
+                          {' '}
+                          <span style={{ fontSize: '0.72rem', color: '#9ca3af', background: '#f3f4f6', padding: '0.1rem 0.4rem', borderRadius: '4px', marginLeft: '0.25rem' }}>
+                            {h.tipo}
+                          </span>
+                        </td>
+                        <td style={{ color: '#6b7280' }}>{h.estoqueAntes}</td>
+                        <td style={{ fontWeight: 700 }}>{h.estoqueDepois}</td>
+                        <td style={{ color: '#9ca3af', fontSize: '0.75rem' }}>{h.admin?.nome || '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+
+            <div className={styles.modalFooter}>
+              <button className={styles.btnPrimary} onClick={() => setHistModal(null)}>Fechar</button>
+            </div>
+          </div>
         </div>
       )}
 

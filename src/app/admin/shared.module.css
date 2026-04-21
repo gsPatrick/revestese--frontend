@@ -108,8 +108,60 @@
   border: 1px solid #f3f4f6;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   transition: box-shadow 0.2s;
+  position: relative;
 }
 .productCard:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+/* ── Stock quick-overlay (visible on card hover) ── */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 2, 5, 0.78);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.75rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+  z-index: 10;
+  border-radius: 6px;
+}
+.productCard:hover .cardOverlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cardOverlayBtn {
+  width: 100%;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.55rem 0.85rem;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 7px;
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  letter-spacing: 0.02em;
+}
+.cardOverlayBtn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.4);
+}
+.cardOverlayBtnGold {
+  background: rgba(201, 168, 76, 0.18) !important;
+  border-color: rgba(201, 168, 76, 0.4) !important;
+  color: #f5d97a !important;
+}
+.cardOverlayBtnGold:hover {
+  background: rgba(201, 168, 76, 0.32) !important;
+  border-color: rgba(201, 168, 76, 0.65) !important;
+}
 
 .productImg {
   position: relative;
