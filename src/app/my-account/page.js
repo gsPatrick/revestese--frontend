@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import styles from '@/components/AccountPage/AccountPage.module.css';
 import Breadcrumb from '@/components/SubscriptionPage/Breadcrumb';
 import { useAuth } from '@/context/AuthContext';
@@ -14,9 +15,16 @@ import FavoriteProducts from '@/components/AccountPage/FavoriteProducts';
 import AccountDetails from '@/components/AccountPage/AccountDetails';
 import AddressManager from '@/components/AccountPage/AddressManager';
 
-export default function MyAccountPage() {
+function MyAccountPageInner() {
   const { user, isAuthenticated, isLoading: isAuthLoading } = useAuth();
-  const [activeView, setActiveView] = useState('dashboard');
+  const searchParams = useSearchParams();
+  const viewParam = searchParams.get('view');
+  const [activeView, setActiveView] = useState(viewParam || 'dashboard');
+
+  // Sync URL param whenever it changes (e.g. after navigation from header dropdown)
+  useEffect(() => {
+    if (viewParam) setActiveView(viewParam);
+  }, [viewParam]);
   
   // Estados para armazenar os dados vindos da API
   const [profileData, setProfileData] = useState(null);
@@ -124,5 +132,13 @@ export default function MyAccountPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function MyAccountPage() {
+  return (
+    <Suspense fallback={null}>
+      <MyAccountPageInner />
+    </Suspense>
   );
 }

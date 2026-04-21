@@ -15,7 +15,7 @@ import api from '@/services/api';
 
 // React Icons
 // ALTERAÇÃO: Importar BsCheckCircle
-import { BsCheckCircle, BsSearch, BsPerson, BsPersonFill, BsCart, BsTiktok, BsBoxArrowRight } from 'react-icons/bs';
+import { BsCheckCircle, BsSearch, BsPerson, BsPersonFill, BsCart, BsTiktok, BsBoxArrowRight, BsBoxSeam, BsHeart, BsGearFill } from 'react-icons/bs';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { HiOutlineBars3, HiXMark, HiChevronDown } from 'react-icons/hi2';
 
@@ -28,6 +28,8 @@ const Header = () => {
   const [isCatalogDropdownOpen, setIsCatalogDropdownOpen] = useState(false);
   const [apiCategories, setApiCategories] = useState([]);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const userMenuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 60);
@@ -77,12 +79,22 @@ const Header = () => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
         setIsSearchFocused(false);
       }
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setUserDropdownOpen(false);
+      }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [searchContainerRef]);
+
+  const getInitials = (name) => {
+    if (!name) return '?';
+    const parts = name.trim().split(' ').filter(Boolean);
+    if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    return parts[0][0].toUpperCase();
+  };
 
 
   useEffect(() => {
@@ -212,8 +224,49 @@ const Header = () => {
             </div>
 
             <div className={styles.mainActionIcons}>
-              <Link href={isAuthenticated ? "/my-account" : "/auth"} className={`${styles.mainActionLink} ${styles.hideOnMobile} ${isAuthenticated ? styles.loggedInUser : ''}`}>{isAuthenticated ? <BsPersonFill className={styles.mainIcon} /> : <BsPerson className={styles.mainIcon} />}<span>{isAuthenticated ? `Olá, ${user.nome.split(' ')[0]}` : 'Entrar'}</span></Link>
-              {isAuthenticated && (<button onClick={logout} className={`${styles.mainActionLink} ${styles.hideOnMobile} ${styles.logoutButton}`}><BsBoxArrowRight className={styles.mainIcon} /><span>Sair</span></button>)}
+              {/* User area */}
+              {!isAuthenticated ? (
+                <Link href="/auth" className={`${styles.mainActionLink} ${styles.hideOnMobile}`}>
+                  <BsPerson className={styles.mainIcon} /><span>Entrar</span>
+                </Link>
+              ) : (
+                <div className={`${styles.userMenu} ${styles.hideOnMobile}`} ref={userMenuRef}>
+                  <button className={styles.userMenuTrigger} onClick={() => setUserDropdownOpen(v => !v)}>
+                    <span className={styles.userAvatar}>{getInitials(user?.nome)}</span>
+                    <span className={styles.userMenuName}>Olá, {user?.nome?.split(' ')[0]}</span>
+                    <HiChevronDown className={`${styles.userMenuChevron} ${userDropdownOpen ? styles.rotated : ''}`} />
+                  </button>
+                  {userDropdownOpen && (
+                    <div className={styles.userDropdown}>
+                      <div className={styles.userDropdownHeader}>
+                        <span className={styles.userAvatarLg}>{getInitials(user?.nome)}</span>
+                        <div>
+                          <p className={styles.userDropdownName}>{user?.nome}</p>
+                          <p className={styles.userDropdownEmail}>{user?.email}</p>
+                        </div>
+                      </div>
+                      <div className={styles.userDropdownItems}>
+                        <Link href="/my-account" className={styles.userDropdownItem} onClick={() => setUserDropdownOpen(false)}>
+                          <BsPersonFill size={14}/> Minha Conta
+                        </Link>
+                        <Link href="/my-account?view=orders" className={styles.userDropdownItem} onClick={() => setUserDropdownOpen(false)}>
+                          <BsBoxSeam size={14}/> Meus Pedidos
+                        </Link>
+                        <Link href="/my-account?view=favorites" className={styles.userDropdownItem} onClick={() => setUserDropdownOpen(false)}>
+                          <BsHeart size={14}/> Favoritos
+                        </Link>
+                        <Link href="/my-account?view=addresses" className={styles.userDropdownItem} onClick={() => setUserDropdownOpen(false)}>
+                          <BsGearFill size={14}/> Meus Endereços
+                        </Link>
+                        <div className={styles.userDropdownDivider}/>
+                        <button className={`${styles.userDropdownItem} ${styles.userDropdownLogout}`} onClick={() => { logout(); setUserDropdownOpen(false); }}>
+                          <BsBoxArrowRight size={14}/> Sair da conta
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
               <Link href="/cart" className={styles.mainActionLink}><div className={styles.cartIconWrapper}><BsCart className={styles.mainIcon} />{totalItemsInCart > 0 && (<span className={styles.cartBadge}>{totalItemsInCart}</span>)}</div><span>Carrinho</span></Link>
               <button className={styles.mobileMenuButton} aria-label="Abrir Menu" onClick={() => setIsMenuOpen(true)}><HiOutlineBars3 className={styles.hamburgerIcon} /></button>
             </div>
