@@ -1,467 +1,407 @@
 // src/components/CheckoutPage/steps/UserInfoStep.js
-
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from '../CheckoutPage.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '@/services/api';
-import { useAuth } from '@/context/AuthContext'; 
+import { useAuth } from '@/context/AuthContext';
 
-// Recebe onComplete, isAuthenticated, isAuthLoading, userAddresses, isLoadingAddresses, onLoginOrRegisterSuccess, initialCep, allCartItemsAreDigital
-const UserInfoStep = ({ onComplete, isAuthenticated, isAuthLoading, userAddresses, isLoadingAddresses, onLoginOrRegisterSuccess, initialCep, allCartItemsAreDigital }) => {
-  const { login: authLogin, user: authUser } = useAuth(); 
+// ── Busca endereço direto na ViaCEP (sem passar pelo backend) ───────────────
+async function fetchViaCep(cep) {
+  const clean = cep.replace(/\D/g, '');
+  if (clean.length !== 8) throw new Error('CEP inválido');
+  const res = await fetch(`https://viacep.com.br/ws/${clean}/json/`);
+  if (!res.ok) throw new Error('Erro na consulta');
+  const data = await res.json();
+  if (data.erro) throw new Error('CEP não encontrado');
+  return data; // { logradouro, bairro, localidade, uf, complemento }
+}
 
-  const [showAuthForms, setShowAuthForms] = useState(false); 
-  const [isLoginMode, setIsLoginMode] = useState(true); 
+// ── Máscara CEP: 00000-000 ───────────────────────────────────────────────────
+function maskCep(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 8);
+  return digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits;
+}
 
-  const [addressFormData, setAddressFormData] = useState({
-    apelido: '', 
-    rua: '', 
-    numero: '', 
-    complemento: '',
-    bairro: '', 
-    cidade: '', 
-    estado: '', 
-    cep: initialCep || ''
-  });
+const EMPTY_ADDR = { apelido: '', cep: '', rua: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '' };
 
-  const [loginCreds, setLoginCreds] = useState({ email: '', senha: '' });
+const UserInfoStep = ({
+  onComplete,
+  isAuthenticated,
+  isAuthLoading,
+  userAddresses,
+  isLoadingAddresses,
+  onLoginOrRegisterSuccess,
+  initialCep,
+  allCartItemsAreDigital,
+}) => {
+  const { login: authLogin, user: authUser } = useAuth();
+
+  const [showAuthForms,  setShowAuthForms]  = useState(false);
+  const [isLoginMode,    setIsLoginMode]    = useState(true);
+
+  const [addrForm,       setAddrForm]       = useState({ ...EMPTY_ADDR, cep: initialCep || '' });
+  const [selectedAddrId, setSelectedAddrId] = useState('');
+
+  const [loginCreds,    setLoginCreds]    = useState({ email: '', senha: '' });
   const [registerCreds, setRegisterCreds] = useState({ nome: '', email: '', senha: '' });
 
-  const [selectedExistingAddressId, setSelectedExistingAddressId] = useState('');
-
-  const [loginError, setLoginError] = useState('');
+  const [loginError,    setLoginError]    = useState('');
   const [registerError, setRegisterError] = useState('');
-  const [addressFormError, setAddressFormError] = useState(''); 
-  const [isProcessingAuth, setIsProcessingAuth] = useState(false);
-  const [isSearchingCep, setIsSearchingCep] = useState(false);
-  const [cepError, setCepError] = useState('');
+  const [formError,     setFormError]     = useState('');
+  const [cepMsg,        setCepMsg]        = useState({ type: '', text: '' }); // type: 'loading'|'ok'|'error'
+  const [processing,    setProcessing]    = useState(false);
+  const cepTimer = useRef(null);
 
-
+  // ── inicializa ao autenticar ─────────────────────────────────────────────
   useEffect(() => {
-    if (!isAuthLoading) {
-      if (isAuthenticated) {
-         setShowAuthForms(false); 
-         if (userAddresses.length > 0) {
-            const principal = userAddresses.find(addr => addr.principal) || userAddresses[0];
-            setSelectedExistingAddressId(principal.id);
-             setAddressFormData({
-                apelido: principal.apelido || '', rua: principal.rua || '', numero: principal.numero || '',
-                complemento: principal.complemento || '', bairro: principal.bairro || '', cidade: principal.cidade || '',
-                estado: principal.estado || '', cep: principal.cep || ''
-             });
-         } else {
-             setSelectedExistingAddressId('new_address'); 
-              setAddressFormData(prev => ({ ...prev, cep: initialCep || '' })); 
-         }
-
+    if (isAuthLoading) return;
+    if (isAuthenticated) {
+      setShowAuthForms(false);
+      if (userAddresses.length > 0) {
+        const principal = userAddresses.find(a => a.principal) || userAddresses[0];
+        setSelectedAddrId(String(principal.id));
+        setAddrForm({
+          apelido: principal.apelido || '', cep: principal.cep || '',
+          rua: principal.rua || '', numero: principal.numero || '',
+          complemento: principal.complemento || '', bairro: principal.bairro || '',
+          cidade: principal.cidade || '', estado: principal.estado || '',
+        });
       } else {
-        setShowAuthForms(true); 
-         if (!initialCep) {
-             setAddressFormData({
-                apelido: '', rua: '', numero: '', complemento: '',
-                bairro: '', cidade: '', estado: '', cep: ''
-             });
-         } else {
-             setAddressFormData(prev => ({
-                ...prev,
-                apelido: '', rua: '', numero: '', complemento: '',
-                bairro: '', cidade: '', estado: ''
-             }));
-         }
-      }
-    }
-  }, [isAuthenticated, isAuthLoading, userAddresses, initialCep]); 
-  
-  useEffect(() => {
-      if (!isAuthenticated && showAuthForms) {
-          setAddressFormData({
-             apelido: '', rua: '', numero: '', complemento: '',
-             bairro: '', cidade: '', estado: '', cep: initialCep || ''
-          });
-          setCepError('');
-      }
-  }, [isLoginMode, isAuthenticated, showAuthForms, initialCep]);
-
-
-  const handleCepChange = async (e) => {
-    const cep = e.target.value.replace(/\D/g, '');
-    setAddressFormData(prev => ({ ...prev, cep }));
-    setCepError('');
-
-    if (cep.length === 8) {
-      setIsSearchingCep(true);
-      try {
-        const response = await api.post('/enderecos/validar-cep', { cep });
-        setAddressFormData(prev => ({
-          ...prev,
-          rua: response.data.logradouro,
-          bairro: response.data.bairro,
-          cidade: response.data.localidade,
-          estado: response.data.uf, 
-          complemento: response.data.complemento || '',
-        }));
-      } catch (error) {
-        setCepError('CEP não encontrado ou inválido.');
-        console.error("Erro ao buscar CEP", error);
-         setAddressFormData(prev => ({ 
-            ...prev,
-            rua: '', bairro: '', cidade: '', estado: '', complemento: ''
-         }));
-      } finally {
-        setIsSearchingCep(false);
+        setSelectedAddrId('new');
+        setAddrForm({ ...EMPTY_ADDR, cep: initialCep || '' });
       }
     } else {
-         setAddressFormData(prev => ({ 
+      setShowAuthForms(true);
+      setAddrForm({ ...EMPTY_ADDR, cep: initialCep || '' });
+    }
+  }, [isAuthenticated, isAuthLoading, userAddresses, initialCep]);
+
+  // ── troca login ↔ cadastro ─────────────────────────────────────────────
+  useEffect(() => {
+    if (!isAuthenticated && showAuthForms) {
+      setAddrForm({ ...EMPTY_ADDR, cep: initialCep || '' });
+      setCepMsg({ type: '', text: '' });
+    }
+  }, [isLoginMode, isAuthenticated, showAuthForms, initialCep]);
+
+  // ── CEP: busca automática com debounce 500ms ──────────────────────────────
+  const handleCepChange = (e) => {
+    const masked = maskCep(e.target.value);
+    setAddrForm(prev => ({ ...prev, cep: masked, rua: '', bairro: '', cidade: '', estado: '' }));
+    setCepMsg({ type: '', text: '' });
+
+    const digits = masked.replace(/\D/g, '');
+    clearTimeout(cepTimer.current);
+    if (digits.length === 8) {
+      setCepMsg({ type: 'loading', text: 'Buscando endereço…' });
+      cepTimer.current = setTimeout(async () => {
+        try {
+          const d = await fetchViaCep(digits);
+          setAddrForm(prev => ({
             ...prev,
-            rua: '', bairro: '', cidade: '', estado: '', complemento: ''
-         }));
+            rua:         d.logradouro || '',
+            bairro:      d.bairro     || '',
+            cidade:      d.localidade || '',
+            estado:      d.uf         || '',
+            complemento: d.complemento || prev.complemento,
+          }));
+          setCepMsg({ type: 'ok', text: '✓ Endereço encontrado' });
+        } catch {
+          setCepMsg({ type: 'error', text: 'CEP não encontrado. Preencha manualmente.' });
+        }
+      }, 500);
     }
   };
 
-  const handleAddressFormChange = (e) => {
+  const handleAddrChange = (e) => {
     const { name, value } = e.target;
-    setAddressFormData(prev => ({ ...prev, [name]: value }));
+    setAddrForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleLoginCredsChange = (e) => {
-    const { name, value } = e.target;
-    setLoginCreds(prev => ({ ...prev, [name]: value }));
-    setLoginError(''); 
+  // ── selecionar endereço existente ─────────────────────────────────────────
+  const handleSelectAddr = (e) => {
+    const id = e.target.value;
+    setSelectedAddrId(id);
+    if (id === 'new') {
+      setAddrForm({ ...EMPTY_ADDR, cep: initialCep || '' });
+      setCepMsg({ type: '', text: '' });
+    } else {
+      const a = userAddresses.find(x => String(x.id) === id);
+      if (a) setAddrForm({
+        apelido: a.apelido || '', cep: a.cep || '', rua: a.rua || '',
+        numero: a.numero || '', complemento: a.complemento || '',
+        bairro: a.bairro || '', cidade: a.cidade || '', estado: a.estado || '',
+      });
+    }
   };
 
-  const handleRegisterCredsChange = (e) => {
-    const { name, value } = e.target;
-    setRegisterCreds(prev => ({ ...prev, [name]: value }));
-    setRegisterError(''); 
-  };
-
-  const handleLoginSubmit = async (e) => {
+  // ── auth handlers ─────────────────────────────────────────────────────────
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setIsProcessingAuth(true);
-    setLoginError('');
+    setProcessing(true); setLoginError('');
     try {
-      const response = await api.post('/auth/login', loginCreds);
-      authLogin(response.data.usuario, response.data.token, null);
-      onLoginOrRegisterSuccess(); 
+      const res = await api.post('/auth/login', loginCreds);
+      authLogin(res.data.usuario, res.data.token, null);
+      onLoginOrRegisterSuccess();
     } catch (err) {
-      setLoginError(err.response?.data?.erro || 'Credenciais inválidas. Tente novamente.');
-    } finally {
-      setIsProcessingAuth(false);
-    }
+      setLoginError(err.response?.data?.erro || 'Credenciais inválidas.');
+    } finally { setProcessing(false); }
   };
 
-  const handleRegisterSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    setIsProcessingAuth(true);
-    setRegisterError('');
+    setProcessing(true); setRegisterError('');
     try {
-      const response = await api.post('/auth/register', registerCreds);
-      authLogin(response.data.usuario, response.data.token, null);
-      onLoginOrRegisterSuccess(); 
+      const res = await api.post('/auth/register', registerCreds);
+      authLogin(res.data.usuario, res.data.token, null);
+      onLoginOrRegisterSuccess();
     } catch (err) {
-      setRegisterError(err.response?.data?.erro || 'Erro no cadastro. Tente novamente.');
-    } finally {
-      setIsProcessingAuth(false);
-    }
+      setRegisterError(err.response?.data?.erro || 'Erro no cadastro.');
+    } finally { setProcessing(false); }
   };
 
-  const handleAddressFormSubmit = async (e) => {
+  // ── submit principal ──────────────────────────────────────────────────────
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setAddressFormError('');
+    setFormError('');
 
-    let finalAddressData = null;
-    let userContactData = null; 
-
-    // NOVO: Se o pedido é 100% digital, o endereço pode ser nulo/simples
+    // Pedido 100% digital
     if (allCartItemsAreDigital) {
-      // Se não está logado, precisa pelo menos do nome e email para o pedido
       if (!isAuthenticated && (!registerCreds.nome || !registerCreds.email)) {
-        setAddressFormError('Por favor, informe seu nome e email para contato.');
+        setFormError('Informe seu nome e e-mail para continuar.');
         return;
       }
-      // Para pedidos digitais, o endereço é opcional e pode ser um objeto vazio/simples
-      finalAddressData = {}; // Ou { cep: '00000000' } se o backend exigir CEP mesmo para digital
-      userContactData = isAuthenticated ? { nome: authUser?.nome, email: authUser?.email } : { nome: registerCreds.nome, email: registerCreds.email };
-      onComplete({ ...userContactData, ...finalAddressData });
+      onComplete({ nome: authUser?.nome || registerCreds.nome, email: authUser?.email || registerCreds.email });
       return;
     }
 
-    // Lógica existente para pedidos FÍSICOS
-    if (isAuthenticated) {
-        const selectedId = e.target.elements['address-selection']?.value; 
-
-        if (userAddresses.length > 0 && selectedId && selectedId !== 'new_address') {
-            const selectedAddress = userAddresses.find(addr => addr.id == selectedId);
-            if (selectedAddress) {
-                if (!selectedAddress.principal) {
-                    try {
-                        await api.post(`/enderecos/${selectedAddress.id}/principal`);
-                    } catch (error) {
-                        console.warn("Falha ao definir endereço como principal:", error);
-                    }
-                }
-                finalAddressData = selectedAddress; 
-            } else {
-                setAddressFormError('Endereço selecionado não encontrado.');
-                return;
-            }
-        } else {
-             if (!addressFormData.rua || !addressFormData.numero || !addressFormData.bairro || !addressFormData.cidade || !addressFormData.estado || !addressFormData.cep) {
-                 setAddressFormError('Por favor, preencha todos os campos obrigatórios do endereço.');
-                 return;
-             }
-             if (addressFormData.cep.replace(/\D/g, '').length !== 8) {
-                  setAddressFormError('CEP inválido.');
-                  return;
-             }
-
-            setIsProcessingAuth(true); 
-            try {
-                 const newAddressPayload = { 
-                     ...addressFormData,
-                     principal: e.target.elements['principal-checkbox']?.checked || userAddresses.length === 0 
-                 };
-                const response = await api.post('/enderecos', newAddressPayload);
-                onLoginOrRegisterSuccess(); 
-                finalAddressData = response.data; 
-            } catch (err) {
-                console.error("Erro ao criar novo endereço:", err.response?.data || err.message);
-                setAddressFormError(err.response?.data?.erro || 'Erro ao salvar o novo endereço. Verifique os dados.');
-                setIsProcessingAuth(false);
-                return; 
-            } finally {
-                 setIsProcessingAuth(false);
-            }
-        }
-
-        userContactData = {
-             email: authUser?.email,
-             nome: authUser?.nome,
-        };
-
-
-    } else { // Não autenticado, deve preencher nome/email e endereço
-        if (!registerCreds.nome || !registerCreds.email || !addressFormData.rua || !addressFormData.numero || !addressFormData.bairro || !addressFormData.cidade || !addressFormData.estado || !addressFormData.cep) {
-             setAddressFormError('Por favor, preencha todos os dados de contato e endereço.');
-             return;
-        }
-         if (addressFormData.cep.replace(/\D/g, '').length !== 8) {
-              setAddressFormError('CEP inválido.');
-              return;
-         }
-
-        finalAddressData = addressFormData; 
-        userContactData = {
-            nome: registerCreds.nome,
-            email: registerCreds.email,
-        };
+    // Usar endereço existente
+    if (isAuthenticated && userAddresses.length > 0 && selectedAddrId !== 'new') {
+      const a = userAddresses.find(x => String(x.id) === selectedAddrId);
+      if (!a) { setFormError('Endereço selecionado não encontrado.'); return; }
+      if (!a.principal) {
+        try { await api.post(`/enderecos/${a.id}/principal`); } catch (_) {}
+      }
+      onComplete({ nome: authUser?.nome, email: authUser?.email, ...a });
+      return;
     }
 
-     onComplete({
-         ...userContactData, 
-         ...finalAddressData 
-     });
+    // Validar novo endereço
+    const cepDigits = addrForm.cep.replace(/\D/g, '');
+    if (cepDigits.length !== 8)  { setFormError('CEP inválido.'); return; }
+    if (!addrForm.rua)            { setFormError('Informe a rua.'); return; }
+    if (!addrForm.numero)         { setFormError('Informe o número.'); return; }
+    if (!addrForm.bairro)         { setFormError('Informe o bairro.'); return; }
+    if (!addrForm.cidade)         { setFormError('Informe a cidade.'); return; }
+    if (!addrForm.estado)         { setFormError('Informe o estado.'); return; }
+    if (!isAuthenticated && (!registerCreds.nome || !registerCreds.email)) {
+      setFormError('Informe seu nome e e-mail para continuar.'); return;
+    }
+
+    const payload = { ...addrForm, cep: cepDigits };
+
+    if (isAuthenticated) {
+      setProcessing(true);
+      try {
+        const principal = userAddresses.length === 0 ||
+          e.target.elements['principal-checkbox']?.checked || false;
+        const res = await api.post('/enderecos', { ...payload, principal });
+        onLoginOrRegisterSuccess();
+        onComplete({ nome: authUser?.nome, email: authUser?.email, ...res.data });
+      } catch (err) {
+        setFormError(err.response?.data?.erro || 'Erro ao salvar endereço.');
+      } finally { setProcessing(false); }
+    } else {
+      onComplete({ nome: registerCreds.nome, email: registerCreds.email, ...payload });
+    }
   };
 
-  const handleAddressSelectionChange = (e) => {
-      const selectedId = e.target.value;
-      setSelectedExistingAddressId(selectedId);
-      if (selectedId !== 'new_address') {
-          const selectedAddr = userAddresses.find(addr => addr.id == selectedId);
-          if (selectedAddr) {
-               setAddressFormData({
-                  apelido: selectedAddr.apelido || '', rua: selectedAddr.rua || '', numero: selectedAddr.numero || '',
-                  complemento: selectedAddr.complemento || '', bairro: selectedAddr.bairro || '', cidade: selectedAddr.cidade || '',
-                  estado: selectedAddr.estado || '', cep: selectedAddr.cep || ''
-               });
-          }
-      } else {
-           setAddressFormData({
-                apelido: '', rua: '', numero: '', complemento: '',
-                bairro: '', cidade: '', estado: '', cep: initialCep || '' 
-           });
-           setCepError(''); 
-      }
-  };
+  // ── render ────────────────────────────────────────────────────────────────
+  if (isAuthLoading) return <p className={styles.loadingText}>Verificando seus dados…</p>;
 
+  // Formulário de endereço (comum a autenticado e visitante)
+  const addrFormEl = (
+    <div>
+      <h4 className={styles.subheading}>Detalhes do Endereço</h4>
 
-  let content;
+      <div className={styles.formGroup}>
+        <label htmlFor="addr-apelido">Apelido (ex: Casa, Trabalho)</label>
+        <input id="addr-apelido" name="apelido" value={addrForm.apelido} onChange={handleAddrChange} placeholder="Casa" />
+      </div>
 
-  if (isAuthLoading) {
-    content = <p className={styles.loadingText}>Verificando seus dados...</p>;
-  } else if (!isAuthenticated && showAuthForms) {
-    content = (
-      <>
-        <div className={styles.loginToggle}>
-          <p>Já tem uma conta?</p>
-          <button type="button" onClick={() => setIsLoginMode(true)} disabled={isProcessingAuth}>Entre</button>
-          <p>Ou, é novo por aqui?</p>
-          <button type="button" onClick={() => setIsLoginMode(false)} disabled={isProcessingAuth}>Cadastre-se</button>
+      {/* CEP com busca automática */}
+      <div className={styles.formGroup}>
+        <label htmlFor="addr-cep">CEP *</label>
+        <input
+          id="addr-cep" name="cep"
+          value={addrForm.cep}
+          onChange={handleCepChange}
+          maxLength={9}
+          placeholder="00000-000"
+          required
+          style={{ background: cepMsg.type === 'loading' ? '#f9fafb' : undefined }}
+        />
+        {cepMsg.text && (
+          <p style={{
+            fontSize: '0.78rem', marginTop: '0.3rem',
+            color: cepMsg.type === 'ok' ? '#059669' : cepMsg.type === 'error' ? '#dc2626' : '#6b7280',
+          }}>
+            {cepMsg.type === 'loading' && <span style={{ marginRight: 4 }}>⏳</span>}
+            {cepMsg.text}
+          </p>
+        )}
+      </div>
+
+      {/* Rua */}
+      <div className={styles.formGroup}>
+        <label htmlFor="addr-rua">Rua / Logradouro *</label>
+        <input id="addr-rua" name="rua" value={addrForm.rua} onChange={handleAddrChange} required placeholder="Preenchido automaticamente pelo CEP" />
+      </div>
+
+      {/* Número + Complemento */}
+      <div className={styles.formGrid}>
+        <div className={styles.formGroup}>
+          <label htmlFor="addr-numero">Número *</label>
+          <input id="addr-numero" name="numero" value={addrForm.numero} onChange={handleAddrChange} required placeholder="123" />
         </div>
-        <AnimatePresence mode="wait">
+        <div className={styles.formGroup}>
+          <label htmlFor="addr-complemento">Complemento (Opcional)</label>
+          <input id="addr-complemento" name="complemento" value={addrForm.complemento} onChange={handleAddrChange} placeholder="Apto, Bloco…" />
+        </div>
+      </div>
+
+      {/* Bairro + Cidade */}
+      <div className={styles.formGrid}>
+        <div className={styles.formGroup}>
+          <label htmlFor="addr-bairro">Bairro *</label>
+          <input id="addr-bairro" name="bairro" value={addrForm.bairro} onChange={handleAddrChange} required />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="addr-cidade">Cidade *</label>
+          <input id="addr-cidade" name="cidade" value={addrForm.cidade} onChange={handleAddrChange} required />
+        </div>
+      </div>
+
+      {/* Estado */}
+      <div className={styles.formGroup} style={{ maxWidth: 120 }}>
+        <label htmlFor="addr-estado">Estado (UF) *</label>
+        <input id="addr-estado" name="estado" value={addrForm.estado} onChange={handleAddrChange} maxLength={2} required placeholder="SP" />
+      </div>
+
+      {isAuthenticated && (selectedAddrId === 'new' || userAddresses.length === 0) && (
+        <div className={styles.checkboxGroup}>
+          <input type="checkbox" id="principal-checkbox" name="principal" defaultChecked={userAddresses.length === 0} />
+          <label htmlFor="principal-checkbox">Tornar este o endereço principal</label>
+        </div>
+      )}
+    </div>
+  );
+
+  // ── Visitante não autenticado com formulários de auth ─────────────────────
+  if (!isAuthenticated && showAuthForms) {
+    return (
+      <AnimatePresence mode="wait">
+        <motion.div key={isLoginMode ? 'login' : 'register'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <div className={styles.loginToggle}>
+            <p>Já tem uma conta?</p>
+            <button type="button" onClick={() => setIsLoginMode(true)}  disabled={processing}>Entre</button>
+            <p>Ou, é novo por aqui?</p>
+            <button type="button" onClick={() => setIsLoginMode(false)} disabled={processing}>Cadastre-se</button>
+          </div>
+
           {isLoginMode ? (
-            <motion.form key="loginForm" onSubmit={handleLoginSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <form onSubmit={handleLogin}>
               <h4 className={styles.subheading}>Entrar para Continuar</h4>
               <div className={styles.formGroup}>
-                <label htmlFor="login-email">Email</label>
-                <input type="email" id="login-email" name="email" value={loginCreds.email} onChange={handleLoginCredsChange} required />
+                <label>E-mail</label>
+                <input type="email" name="email" value={loginCreds.email} onChange={e => setLoginCreds(p => ({...p, email: e.target.value}))} required />
               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="login-senha">Senha</label>
-                <input type="password" id="login-senha" name="senha" value={loginCreds.senha} onChange={handleLoginCredsChange} required />
+                <label>Senha</label>
+                <input type="password" name="senha" value={loginCreds.senha} onChange={e => setLoginCreds(p => ({...p, senha: e.target.value}))} required />
               </div>
               {loginError && <p className={styles.errorMessage}>{loginError}</p>}
-              <button type="submit" className={styles.loginButton} disabled={isProcessingAuth}>
-                {isProcessingAuth ? 'Entrando...' : 'Entrar'}
-              </button>
-            </motion.form>
+              <button type="submit" className={styles.loginButton} disabled={processing}>{processing ? 'Entrando…' : 'Entrar'}</button>
+            </form>
           ) : (
-            <motion.form key="registerForm" onSubmit={handleRegisterSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <form onSubmit={handleRegister}>
               <h4 className={styles.subheading}>Cadastre-se para Continuar</h4>
-               <div className={styles.formGroup}>
-                 <label htmlFor="register-nome">Seu Nome</label>
-                 <input type="text" id="register-nome" name="nome" value={registerCreds.nome} onChange={handleRegisterCredsChange} required />
-               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="register-email">Email</label>
-                <input type="email" id="register-email" name="email" value={registerCreds.email} onChange={handleRegisterCredsChange} required />
+                <label>Seu Nome</label>
+                <input type="text" value={registerCreds.nome} onChange={e => setRegisterCreds(p => ({...p, nome: e.target.value}))} required />
               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="register-senha">Crie uma Senha</label>
-                <input type="password" id="register-senha" name="senha" value={registerCreds.senha} onChange={handleRegisterCredsChange} required />
+                <label>E-mail</label>
+                <input type="email" value={registerCreds.email} onChange={e => setRegisterCreds(p => ({...p, email: e.target.value}))} required />
+              </div>
+              <div className={styles.formGroup}>
+                <label>Crie uma Senha</label>
+                <input type="password" value={registerCreds.senha} onChange={e => setRegisterCreds(p => ({...p, senha: e.target.value}))} required />
               </div>
               {registerError && <p className={styles.errorMessage}>{registerError}</p>}
-              <button type="submit" className={styles.loginButton} disabled={isProcessingAuth}>
-                {isProcessingAuth ? 'Cadastrando...' : 'Criar Conta'}
-              </button>
-            </motion.form>
+              <button type="submit" className={styles.loginButton} disabled={processing}>{processing ? 'Cadastrando…' : 'Criar Conta'}</button>
+            </form>
           )}
-        </AnimatePresence>
-      </>
-    );
-  } else { 
-    content = (
-      <form onSubmit={handleAddressFormSubmit}>
-        <h4 className={styles.subheading}>Informações de Contato e Endereço de Entrega</h4>
-
-         {!isAuthenticated ? (
-             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                 <div className={styles.formGroup}>
-                   <label htmlFor="contact-nome">Seu Nome</label>
-                   <input type="text" id="contact-nome" name="nome" value={registerCreds.nome} onChange={handleRegisterCredsChange} required />
-                 </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="contact-email">Email para Contato</label>
-                  <input type="email" id="contact-email" name="email" value={registerCreds.email} onChange={handleRegisterCredsChange} required />
-                </div>
-             </motion.div>
-         ) : (
-              <p className={styles.infoText}>
-                  Você está logado como <strong>{authUser?.nome}</strong> ({authUser?.email}). 
-                  Os dados de contato serão vinculados à sua conta.
-              </p>
-         )}
-
-        {/* NOVO: Esconde a seleção/form de endereço se o pedido for 100% digital */}
-        {!allCartItemsAreDigital && (
-          <>
-            {isLoadingAddresses ? (
-              <p className={styles.loadingText}>Carregando endereços cadastrados...</p>
-            ) : isAuthenticated && userAddresses.length > 0 ? ( 
-              <motion.div key="selectAddress" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <div className={styles.formGroup}>
-                  <label htmlFor="address-selection">Selecione um Endereço:</label>
-                  <select 
-                    id="address-selection" 
-                    name="address-selection" 
-                    className={styles.selectInput}
-                    value={selectedExistingAddressId} 
-                    onChange={handleAddressSelectionChange}
-                  >
-                    {userAddresses.map(addr => (
-                      <option key={addr.id} value={addr.id}>
-                        {addr.apelido || `${addr.rua}, ${addr.numero}`} ({addr.cep}) {addr.principal ? ' (Principal)' : ''}
-                      </option>
-                    ))}
-                    <option value="new_address">Adicionar Novo Endereço</option>
-                  </select>
-                </div>
-              </motion.div>
-            ) : null }
-            
-            {(selectedExistingAddressId === 'new_address' || userAddresses.length === 0) && (
-                <motion.div 
-                    initial={{ opacity: 0 }} 
-                    animate={{ opacity: 1 }} 
-                    key="manualAddressForm" 
-                >
-                    <h4 className={styles.subheading}>Detalhes do {isAuthenticated && (userAddresses.length > 0 ? 'Novo ' : '')} Endereço</h4>
-                    <div className={styles.formGroup}>
-                        <label htmlFor="address-apelido">Apelido (ex: Casa, Trabalho)</label>
-                        <input type="text" id="address-apelido" name="apelido" value={addressFormData.apelido} onChange={handleAddressFormChange} />
-                    </div>
-                    <div className={styles.formGrid}>
-                        <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                        <label htmlFor="endereco-cep">CEP</label>
-                        <input type="text" id="endereco-cep" name="cep" value={addressFormData.cep} onChange={handleCepChange} maxLength={9} placeholder="00000-000" required />
-                        {isSearchingCep && <p className={styles.cepStatus}>Buscando...</p>}
-                        {cepError && <p className={styles.cepError}>{cepError}</p>}
-                        </div>
-                        <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                        <label htmlFor="endereco-rua">Rua / Logradouro</label>
-                        <input type="text" id="endereco-rua" name="rua" value={addressFormData.rua} onChange={handleAddressFormChange} required />
-                        </div>
-                        <div className={styles.formGroup}>
-                        <label htmlFor="endereco-numero">Número</label>
-                        <input type="text" id="endereco-numero" name="numero" value={addressFormData.numero} onChange={handleAddressFormChange} required />
-                        </div>
-                        <div className={styles.formGroup}>
-                        <label htmlFor="endereco-complemento">Complemento (Opcional)</label>
-                        <input type="text" id="endereco-complemento" name="complemento" value={addressFormData.complemento} onChange={handleAddressFormChange} />
-                        </div>
-                        <div className={styles.formGroup}>
-                        <label htmlFor="endereco-bairro">Bairro</label>
-                        <input type="text" id="endereco-bairro" name="bairro" value={addressFormData.bairro} onChange={handleAddressFormChange} required />
-                        </div>
-                        <div className={styles.formGroup}>
-                        <label htmlFor="endereco-cidade">Cidade</label>
-                        <input type="text" id="endereco-cidade" name="cidade" value={addressFormData.cidade} onChange={handleAddressFormChange} required />
-                        </div>
-                        <div className={styles.formGroup}>
-                        <label htmlFor="endereco-estado">Estado (UF)</label>
-                        <input type="text" id="endereco-estado" name="estado" value={addressFormData.estado} onChange={handleAddressFormChange} maxLength={2} required />
-                        </div>
-                        {isAuthenticated && selectedExistingAddressId === 'new_address' && (
-                            <div className={`${styles.checkboxGroup} ${styles.fullWidth}`}>
-                                <input type="checkbox" id="principal-checkbox" name="principal" />
-                                <label htmlFor="principal-checkbox">Tornar este o endereço principal</label>
-                            </div>
-                        )}
-                    </div>
-                </motion.div>
-            )}
-          </>
-        )}
-
-        {addressFormError && <p className={styles.errorMessage}>{addressFormError}</p>}
-
-        <div className={styles.stepActions}>
-          <button type="submit" className={styles.nextButton} disabled={isProcessingAuth || isSearchingCep}>
-             {isProcessingAuth ? 'Processando...' : 'Confirmar Endereço e Continuar'}
-          </button>
-        </div>
-      </form>
+        </motion.div>
+      </AnimatePresence>
     );
   }
 
+  // ── Formulário principal (autenticado ou visitante confirmado) ─────────────
   return (
-    <AnimatePresence mode="wait">
-       <motion.div key={isAuthenticated ? "authenticatedFlow" : (showAuthForms ? "authForms" : "addressFormOnly")} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-         {content}
-       </motion.div>
-    </AnimatePresence>
+    <form onSubmit={handleSubmit}>
+      <h4 className={styles.subheading}>Informações de Contato e Endereço de Entrega</h4>
+
+      {isAuthenticated ? (
+        <p className={styles.infoText}>
+          Você está logado como <strong>{authUser?.nome}</strong> ({authUser?.email}).{' '}
+          Os dados de contato serão vinculados à sua conta.
+        </p>
+      ) : (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div className={styles.formGroup}>
+            <label>Seu Nome *</label>
+            <input type="text" value={registerCreds.nome} onChange={e => setRegisterCreds(p => ({...p, nome: e.target.value}))} required />
+          </div>
+          <div className={styles.formGroup}>
+            <label>E-mail para Contato *</label>
+            <input type="email" value={registerCreds.email} onChange={e => setRegisterCreds(p => ({...p, email: e.target.value}))} required />
+          </div>
+        </motion.div>
+      )}
+
+      {!allCartItemsAreDigital && (
+        <>
+          {isLoadingAddresses ? (
+            <p className={styles.loadingText}>Carregando endereços…</p>
+          ) : isAuthenticated && userAddresses.length > 0 ? (
+            <div className={styles.formGroup}>
+              <label>Selecione um Endereço</label>
+              <select className={styles.selectInput} value={selectedAddrId} onChange={handleSelectAddr}>
+                {userAddresses.map(a => (
+                  <option key={a.id} value={String(a.id)}>
+                    {a.apelido || `${a.rua}, ${a.numero}`} — {a.cep}{a.principal ? ' (Principal)' : ''}
+                  </option>
+                ))}
+                <option value="new">+ Adicionar Novo Endereço</option>
+              </select>
+            </div>
+          ) : null}
+
+          {(selectedAddrId === 'new' || (isAuthenticated && userAddresses.length === 0) || !isAuthenticated) && addrFormEl}
+        </>
+      )}
+
+      {formError && <p className={styles.errorMessage}>{formError}</p>}
+
+      <div className={styles.stepActions}>
+        <button type="submit" className={styles.nextButton} disabled={processing || cepMsg.type === 'loading'}>
+          {processing ? 'Processando…' : 'Confirmar Endereço e Continuar'}
+        </button>
+      </div>
+    </form>
   );
 };
 
