@@ -123,30 +123,47 @@ export default function ProdutosPage() {
   };
 
   // ── Step 0: Save product data ──
+  const saveDadosPayload = async () => {
+    const payload = {
+      nome: form.nome, descricao: form.descricao,
+      categoriaId: form.categoria_id || null,
+      ativo: form.ativo,
+      peso: parseFloat(form.peso) || 0.3,
+      largura: parseFloat(form.largura) || 20,
+      altura: parseFloat(form.altura) || 5,
+      comprimento: parseFloat(form.comprimento) || 30,
+    };
+    if (editing) {
+      await api.put(`/produtos/${editing}`, payload);
+      return editing;
+    } else {
+      const res = await api.post('/produtos', payload);
+      return res.data.id;
+    }
+  };
+
   const handleSaveDados = async (e) => {
     e.preventDefault();
     setSaving(true);
     try {
-      const payload = {
-        nome: form.nome, descricao: form.descricao,
-        categoriaId: form.categoria_id || null,
-        ativo: form.ativo,
-        peso: parseFloat(form.peso) || 0.3,
-        largura: parseFloat(form.largura) || 20,
-        altura: parseFloat(form.altura) || 5,
-        comprimento: parseFloat(form.comprimento) || 30,
-      };
-
-      if (editing) {
-        await api.put(`/produtos/${editing}`, payload);
-        setSavedId(editing);
-      } else {
-        const res = await api.post('/produtos', payload);
-        setSavedId(res.data.id);
-      }
+      const id = await saveDadosPayload();
+      setSavedId(id);
       setStep(1);
     } catch (err) {
       showToast(err.response?.data?.erro || 'Erro ao salvar dados do produto.');
+    } finally { setSaving(false); }
+  };
+
+  const handleSaveAndClose = async () => {
+    setSaving(true);
+    try {
+      await saveDadosPayload();
+      showToast('Produto salvo com sucesso!');
+      setModal(false);
+      resetModal();
+      load();
+    } catch (err) {
+      showToast(err.response?.data?.erro || 'Erro ao salvar produto.');
     } finally { setSaving(false); }
   };
 
@@ -215,7 +232,8 @@ export default function ProdutosPage() {
         });
       }
       showToast('Produto salvo com sucesso!');
-      closeModal();
+      setModal(false);
+      resetModal();
       load();
     } catch (err) {
       showToast(err.response?.data?.erro || 'Erro ao salvar variações.');
@@ -303,6 +321,9 @@ export default function ProdutosPage() {
                 </button>
                 <button className={styles.cardOverlayBtn} onClick={(e) => { e.stopPropagation(); openEdit(p); }}>
                   <BsPencil size={13}/> Editar
+                </button>
+                <button className={`${styles.cardOverlayBtn} ${styles.cardOverlayBtnDanger}`} onClick={(e) => { e.stopPropagation(); setConfirm(p.id); }}>
+                  <BsTrash size={13}/> Excluir
                 </button>
               </div>
 
@@ -531,6 +552,11 @@ export default function ProdutosPage() {
 
                 <div className={pStyles.footer}>
                   <button type="button" className={styles.btnSecondary} onClick={closeModal}>Cancelar</button>
+                  {editing && (
+                    <button type="button" className={styles.btnSecondary} disabled={saving} onClick={handleSaveAndClose}>
+                      {saving ? 'Salvando...' : <><BsCheckLg size={13}/> Salvar e fechar</>}
+                    </button>
+                  )}
                   <button type="submit" className={styles.btnPrimary} disabled={saving}>
                     {saving ? 'Salvando...' : 'Próximo: Imagens →'}
                   </button>

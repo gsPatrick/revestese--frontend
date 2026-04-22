@@ -162,6 +162,16 @@
   background: rgba(201, 168, 76, 0.32) !important;
   border-color: rgba(201, 168, 76, 0.65) !important;
 }
+.cardOverlayBtnDanger {
+  background: rgba(220, 38, 38, 0.15) !important;
+  border-color: rgba(220, 38, 38, 0.35) !important;
+  color: #fca5a5 !important;
+}
+.cardOverlayBtnDanger:hover {
+  background: rgba(220, 38, 38, 0.28) !important;
+  border-color: rgba(220, 38, 38, 0.6) !important;
+  color: #fecaca !important;
+}
 
 .productImg {
   position: relative;
