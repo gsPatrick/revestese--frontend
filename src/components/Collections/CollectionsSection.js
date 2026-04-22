@@ -45,7 +45,7 @@ const ICON_MAP = {
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://geral-revestese-api.r954jc.easypanel.host';
 
-function renderIcon(icone, size = 28) {
+function renderIcon(icone, size = 96) {
   if (!icone) return <GiHanger size={size} />;
   // URL de imagem (personalizado)
   if (icone.startsWith('/') || icone.startsWith('http')) {
