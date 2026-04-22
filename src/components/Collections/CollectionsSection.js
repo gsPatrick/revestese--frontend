@@ -47,10 +47,16 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://geral-revestese-api
 
 function renderIcon(icone, size = 96) {
   if (!icone) return <GiHanger size={size} />;
-  // URL de imagem (personalizado)
+  // URL de imagem (personalizado) — preenche o container inteiro
   if (icone.startsWith('/') || icone.startsWith('http')) {
     const src = icone.startsWith('http') ? icone : `${API_BASE}${icone}`;
-    return <img src={src} alt="ícone" width={size} height={size} style={{ objectFit: 'contain' }} />;
+    return (
+      <img
+        src={src}
+        alt="ícone"
+        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '6px' }}
+      />
+    );
   }
   // Nome de react-icon
   const Icon = ICON_MAP[icone] || GiHanger;
