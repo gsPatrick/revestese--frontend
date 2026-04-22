@@ -99,8 +99,9 @@ export default function ProdutosPage() {
     });
     setEditing(p.id);
     setSavedId(p.id);
-    // Load existing images
-    setExistingImgs(p.imagens || p.ArquivoProdutos?.filter(a => a.tipo === 'imagem') || []);
+    // Prefer full ArquivoProdutos objects (have id for deletion) over plain URL strings
+    const imgObjs = p.ArquivoProdutos?.filter(a => a.tipo === 'imagem');
+    setExistingImgs(imgObjs?.length ? imgObjs : (p.imagens || []).map(url => ({ url })));
     // Load existing variations
     try {
       const r = await api.get(`/produtos/${p.id}/variacoes`);
@@ -181,11 +182,23 @@ export default function ProdutosPage() {
   };
 
   const removeExistingImage = async (img) => {
-    const id = img.id || img;
-    if (id && typeof id === 'number') {
-      try { await api.delete(`/arquivos/${id}`); } catch {}
+    const id  = img?.id ?? (typeof img === 'number' ? img : null);
+    const url = typeof img === 'string' ? img : img?.url;
+    if (id !== null) {
+      try {
+        await api.delete(`/uploads/arquivos/${id}`);
+      } catch (err) {
+        showToast(err?.response?.data?.erro || 'Erro ao remover imagem.');
+        return;
+      }
     }
-    setExistingImgs(prev => prev.filter(im => (im.id || im) !== (img.id || img)));
+    setExistingImgs(prev => prev.filter(im => {
+      if (id !== null) {
+        return (im?.id ?? (typeof im === 'number' ? im : null)) !== id;
+      }
+      const imUrl = typeof im === 'string' ? im : im?.url;
+      return imUrl !== url;
+    }));
   };
 
   const handleUploadImages = async () => {
