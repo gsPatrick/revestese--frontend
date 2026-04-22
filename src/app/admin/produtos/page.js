@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 const EMPTY_PRODUTO = {
   nome: '', descricao: '', categoria_id: '', ativo: true,
-  peso: '0.300', largura: '20', altura: '5', comprimento: '30',
+  peso: '0.200', largura: '2', altura: '2', comprimento: '2',
 };
 const EMPTY_VAR = { nome: 'Único', preco: '', estoque: '1', ativo: true, digital: false };
 
@@ -128,10 +128,10 @@ export default function ProdutosPage() {
       nome: form.nome, descricao: form.descricao,
       categoriaId: form.categoria_id || null,
       ativo: form.ativo,
-      peso: parseFloat(form.peso) || 0.3,
-      largura: parseFloat(form.largura) || 20,
-      altura: parseFloat(form.altura) || 5,
-      comprimento: parseFloat(form.comprimento) || 30,
+      peso: parseFloat(form.peso) || 0.2,
+      largura: parseFloat(form.largura) || 2,
+      altura: parseFloat(form.altura) || 2,
+      comprimento: parseFloat(form.comprimento) || 2,
     };
     if (editing) {
       await api.put(`/produtos/${editing}`, payload);
@@ -534,19 +534,19 @@ export default function ProdutosPage() {
                 <div className={styles.formGrid}>
                   <div className={styles.field}>
                     <label>Peso (kg)</label>
-                    <input type="number" step="0.001" min="0" value={form.peso} onChange={e => f('peso', e.target.value)} placeholder="0.300"/>
+                    <input type="number" step="0.001" min="0" value={form.peso} onChange={e => f('peso', e.target.value)} placeholder="0.200"/>
                   </div>
                   <div className={styles.field}>
                     <label>Largura (cm)</label>
-                    <input type="number" step="0.1" min="0" value={form.largura} onChange={e => f('largura', e.target.value)} placeholder="20"/>
+                    <input type="number" step="0.1" min="0" value={form.largura} onChange={e => f('largura', e.target.value)} placeholder="2"/>
                   </div>
                   <div className={styles.field}>
                     <label>Altura (cm)</label>
-                    <input type="number" step="0.1" min="0" value={form.altura} onChange={e => f('altura', e.target.value)} placeholder="5"/>
+                    <input type="number" step="0.1" min="0" value={form.altura} onChange={e => f('altura', e.target.value)} placeholder="2"/>
                   </div>
                   <div className={styles.field}>
                     <label>Comprimento (cm)</label>
-                    <input type="number" step="0.1" min="0" value={form.comprimento} onChange={e => f('comprimento', e.target.value)} placeholder="30"/>
+                    <input type="number" step="0.1" min="0" value={form.comprimento} onChange={e => f('comprimento', e.target.value)} placeholder="2"/>
                   </div>
                 </div>
 
