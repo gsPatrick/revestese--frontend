@@ -45,20 +45,18 @@ const ICON_MAP = {
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://geral-revestese-api.r954jc.easypanel.host';
 
+function isImageUrl(icone) {
+  if (!icone) return false;
+  return icone.startsWith('/') || icone.startsWith('http');
+}
+
+function getImageSrc(icone) {
+  return icone.startsWith('http') ? icone : `${API_BASE}${icone}`;
+}
+
 function renderIcon(icone, size = 96) {
   if (!icone) return <GiHanger size={size} />;
-  // URL de imagem (personalizado) — preenche o container inteiro
-  if (icone.startsWith('/') || icone.startsWith('http')) {
-    const src = icone.startsWith('http') ? icone : `${API_BASE}${icone}`;
-    return (
-      <img
-        src={src}
-        alt="ícone"
-        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '6px' }}
-      />
-    );
-  }
-  // Nome de react-icon
+  if (isImageUrl(icone)) return null; // handled separately in card
   const Icon = ICON_MAP[icone] || GiHanger;
   return <Icon size={size} />;
 }
@@ -130,33 +128,44 @@ const CollectionsSection = () => {
       {/* ── Categorias da API ── */}
       {!loading && categorias.length > 0 && (
         <motion.div variants={itemVariants} className={styles.collectionsGrid}>
-          {categorias.map((cat, i) => (
-            <motion.div
-              key={cat.id}
-              className={styles.collectionCard}
-              style={{ '--card-accent': ACCENTS[i % ACCENTS.length] }}
-              whileHover={{ scale: 1.04, y: -6 }}
-              transition={{ type: 'spring', stiffness: 280, damping: 18 }}
-            >
-              <div className={styles.collectionIconContainer}>
-                <span className={styles.collectionIcon} style={{ color: ACCENTS[i % ACCENTS.length] }}>
-                  {renderIcon(cat.icone)}
-                </span>
-              </div>
-              <h3 className={styles.collectionName}>{cat.nome}</h3>
-              <p className={styles.collectionDescription}>
-                {cat.descricao || 'Explore as peças desta categoria'}
-              </p>
-              <Link
-                href="/catalog"
-                onClick={() => setCategoryAndNavigate(String(cat.id))}
-                className={styles.viewCollectionLink}
+          {categorias.map((cat, i) => {
+            const hasImage = isImageUrl(cat.icone);
+            return (
+              <motion.div
+                key={cat.id}
+                className={`${styles.collectionCard} ${hasImage ? styles.collectionCardImg : ''}`}
+                style={{ '--card-accent': ACCENTS[i % ACCENTS.length] }}
+                whileHover={{ scale: 1.04, y: -6 }}
+                transition={{ type: 'spring', stiffness: 280, damping: 18 }}
               >
-                Ver peças
-                <span className={styles.arrowIcon}>→</span>
-              </Link>
-            </motion.div>
-          ))}
+                {hasImage ? (
+                  <div className={styles.collectionCoverImg}>
+                    <img src={getImageSrc(cat.icone)} alt={cat.nome} />
+                  </div>
+                ) : (
+                  <div className={styles.collectionIconContainer}>
+                    <span className={styles.collectionIcon} style={{ color: ACCENTS[i % ACCENTS.length] }}>
+                      {renderIcon(cat.icone)}
+                    </span>
+                  </div>
+                )}
+                <div className={styles.collectionBody}>
+                  <h3 className={styles.collectionName}>{cat.nome}</h3>
+                  <p className={styles.collectionDescription}>
+                    {cat.descricao || 'Explore as peças desta categoria'}
+                  </p>
+                  <Link
+                    href="/catalog"
+                    onClick={() => setCategoryAndNavigate(String(cat.id))}
+                    className={styles.viewCollectionLink}
+                  >
+                    Ver peças
+                    <span className={styles.arrowIcon}>→</span>
+                  </Link>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       )}
 

@@ -63,6 +63,41 @@
   min-height: 300px;
 }
 
+/* Card variant when icon is an image — remove top padding so image bleeds to edge */
+.collectionCardImg {
+  padding: 0 0 2rem;
+  justify-content: flex-start;
+}
+
+/* Full-width cover image at the top of the card */
+.collectionCoverImg {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.collectionCoverImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.collectionCard:hover .collectionCoverImg img {
+  transform: scale(1.06);
+}
+
+/* Wrapper for text content below image */
+.collectionBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 1rem 0;
+  flex: 1;
+}
+
 /* Bottom accent line on hover */
 .collectionCard::after {
   content: '';
@@ -128,8 +163,8 @@
   text-transform: uppercase;
   color: var(--reveste-crimson);
   display: flex; align-items: center; gap: 0.4rem;
-  position: absolute;
-  bottom: 1.25rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.25s 0.05s ease, transform 0.25s 0.05s ease;
@@ -137,6 +172,14 @@
 
 .collectionCard:hover .viewCollectionLink {
   opacity: 1; transform: translateY(0);
+}
+
+/* For icon-only cards keep link absolute at bottom */
+.collectionCard:not(.collectionCardImg) .viewCollectionLink {
+  position: absolute;
+  bottom: 1.25rem;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .arrowIcon { font-size: 1rem; display: inline-block; }
