@@ -178,11 +178,7 @@ const OrderHistory = ({ orders: initialOrders }) => {
                   {/* Items */}
                   <div className={ord.itemsList}>
                     {(order.itens || []).map((item, idx) => {
-                      const imgUrl = item.produto?.imagemUrl
-                        ? item.produto.imagemUrl.startsWith('http')
-                          ? item.produto.imagemUrl
-                          : `https://n8n-doodledreamsmidia.r954jc.easypanel.host${item.produto.imagemUrl}`
-                        : null;
+                      const imgUrl = item.produto?.imagemUrl || null;
                       return (
                         <div key={idx} className={ord.itemRow}>
                           <div className={ord.itemImg}>

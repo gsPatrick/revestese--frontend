@@ -234,11 +234,7 @@ export default function PedidosPage() {
                       {/* Items com imagens */}
                       <div className={ord.itemsList}>
                         {(det.itens || []).map((it, i) => {
-                          const imgUrl = it.produto?.imagemUrl
-                            ? it.produto.imagemUrl.startsWith('http')
-                              ? it.produto.imagemUrl
-                              : `https://n8n-doodledreamsmidia.r954jc.easypanel.host${it.produto.imagemUrl}`
-                            : null;
+                          const imgUrl = it.produto?.imagemUrl || null;
                           return (
                             <div key={i} className={ord.itemRow}>
                               <div className={ord.itemImg}>
